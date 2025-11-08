@@ -1,4 +1,4 @@
 [submodule "scalehls"]
 	path = scalehls
-	url = git@github.com:Jason048/scalehls.git
-	branch = scalehls-pom
+	url = git@github.com:Shirely351/scalehls.git
+	branch = shirely/local-mods
