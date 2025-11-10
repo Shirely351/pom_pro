@@ -40,8 +40,7 @@ do
 done
 wait
 
-
-examples=("vgg16"  "resnet")
+examples=("vgg16" "resnet")
 sizes=(512)
 for example in "${examples[@]}"
 do  
@@ -56,8 +55,8 @@ done
 wait
 
 
-sizes=(32 64 128 256 512 1024 2048 4096 8192)
-
+#sizes=(32 64 128 256 512 1024 2048 4096 8192)
+sizes=(32 64 256 1024 2048)
 examples=("2mm" "3mm" "gemm" "bicg" "gesummv")
 
 for example in "${examples[@]}"
@@ -72,35 +71,35 @@ do
 done
 wait
 
-examples=("2mm" "3mm" "gemm" "gesummv")
-sizes=(4096)
-for example in "${examples[@]}"
-do  
-    for size in "${sizes[@]}"
-    do
-        execute_tcl2 "$example" "$size" &
-        if (( $(jobs | wc -l) >= $max_parallel )); then
-            wait -n
-        fi
-    done
-done
-wait
+# examples=("2mm" "3mm" "gemm" "gesummv")
+# sizes=(4096)
+# for example in "${examples[@]}"
+# do  
+#     for size in "${sizes[@]}"
+#     do
+#         execute_tcl2 "$example" "$size" &
+#         if (( $(jobs | wc -l) >= $max_parallel )); then
+#             wait -n
+#         fi
+#     done
+# done
+# wait
 
-examples=("bicg")
-sizes=(4096)
-for example in "${examples[@]}"
-do  
-    for size in "${sizes[@]}"
-    do
-        execute_tcl2 "$example" "$size" &
-        if (( $(jobs | wc -l) >= $max_parallel )); then
-            wait -n
-        fi
-    done
-done
-wait
+# examples=("bicg")
+# sizes=(4096)
+# for example in "${examples[@]}"
+# do  
+#     for size in "${sizes[@]}"
+#     do
+#         execute_tcl2 "$example" "$size" &
+#         if (( $(jobs | wc -l) >= $max_parallel )); then
+#             wait -n
+#         fi
+#     done
+# done
+# wait
 
-cd /usr/src/workspace
+# cd /usr/src/workspace
 
 
 

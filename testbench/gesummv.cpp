@@ -47,8 +47,23 @@ int main(){
 
     s_2.after(s_1,j);
     s_3.after(s_1,-1);
-    
+    fct->auto_DSE_loop_transformation();
+    for(auto &comp: fct->leader_computations){
+        auto iterators = comp->get_iteration_variables();
+        int size = iterators.size();
+        if(size==1){
+          comp->apply_opt_strategy({16});
+        }
+        if(size==2){
+          comp->apply_opt_strategy({1,16});
+        }
+        if(size==3){
+            comp->apply_opt_strategy({1,8,16});
+        }
+          
+    }
     std::string pwd = std::filesystem::current_path().parent_path();
     std::string path = pwd+"/samples/gesummv/";
-    fct->auto_DSE(path);
+    fct->dump_schedule(path);
+    // fct->auto_DSE(path);
 }

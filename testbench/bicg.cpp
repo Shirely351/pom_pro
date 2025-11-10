@@ -2,7 +2,7 @@
 #include "compute.h"
 #include "function.h"
 #include "core.h"
-#define N 4096
+#define N 32
 #include <filesystem>
 using namespace std;
 using namespace polyfp;
@@ -26,7 +26,18 @@ int main(){
     // s_2.interchange(i,j);
     s_2.after(s_1,j);
 
-    var i0("i0"), j0("j0"),k0("k0"), i1("i1"), j1("j1"),k1("k1");
+    //just for test
+    // fct->auto_DSE_loop_transformation();
+    // int count=0;
+    // for(auto &comp: fct->leader_computations){
+    //     auto iterators = comp->get_iteration_variables();
+    //     int size = iterators.size();
+    //     if(size==2){
+    //     //   comp->apply_opt_strategy({16,1}); // 277 latency depth=87 trip count=64
+    //       comp->apply_opt_strategy({1,64});
+    //     }
+    // }
+    // var i0("i0"), j0("j0"),k0("k0"), i1("i1"), j1("j1"),k1("k1");
     // s_1.tile(i,j,1,32,i0, j0, i1, j1);
     // s_2.tile(i,j,1,32,i0, j0, i1, j1);
     // s_1.unroll(j1,-1);
@@ -36,9 +47,15 @@ int main(){
     // s.partition({32},"cyclic");
     // q.partition({32},"cyclic");
     // A.partition({16,16},"cyclic");
-
-    std::string pwd = std::filesystem::current_path().parent_path();
+    // codegen();
+    // std::string pwd = std::filesystem::current_path().parent_path();
+#ifdef DEBUG
+std::string pwd = std::filesystem::current_path();
+#else
+std::string pwd = std::filesystem::current_path().parent_path();
+#endif
     std::string path = pwd+"/samples/bicg/";
+    // fct->dump_schedule(path);
     fct->auto_DSE(path);
 
 }

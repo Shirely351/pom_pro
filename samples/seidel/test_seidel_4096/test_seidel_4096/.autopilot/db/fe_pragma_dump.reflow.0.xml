@@ -1,0 +1,13 @@
+<pragmas>
+<pragma file="test_seidel_4096.cpp" line="41" pragmaType="pipeline" parentfunction="test_seidel_4096" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_seidel_4096.cpp" line="42" pragmaType="loop_tripcount" parentfunction="test_seidel_4096" min="1366" max="1366" avg="1366"/>
+<pragma file="test_seidel_4096.cpp" line="26" pragmaType="interface" parentfunction="test_seidel_4096" mode="s_axilite" port="" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_seidel_4096.cpp" line="27" pragmaType="interface" parentfunction="test_seidel_4096" mode="s_axilite" port="v0" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_seidel_4096.cpp" line="28" pragmaType="interface" parentfunction="test_seidel_4096" mode="ap_memory" port="v1" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_seidel_4096.cpp" line="29" pragmaType="interface" parentfunction="test_seidel_4096" mode="ap_memory" port="v2" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_seidel_4096.cpp" line="31" pragmaType="array_partition" parentfunction="test_seidel_4096" dim="1" factor="3" mode="cyclic" dynamic="0" variable="v1"/>
+<pragma file="test_seidel_4096.cpp" line="32" pragmaType="array_partition" parentfunction="test_seidel_4096" dim="2" factor="3" mode="cyclic" dynamic="0" variable="v1"/>
+<pragma file="test_seidel_4096.cpp" line="33" pragmaType="bind_storage" parentfunction="test_seidel_4096" op="666" impl="25" latency="-1" variable="v1"/>
+<pragma file="test_seidel_4096.cpp" line="35" pragmaType="bind_storage" parentfunction="test_seidel_4096" op="666" impl="25" latency="-1" variable="v2"/>
+<pragma file="test_seidel_4096.cpp" line="37" pragmaType="dependence" parentfunction="test_seidel_4096" class="" direction="NODIR" type="inter" distance="0" variable="v1"/>
+</pragmas>

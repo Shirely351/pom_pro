@@ -1,27 +1,9 @@
-build
-# balance/
-# sample_l/
-# samles_4_paper/
-# samles_update/
-build.txt
-.vscode/
-.env
-scalehls/
-**/tmp
-**/cpp_src
-**/mlir_src
-**/hls_proj
-**/dump_csv
-**/.ipynb_checkpoints
-**/__pycache__
-
-*.onnx*
-*.tmp
-*.gv
-*.png
+.cache/
+core
+build/
 *.log
-*.csv
-*.zip
+*.tmp
 *.swp
-*.swo
-*.swn
+*.zip
+*.tar.gz
+# 按需添加你的构建输出目录、Vitis 生成物、仿真输出等

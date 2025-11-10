@@ -2995,7 +2995,13 @@ manager.getModule().dump();
 
     // Read target specification JSON file.
     std::string errorMessage;
-    std::string pwd = std::filesystem::current_path().parent_path();
+#ifdef DEBUG
+std::string pwd = std::filesystem::current_path();
+#else
+std::string pwd = std::filesystem::current_path().parent_path();
+#endif // DEBUG
+
+
     auto configFile = mlir::openInputFile(pwd+"/samples/config.json", &errorMessage);
     if (!configFile) {
         llvm::errs() << errorMessage << "\n";

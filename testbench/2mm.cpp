@@ -29,6 +29,7 @@ using namespace std;
 using namespace polyfp;
 int main(){
     std::string name = "test_2mm_"+std::to_string(N);
+    // std::string name = "kernel_2mm";
     init(name);
 
     auto *fct = global::get_implicit_function();
@@ -69,8 +70,24 @@ int main(){
     // C.partition({1,2},"cyclic");
     // D.partition({16,2},"cyclic");
     // temp.partition({16,2},"cyclic");
+    // }
+    // just for test
+    fct->auto_DSE_loop_transformation();
+    
+    for(auto &comp: fct->leader_computations){
+        auto iterators = comp->get_iteration_variables();
+        int size = iterators.size();
+        if(size==2){
+          comp->apply_opt_strategy({16,32});
+        }
+        if(size==3){
+            comp->apply_opt_strategy({1,16,32});
+        }
+          
+    }
     std::string pwd = std::filesystem::current_path().parent_path();
     std::string path = pwd+"/samples/2mm/";
-    fct->auto_DSE(path);
+    fct->dump_schedule(path);
+    // fct->auto_DSE(path);
     // codegen();
 }

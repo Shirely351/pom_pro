@@ -1,0 +1,351 @@
+
+
+================================================================
+== Vitis HLS Report for 'test_gaussian_4096_Pipeline_VITIS_LOOP_58_1_VITIS_LOOP_59_2'
+================================================================
+* Date:           Wed Nov  5 20:47:28 2025
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        test_gaussian_4096
+* Solution:       test_gaussian_4096 (Vivado IP Flow Target)
+* Product family: artix7
+* Target device:  xc7a100t-csg324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  6.456 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+-----------+-----------+---------+---------+---------+
+    |  Latency (cycles) |   Latency (absolute)  |      Interval     | Pipeline|
+    |   min   |   max   |    min    |    max    |   min   |   max   |   Type  |
+    +---------+---------+-----------+-----------+---------+---------+---------+
+    |  1857773|  1857773|  18.578 ms|  18.578 ms|  1857773|  1857773|       no|
+    +---------+---------+-----------+-----------+---------+---------+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-----------------------------------+---------+---------+----------+-----------+-----------+---------+----------+
+        |                                   |  Latency (cycles) | Iteration|  Initiation Interval  |   Trip  |          |
+        |             Loop Name             |   min   |   max   |  Latency |  achieved |   target  |  Count  | Pipelined|
+        +-----------------------------------+---------+---------+----------+-----------+-----------+---------+----------+
+        |- VITIS_LOOP_58_1_VITIS_LOOP_59_2  |  1857771|  1857771|         4|          1|          1|  1857769|       yes|
+        +-----------------------------------+---------+---------+----------+-----------+-----------+---------+----------+
+
+============================================================
++ Verbose Summary: Synthesis Manager
+============================================================
+InlineROM: 1
+ExposeGlobal: 0
+============================================================
++ Verbose Summary: CDFG Model
+============================================================
+IsTopModel: 0
+ResetActiveHigh: 1
+IsCombinational: 0
+IsDatapathOnly: 0
+HasWiredReturn: 1
+HasMFsm: 2
+HasVarLatency: 1
+IsPipeline: 0
+IsRtlPipelined: 0
+IsInstanceOverlapped: 0
+IsDontTouch: 0
+HasImplIP: 0
+IsGatedGlobalClock: 0
+
++ Individual pipeline summary: 
+  * Pipeline-0: initiation interval (II) = 1, depth = 5
+
+
+============================================================
++ Verbose Summary: Schedule
+============================================================
+* Number of FSM states : 5
+* Pipeline : 1
+  Pipeline-0 : II = 1, D = 5, States = { 1 2 3 4 5 }
+* Dataflow Pipeline: 0
+
+* FSM state transitions: 
+1 --> 2 
+2 --> 3 
+3 --> 4 
+4 --> 5 
+5 --> 
+
+* FSM state operations: 
+
+State 1 <SV = 0> <Delay = 1.61>
+ST_1 : Operation 7 [1/1] (0.00ns)   --->   "%v7 = alloca i32 1"   --->   Operation 7 'alloca' 'v7' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 8 [1/1] (0.00ns)   --->   "%v6 = alloca i32 1"   --->   Operation 8 'alloca' 'v6' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 9 [1/1] (0.00ns)   --->   "%indvar_flatten = alloca i32 1"   --->   Operation 9 'alloca' 'indvar_flatten' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 10 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_2_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 10 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 11 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_2_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 11 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 12 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_2_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 12 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 13 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_1_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 13 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 14 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_1_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 14 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 15 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_1_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 15 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 16 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_0_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 16 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 17 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_0_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 17 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 18 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_2_0_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 18 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 19 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_2_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 19 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 20 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_2_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 20 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 21 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_2_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 21 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 22 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_1_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 22 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 23 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_1_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 23 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 24 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_1_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 24 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 25 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_0_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 25 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 26 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_0_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 26 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 27 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_1_0_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 27 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 28 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_2_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 28 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 29 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_2_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 29 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 30 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_2_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 30 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 31 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_1_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 31 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 32 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_1_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 32 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 33 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_1_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 33 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 34 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_0_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 34 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 35 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_0_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 35 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 36 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v5_0_0_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 36 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 37 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_2_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 37 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 38 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_2_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 38 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 39 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_2_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 39 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 40 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_1_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 40 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 41 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_1_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 41 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 42 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_1_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 42 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 43 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_0_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 43 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 44 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_0_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 44 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 45 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_2_0_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 45 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 46 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_2_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 46 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 47 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_2_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 47 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 48 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_2_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 48 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 49 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_1_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 49 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 50 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_1_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 50 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 51 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_1_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 51 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 52 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_0_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 52 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 53 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_0_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 53 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 54 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_1_0_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 54 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 55 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_2_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 55 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 56 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_2_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 56 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 57 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_2_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 57 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 58 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_1_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 58 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 59 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_1_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 59 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 60 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_1_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 60 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 61 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_0_2, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 61 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 62 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_0_1, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 62 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 63 [1/1] (0.00ns)   --->   "%specinterface_ln0 = specinterface void @_ssdm_op_SpecInterface, i32 %v1_0_0_0, void @empty_3, i32 0, i32 0, void @empty_7, i32 4294967295, i32 0, void @empty_7, void @empty_7, void @empty_7, i32 0, i32 0, i32 0, i32 0, void @empty_7, void @empty_7, i32 4294967295, i32 0"   --->   Operation 63 'specinterface' 'specinterface_ln0' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 64 [1/1] (0.00ns)   --->   "%bitcast_ln61_read = read i32 @_ssdm_op_Read.ap_auto.i32, i32 %bitcast_ln61"   --->   Operation 64 'read' 'bitcast_ln61_read' <Predicate = true> <Delay = 0.00>
+ST_1 : Operation 65 [1/1] (1.61ns)   --->   "%store_ln0 = store i21 0, i21 %indvar_flatten"   --->   Operation 65 'store' 'store_ln0' <Predicate = true> <Delay = 1.61>
+ST_1 : Operation 66 [1/1] (1.61ns)   --->   "%store_ln0 = store i11 0, i11 %v6"   --->   Operation 66 'store' 'store_ln0' <Predicate = true> <Delay = 1.61>
+ST_1 : Operation 67 [1/1] (1.61ns)   --->   "%store_ln0 = store i11 0, i11 %v7"   --->   Operation 67 'store' 'store_ln0' <Predicate = true> <Delay = 1.61>
+ST_1 : Operation 68 [1/1] (0.00ns)   --->   "%br_ln0 = br void %for.inc"   --->   Operation 68 'br' 'br_ln0' <Predicate = true> <Delay = 0.00>
+
+State 2 <SV = 1> <Delay = 6.45>
+ST_2 : Operation 69 [1/1] (0.00ns)   --->   "%indvar_flatten_load = load i21 %indvar_flatten" [test_gaussian_4096.cpp:58]   --->   Operation 69 'load' 'indvar_flatten_load' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 70 [1/1] (2.39ns)   --->   "%icmp_ln58 = icmp_eq  i21 %indvar_flatten_load, i21 1857769" [test_gaussian_4096.cpp:58]   --->   Operation 70 'icmp' 'icmp_ln58' <Predicate = true> <Delay = 2.39> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 2.39> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 71 [1/1] (2.31ns)   --->   "%add_ln58_1 = add i21 %indvar_flatten_load, i21 1" [test_gaussian_4096.cpp:58]   --->   Operation 71 'add' 'add_ln58_1' <Predicate = true> <Delay = 2.31> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.31> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 72 [1/1] (0.00ns)   --->   "%br_ln58 = br i1 %icmp_ln58, void %for.inc452, void %for.inc1225.preheader.exitStub" [test_gaussian_4096.cpp:58]   --->   Operation 72 'br' 'br_ln58' <Predicate = true> <Delay = 0.00>
+ST_2 : Operation 73 [1/1] (0.00ns)   --->   "%v7_load = load i11 %v7" [test_gaussian_4096.cpp:59]   --->   Operation 73 'load' 'v7_load' <Predicate = (!icmp_ln58)> <Delay = 0.00>
+ST_2 : Operation 74 [1/1] (0.00ns)   --->   "%v6_load = load i11 %v6" [test_gaussian_4096.cpp:58]   --->   Operation 74 'load' 'v6_load' <Predicate = (!icmp_ln58)> <Delay = 0.00>
+ST_2 : Operation 75 [1/1] (2.12ns)   --->   "%add_ln58 = add i11 %v6_load, i11 1" [test_gaussian_4096.cpp:58]   --->   Operation 75 'add' 'add_ln58' <Predicate = (!icmp_ln58)> <Delay = 2.12> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.12> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 76 [1/1] (1.81ns)   --->   "%icmp_ln59 = icmp_eq  i11 %v7_load, i11 1363" [test_gaussian_4096.cpp:59]   --->   Operation 76 'icmp' 'icmp_ln59' <Predicate = (!icmp_ln58)> <Delay = 1.81> <CoreInst = "Cmp">   --->   Core 9 'Cmp' <Latency = 0> <II = 1> <Delay = 1.81> <FuncUnit> <Opcode : 'icmp'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 77 [1/1] (0.90ns)   --->   "%select_ln58 = select i1 %icmp_ln59, i11 0, i11 %v7_load" [test_gaussian_4096.cpp:58]   --->   Operation 77 'select' 'select_ln58' <Predicate = (!icmp_ln58)> <Delay = 0.90> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.90> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 78 [1/1] (0.90ns)   --->   "%select_ln58_1 = select i1 %icmp_ln59, i11 %add_ln58, i11 %v6_load" [test_gaussian_4096.cpp:58]   --->   Operation 78 'select' 'select_ln58_1' <Predicate = (!icmp_ln58)> <Delay = 0.90> <CoreInst = "Sel">   --->   Core 73 'Sel' <Latency = 0> <II = 1> <Delay = 0.90> <FuncUnit> <Opcode : 'select'> <InPorts = 3> <OutPorts = 1>
+ST_2 : Operation 79 [1/1] (0.00ns)   --->   "%zext_ln59 = zext i11 %select_ln58_1" [test_gaussian_4096.cpp:59]   --->   Operation 79 'zext' 'zext_ln59' <Predicate = (!icmp_ln58)> <Delay = 0.00>
+ST_2 : Operation 80 [3/3] (1.45ns) (grouped into DSP with root node add_ln62)   --->   "%mul_ln59 = mul i21 %zext_ln59, i21 1366" [test_gaussian_4096.cpp:59]   --->   Operation 80 'mul' 'mul_ln59' <Predicate = (!icmp_ln58)> <Delay = 1.45> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_2 : Operation 81 [1/1] (2.12ns)   --->   "%add_ln59 = add i11 %select_ln58, i11 1" [test_gaussian_4096.cpp:59]   --->   Operation 81 'add' 'add_ln59' <Predicate = (!icmp_ln58)> <Delay = 2.12> <CoreInst = "Adder">   --->   Core 1 'Adder' <Latency = 0> <II = 1> <Delay = 2.12> <FuncUnit> <Opcode : 'add' 'sub'> <InPorts = 2> <OutPorts = 1>
+ST_2 : Operation 82 [1/1] (1.61ns)   --->   "%store_ln59 = store i21 %add_ln58_1, i21 %indvar_flatten" [test_gaussian_4096.cpp:59]   --->   Operation 82 'store' 'store_ln59' <Predicate = (!icmp_ln58)> <Delay = 1.61>
+ST_2 : Operation 83 [1/1] (1.61ns)   --->   "%store_ln59 = store i11 %select_ln58_1, i11 %v6" [test_gaussian_4096.cpp:59]   --->   Operation 83 'store' 'store_ln59' <Predicate = (!icmp_ln58)> <Delay = 1.61>
+ST_2 : Operation 84 [1/1] (1.61ns)   --->   "%store_ln59 = store i11 %add_ln59, i11 %v7" [test_gaussian_4096.cpp:59]   --->   Operation 84 'store' 'store_ln59' <Predicate = (!icmp_ln58)> <Delay = 1.61>
+
+State 3 <SV = 2> <Delay = 1.45>
+ST_3 : Operation 85 [2/3] (1.45ns) (grouped into DSP with root node add_ln62)   --->   "%mul_ln59 = mul i21 %zext_ln59, i21 1366" [test_gaussian_4096.cpp:59]   --->   Operation 85 'mul' 'mul_ln59' <Predicate = true> <Delay = 1.45> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+
+State 4 <SV = 3> <Delay = 2.10>
+ST_4 : Operation 86 [1/3] (0.00ns) (grouped into DSP with root node add_ln62)   --->   "%mul_ln59 = mul i21 %zext_ln59, i21 1366" [test_gaussian_4096.cpp:59]   --->   Operation 86 'mul' 'mul_ln59' <Predicate = true> <Delay = 0.00> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_4 : Operation 87 [1/1] (0.00ns)   --->   "%zext_ln62 = zext i11 %select_ln58" [test_gaussian_4096.cpp:62]   --->   Operation 87 'zext' 'zext_ln62' <Predicate = true> <Delay = 0.00>
+ST_4 : Operation 88 [2/2] (2.10ns) (root node of the DSP)   --->   "%add_ln62 = add i21 %mul_ln59, i21 %zext_ln62" [test_gaussian_4096.cpp:62]   --->   Operation 88 'add' 'add_ln62' <Predicate = true> <Delay = 2.10> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_4 : Operation 204 [1/1] (0.00ns)   --->   "%ret_ln0 = ret"   --->   Operation 204 'ret' 'ret_ln0' <Predicate = (icmp_ln58)> <Delay = 0.00>
+
+State 5 <SV = 4> <Delay = 5.35>
+ST_5 : Operation 89 [1/1] (0.00ns)   --->   "%specloopname_ln0 = specloopname void @_ssdm_op_SpecLoopName, void @VITIS_LOOP_58_1_VITIS_LOOP_59_2_str"   --->   Operation 89 'specloopname' 'specloopname_ln0' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 90 [1/1] (0.00ns)   --->   "%empty = speclooptripcount i32 @_ssdm_op_SpecLoopTripCount, i64 1857769, i64 1857769, i64 1857769"   --->   Operation 90 'speclooptripcount' 'empty' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 91 [1/2] (2.10ns) (root node of the DSP)   --->   "%add_ln62 = add i21 %mul_ln59, i21 %zext_ln62" [test_gaussian_4096.cpp:62]   --->   Operation 91 'add' 'add_ln62' <Predicate = true> <Delay = 2.10> <CoreInst = "DSP48">   --->   Core 119 'DSP48' <Latency = 3> <II = 1> <Delay = 2.15> <IPBlock> <Opcode : 'mul' 'add' 'sub' 'select'> <InPorts = 0> <OutPorts = 1> <Sync> <CReg>
+ST_5 : Operation 92 [1/1] (0.00ns)   --->   "%zext_ln62_1 = zext i21 %add_ln62" [test_gaussian_4096.cpp:62]   --->   Operation 92 'zext' 'zext_ln62_1' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 93 [1/1] (0.00ns)   --->   "%v1_0_0_0_addr = getelementptr i32 %v1_0_0_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:62]   --->   Operation 93 'getelementptr' 'v1_0_0_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 94 [1/1] (0.00ns)   --->   "%v1_0_0_1_addr = getelementptr i32 %v1_0_0_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:80]   --->   Operation 94 'getelementptr' 'v1_0_0_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 95 [1/1] (0.00ns)   --->   "%v1_0_0_2_addr = getelementptr i32 %v1_0_0_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:98]   --->   Operation 95 'getelementptr' 'v1_0_0_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 96 [1/1] (0.00ns)   --->   "%v1_0_1_0_addr = getelementptr i32 %v1_0_1_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:64]   --->   Operation 96 'getelementptr' 'v1_0_1_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 97 [1/1] (0.00ns)   --->   "%v1_0_1_1_addr = getelementptr i32 %v1_0_1_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:82]   --->   Operation 97 'getelementptr' 'v1_0_1_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 98 [1/1] (0.00ns)   --->   "%v1_0_1_2_addr = getelementptr i32 %v1_0_1_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:100]   --->   Operation 98 'getelementptr' 'v1_0_1_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 99 [1/1] (0.00ns)   --->   "%v1_0_2_0_addr = getelementptr i32 %v1_0_2_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:66]   --->   Operation 99 'getelementptr' 'v1_0_2_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 100 [1/1] (0.00ns)   --->   "%v1_0_2_1_addr = getelementptr i32 %v1_0_2_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:84]   --->   Operation 100 'getelementptr' 'v1_0_2_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 101 [1/1] (0.00ns)   --->   "%v1_0_2_2_addr = getelementptr i32 %v1_0_2_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:102]   --->   Operation 101 'getelementptr' 'v1_0_2_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 102 [1/1] (0.00ns)   --->   "%v1_1_0_0_addr = getelementptr i32 %v1_1_0_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:68]   --->   Operation 102 'getelementptr' 'v1_1_0_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 103 [1/1] (0.00ns)   --->   "%v1_1_0_1_addr = getelementptr i32 %v1_1_0_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:86]   --->   Operation 103 'getelementptr' 'v1_1_0_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 104 [1/1] (0.00ns)   --->   "%v1_1_0_2_addr = getelementptr i32 %v1_1_0_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:104]   --->   Operation 104 'getelementptr' 'v1_1_0_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 105 [1/1] (0.00ns)   --->   "%v1_1_1_0_addr = getelementptr i32 %v1_1_1_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:70]   --->   Operation 105 'getelementptr' 'v1_1_1_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 106 [1/1] (0.00ns)   --->   "%v1_1_1_1_addr = getelementptr i32 %v1_1_1_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:88]   --->   Operation 106 'getelementptr' 'v1_1_1_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 107 [1/1] (0.00ns)   --->   "%v1_1_1_2_addr = getelementptr i32 %v1_1_1_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:106]   --->   Operation 107 'getelementptr' 'v1_1_1_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 108 [1/1] (0.00ns)   --->   "%v1_1_2_0_addr = getelementptr i32 %v1_1_2_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:72]   --->   Operation 108 'getelementptr' 'v1_1_2_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 109 [1/1] (0.00ns)   --->   "%v1_1_2_1_addr = getelementptr i32 %v1_1_2_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:90]   --->   Operation 109 'getelementptr' 'v1_1_2_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 110 [1/1] (0.00ns)   --->   "%v1_1_2_2_addr = getelementptr i32 %v1_1_2_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:108]   --->   Operation 110 'getelementptr' 'v1_1_2_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 111 [1/1] (0.00ns)   --->   "%v1_2_0_0_addr = getelementptr i32 %v1_2_0_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:74]   --->   Operation 111 'getelementptr' 'v1_2_0_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 112 [1/1] (0.00ns)   --->   "%v1_2_0_1_addr = getelementptr i32 %v1_2_0_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:92]   --->   Operation 112 'getelementptr' 'v1_2_0_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 113 [1/1] (0.00ns)   --->   "%v1_2_0_2_addr = getelementptr i32 %v1_2_0_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:110]   --->   Operation 113 'getelementptr' 'v1_2_0_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 114 [1/1] (0.00ns)   --->   "%v1_2_1_0_addr = getelementptr i32 %v1_2_1_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:76]   --->   Operation 114 'getelementptr' 'v1_2_1_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 115 [1/1] (0.00ns)   --->   "%v1_2_1_1_addr = getelementptr i32 %v1_2_1_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:94]   --->   Operation 115 'getelementptr' 'v1_2_1_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 116 [1/1] (0.00ns)   --->   "%v1_2_1_2_addr = getelementptr i32 %v1_2_1_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:112]   --->   Operation 116 'getelementptr' 'v1_2_1_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 117 [1/1] (0.00ns)   --->   "%v1_2_2_0_addr = getelementptr i32 %v1_2_2_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:78]   --->   Operation 117 'getelementptr' 'v1_2_2_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 118 [1/1] (0.00ns)   --->   "%v1_2_2_1_addr = getelementptr i32 %v1_2_2_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:96]   --->   Operation 118 'getelementptr' 'v1_2_2_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 119 [1/1] (0.00ns)   --->   "%v1_2_2_2_addr = getelementptr i32 %v1_2_2_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:114]   --->   Operation 119 'getelementptr' 'v1_2_2_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 120 [1/1] (0.00ns)   --->   "%v5_0_0_0_addr = getelementptr i32 %v5_0_0_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:61]   --->   Operation 120 'getelementptr' 'v5_0_0_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 121 [1/1] (0.00ns)   --->   "%v5_0_0_1_addr = getelementptr i32 %v5_0_0_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:79]   --->   Operation 121 'getelementptr' 'v5_0_0_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 122 [1/1] (0.00ns)   --->   "%v5_0_0_2_addr = getelementptr i32 %v5_0_0_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:97]   --->   Operation 122 'getelementptr' 'v5_0_0_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 123 [1/1] (0.00ns)   --->   "%v5_0_1_0_addr = getelementptr i32 %v5_0_1_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:63]   --->   Operation 123 'getelementptr' 'v5_0_1_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 124 [1/1] (0.00ns)   --->   "%v5_0_1_1_addr = getelementptr i32 %v5_0_1_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:81]   --->   Operation 124 'getelementptr' 'v5_0_1_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 125 [1/1] (0.00ns)   --->   "%v5_0_1_2_addr = getelementptr i32 %v5_0_1_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:99]   --->   Operation 125 'getelementptr' 'v5_0_1_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 126 [1/1] (0.00ns)   --->   "%v5_0_2_0_addr = getelementptr i32 %v5_0_2_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:65]   --->   Operation 126 'getelementptr' 'v5_0_2_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 127 [1/1] (0.00ns)   --->   "%v5_0_2_1_addr = getelementptr i32 %v5_0_2_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:83]   --->   Operation 127 'getelementptr' 'v5_0_2_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 128 [1/1] (0.00ns)   --->   "%v5_0_2_2_addr = getelementptr i32 %v5_0_2_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:101]   --->   Operation 128 'getelementptr' 'v5_0_2_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 129 [1/1] (0.00ns)   --->   "%v5_1_0_0_addr = getelementptr i32 %v5_1_0_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:67]   --->   Operation 129 'getelementptr' 'v5_1_0_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 130 [1/1] (0.00ns)   --->   "%v5_1_0_1_addr = getelementptr i32 %v5_1_0_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:85]   --->   Operation 130 'getelementptr' 'v5_1_0_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 131 [1/1] (0.00ns)   --->   "%v5_1_0_2_addr = getelementptr i32 %v5_1_0_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:103]   --->   Operation 131 'getelementptr' 'v5_1_0_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 132 [1/1] (0.00ns)   --->   "%v5_1_1_0_addr = getelementptr i32 %v5_1_1_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:69]   --->   Operation 132 'getelementptr' 'v5_1_1_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 133 [1/1] (0.00ns)   --->   "%v5_1_1_1_addr = getelementptr i32 %v5_1_1_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:87]   --->   Operation 133 'getelementptr' 'v5_1_1_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 134 [1/1] (0.00ns)   --->   "%v5_1_1_2_addr = getelementptr i32 %v5_1_1_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:105]   --->   Operation 134 'getelementptr' 'v5_1_1_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 135 [1/1] (0.00ns)   --->   "%v5_1_2_0_addr = getelementptr i32 %v5_1_2_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:71]   --->   Operation 135 'getelementptr' 'v5_1_2_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 136 [1/1] (0.00ns)   --->   "%v5_1_2_1_addr = getelementptr i32 %v5_1_2_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:89]   --->   Operation 136 'getelementptr' 'v5_1_2_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 137 [1/1] (0.00ns)   --->   "%v5_1_2_2_addr = getelementptr i32 %v5_1_2_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:107]   --->   Operation 137 'getelementptr' 'v5_1_2_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 138 [1/1] (0.00ns)   --->   "%v5_2_0_0_addr = getelementptr i32 %v5_2_0_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:73]   --->   Operation 138 'getelementptr' 'v5_2_0_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 139 [1/1] (0.00ns)   --->   "%v5_2_0_1_addr = getelementptr i32 %v5_2_0_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:91]   --->   Operation 139 'getelementptr' 'v5_2_0_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 140 [1/1] (0.00ns)   --->   "%v5_2_0_2_addr = getelementptr i32 %v5_2_0_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:109]   --->   Operation 140 'getelementptr' 'v5_2_0_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 141 [1/1] (0.00ns)   --->   "%v5_2_1_0_addr = getelementptr i32 %v5_2_1_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:75]   --->   Operation 141 'getelementptr' 'v5_2_1_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 142 [1/1] (0.00ns)   --->   "%v5_2_1_1_addr = getelementptr i32 %v5_2_1_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:93]   --->   Operation 142 'getelementptr' 'v5_2_1_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 143 [1/1] (0.00ns)   --->   "%v5_2_1_2_addr = getelementptr i32 %v5_2_1_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:111]   --->   Operation 143 'getelementptr' 'v5_2_1_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 144 [1/1] (0.00ns)   --->   "%v5_2_2_0_addr = getelementptr i32 %v5_2_2_0, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:77]   --->   Operation 144 'getelementptr' 'v5_2_2_0_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 145 [1/1] (0.00ns)   --->   "%v5_2_2_1_addr = getelementptr i32 %v5_2_2_1, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:95]   --->   Operation 145 'getelementptr' 'v5_2_2_1_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 146 [1/1] (0.00ns)   --->   "%v5_2_2_2_addr = getelementptr i32 %v5_2_2_2, i64 0, i64 %zext_ln62_1" [test_gaussian_4096.cpp:113]   --->   Operation 146 'getelementptr' 'v5_2_2_2_addr' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 147 [1/1] (0.00ns)   --->   "%specpipeline_ln60 = specpipeline void @_ssdm_op_SpecPipeline, i32 1, i32 0, i32 0, i32 0, void @empty_7" [test_gaussian_4096.cpp:60]   --->   Operation 147 'specpipeline' 'specpipeline_ln60' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 148 [1/1] (0.00ns)   --->   "%specloopname_ln59 = specloopname void @_ssdm_op_SpecLoopName, void @empty_6" [test_gaussian_4096.cpp:59]   --->   Operation 148 'specloopname' 'specloopname_ln59' <Predicate = true> <Delay = 0.00>
+ST_5 : Operation 149 [1/1] (3.25ns)   --->   "%store_ln61 = store i32 %bitcast_ln61_read, i21 %v5_0_0_0_addr" [test_gaussian_4096.cpp:61]   --->   Operation 149 'store' 'store_ln61' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 150 [1/1] (3.25ns)   --->   "%store_ln62 = store i32 %bitcast_ln61_read, i21 %v1_0_0_0_addr" [test_gaussian_4096.cpp:62]   --->   Operation 150 'store' 'store_ln62' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 151 [1/1] (3.25ns)   --->   "%store_ln63 = store i32 %bitcast_ln61_read, i21 %v5_0_1_0_addr" [test_gaussian_4096.cpp:63]   --->   Operation 151 'store' 'store_ln63' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 152 [1/1] (3.25ns)   --->   "%store_ln64 = store i32 %bitcast_ln61_read, i21 %v1_0_1_0_addr" [test_gaussian_4096.cpp:64]   --->   Operation 152 'store' 'store_ln64' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 153 [1/1] (3.25ns)   --->   "%store_ln65 = store i32 %bitcast_ln61_read, i21 %v5_0_2_0_addr" [test_gaussian_4096.cpp:65]   --->   Operation 153 'store' 'store_ln65' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 154 [1/1] (3.25ns)   --->   "%store_ln66 = store i32 %bitcast_ln61_read, i21 %v1_0_2_0_addr" [test_gaussian_4096.cpp:66]   --->   Operation 154 'store' 'store_ln66' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 155 [1/1] (3.25ns)   --->   "%store_ln67 = store i32 %bitcast_ln61_read, i21 %v5_1_0_0_addr" [test_gaussian_4096.cpp:67]   --->   Operation 155 'store' 'store_ln67' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 156 [1/1] (3.25ns)   --->   "%store_ln68 = store i32 %bitcast_ln61_read, i21 %v1_1_0_0_addr" [test_gaussian_4096.cpp:68]   --->   Operation 156 'store' 'store_ln68' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 157 [1/1] (3.25ns)   --->   "%store_ln69 = store i32 %bitcast_ln61_read, i21 %v5_1_1_0_addr" [test_gaussian_4096.cpp:69]   --->   Operation 157 'store' 'store_ln69' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 158 [1/1] (3.25ns)   --->   "%store_ln70 = store i32 %bitcast_ln61_read, i21 %v1_1_1_0_addr" [test_gaussian_4096.cpp:70]   --->   Operation 158 'store' 'store_ln70' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 159 [1/1] (3.25ns)   --->   "%store_ln71 = store i32 %bitcast_ln61_read, i21 %v5_1_2_0_addr" [test_gaussian_4096.cpp:71]   --->   Operation 159 'store' 'store_ln71' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 160 [1/1] (3.25ns)   --->   "%store_ln72 = store i32 %bitcast_ln61_read, i21 %v1_1_2_0_addr" [test_gaussian_4096.cpp:72]   --->   Operation 160 'store' 'store_ln72' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 161 [1/1] (3.25ns)   --->   "%store_ln73 = store i32 %bitcast_ln61_read, i21 %v5_2_0_0_addr" [test_gaussian_4096.cpp:73]   --->   Operation 161 'store' 'store_ln73' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 162 [1/1] (3.25ns)   --->   "%store_ln74 = store i32 %bitcast_ln61_read, i21 %v1_2_0_0_addr" [test_gaussian_4096.cpp:74]   --->   Operation 162 'store' 'store_ln74' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 163 [1/1] (3.25ns)   --->   "%store_ln75 = store i32 %bitcast_ln61_read, i21 %v5_2_1_0_addr" [test_gaussian_4096.cpp:75]   --->   Operation 163 'store' 'store_ln75' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 164 [1/1] (3.25ns)   --->   "%store_ln76 = store i32 %bitcast_ln61_read, i21 %v1_2_1_0_addr" [test_gaussian_4096.cpp:76]   --->   Operation 164 'store' 'store_ln76' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 165 [1/1] (3.25ns)   --->   "%store_ln77 = store i32 %bitcast_ln61_read, i21 %v5_2_2_0_addr" [test_gaussian_4096.cpp:77]   --->   Operation 165 'store' 'store_ln77' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 166 [1/1] (3.25ns)   --->   "%store_ln78 = store i32 %bitcast_ln61_read, i21 %v1_2_2_0_addr" [test_gaussian_4096.cpp:78]   --->   Operation 166 'store' 'store_ln78' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 167 [1/1] (3.25ns)   --->   "%store_ln79 = store i32 %bitcast_ln61_read, i21 %v5_0_0_1_addr" [test_gaussian_4096.cpp:79]   --->   Operation 167 'store' 'store_ln79' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 168 [1/1] (3.25ns)   --->   "%store_ln80 = store i32 %bitcast_ln61_read, i21 %v1_0_0_1_addr" [test_gaussian_4096.cpp:80]   --->   Operation 168 'store' 'store_ln80' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 169 [1/1] (3.25ns)   --->   "%store_ln81 = store i32 %bitcast_ln61_read, i21 %v5_0_1_1_addr" [test_gaussian_4096.cpp:81]   --->   Operation 169 'store' 'store_ln81' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 170 [1/1] (3.25ns)   --->   "%store_ln82 = store i32 %bitcast_ln61_read, i21 %v1_0_1_1_addr" [test_gaussian_4096.cpp:82]   --->   Operation 170 'store' 'store_ln82' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 171 [1/1] (3.25ns)   --->   "%store_ln83 = store i32 %bitcast_ln61_read, i21 %v5_0_2_1_addr" [test_gaussian_4096.cpp:83]   --->   Operation 171 'store' 'store_ln83' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 172 [1/1] (3.25ns)   --->   "%store_ln84 = store i32 %bitcast_ln61_read, i21 %v1_0_2_1_addr" [test_gaussian_4096.cpp:84]   --->   Operation 172 'store' 'store_ln84' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 173 [1/1] (3.25ns)   --->   "%store_ln85 = store i32 %bitcast_ln61_read, i21 %v5_1_0_1_addr" [test_gaussian_4096.cpp:85]   --->   Operation 173 'store' 'store_ln85' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 174 [1/1] (3.25ns)   --->   "%store_ln86 = store i32 %bitcast_ln61_read, i21 %v1_1_0_1_addr" [test_gaussian_4096.cpp:86]   --->   Operation 174 'store' 'store_ln86' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 175 [1/1] (3.25ns)   --->   "%store_ln87 = store i32 %bitcast_ln61_read, i21 %v5_1_1_1_addr" [test_gaussian_4096.cpp:87]   --->   Operation 175 'store' 'store_ln87' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 176 [1/1] (3.25ns)   --->   "%store_ln88 = store i32 %bitcast_ln61_read, i21 %v1_1_1_1_addr" [test_gaussian_4096.cpp:88]   --->   Operation 176 'store' 'store_ln88' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 177 [1/1] (3.25ns)   --->   "%store_ln89 = store i32 %bitcast_ln61_read, i21 %v5_1_2_1_addr" [test_gaussian_4096.cpp:89]   --->   Operation 177 'store' 'store_ln89' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 178 [1/1] (3.25ns)   --->   "%store_ln90 = store i32 %bitcast_ln61_read, i21 %v1_1_2_1_addr" [test_gaussian_4096.cpp:90]   --->   Operation 178 'store' 'store_ln90' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 179 [1/1] (3.25ns)   --->   "%store_ln91 = store i32 %bitcast_ln61_read, i21 %v5_2_0_1_addr" [test_gaussian_4096.cpp:91]   --->   Operation 179 'store' 'store_ln91' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 180 [1/1] (3.25ns)   --->   "%store_ln92 = store i32 %bitcast_ln61_read, i21 %v1_2_0_1_addr" [test_gaussian_4096.cpp:92]   --->   Operation 180 'store' 'store_ln92' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 181 [1/1] (3.25ns)   --->   "%store_ln93 = store i32 %bitcast_ln61_read, i21 %v5_2_1_1_addr" [test_gaussian_4096.cpp:93]   --->   Operation 181 'store' 'store_ln93' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 182 [1/1] (3.25ns)   --->   "%store_ln94 = store i32 %bitcast_ln61_read, i21 %v1_2_1_1_addr" [test_gaussian_4096.cpp:94]   --->   Operation 182 'store' 'store_ln94' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 183 [1/1] (3.25ns)   --->   "%store_ln95 = store i32 %bitcast_ln61_read, i21 %v5_2_2_1_addr" [test_gaussian_4096.cpp:95]   --->   Operation 183 'store' 'store_ln95' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 184 [1/1] (3.25ns)   --->   "%store_ln96 = store i32 %bitcast_ln61_read, i21 %v1_2_2_1_addr" [test_gaussian_4096.cpp:96]   --->   Operation 184 'store' 'store_ln96' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 185 [1/1] (3.25ns)   --->   "%store_ln97 = store i32 %bitcast_ln61_read, i21 %v5_0_0_2_addr" [test_gaussian_4096.cpp:97]   --->   Operation 185 'store' 'store_ln97' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 186 [1/1] (3.25ns)   --->   "%store_ln98 = store i32 %bitcast_ln61_read, i21 %v1_0_0_2_addr" [test_gaussian_4096.cpp:98]   --->   Operation 186 'store' 'store_ln98' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 187 [1/1] (3.25ns)   --->   "%store_ln99 = store i32 %bitcast_ln61_read, i21 %v5_0_1_2_addr" [test_gaussian_4096.cpp:99]   --->   Operation 187 'store' 'store_ln99' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 188 [1/1] (3.25ns)   --->   "%store_ln100 = store i32 %bitcast_ln61_read, i21 %v1_0_1_2_addr" [test_gaussian_4096.cpp:100]   --->   Operation 188 'store' 'store_ln100' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 189 [1/1] (3.25ns)   --->   "%store_ln101 = store i32 %bitcast_ln61_read, i21 %v5_0_2_2_addr" [test_gaussian_4096.cpp:101]   --->   Operation 189 'store' 'store_ln101' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 190 [1/1] (3.25ns)   --->   "%store_ln102 = store i32 %bitcast_ln61_read, i21 %v1_0_2_2_addr" [test_gaussian_4096.cpp:102]   --->   Operation 190 'store' 'store_ln102' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 191 [1/1] (3.25ns)   --->   "%store_ln103 = store i32 %bitcast_ln61_read, i21 %v5_1_0_2_addr" [test_gaussian_4096.cpp:103]   --->   Operation 191 'store' 'store_ln103' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 192 [1/1] (3.25ns)   --->   "%store_ln104 = store i32 %bitcast_ln61_read, i21 %v1_1_0_2_addr" [test_gaussian_4096.cpp:104]   --->   Operation 192 'store' 'store_ln104' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 193 [1/1] (3.25ns)   --->   "%store_ln105 = store i32 %bitcast_ln61_read, i21 %v5_1_1_2_addr" [test_gaussian_4096.cpp:105]   --->   Operation 193 'store' 'store_ln105' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 194 [1/1] (3.25ns)   --->   "%store_ln106 = store i32 %bitcast_ln61_read, i21 %v1_1_1_2_addr" [test_gaussian_4096.cpp:106]   --->   Operation 194 'store' 'store_ln106' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 195 [1/1] (3.25ns)   --->   "%store_ln107 = store i32 %bitcast_ln61_read, i21 %v5_1_2_2_addr" [test_gaussian_4096.cpp:107]   --->   Operation 195 'store' 'store_ln107' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 196 [1/1] (3.25ns)   --->   "%store_ln108 = store i32 %bitcast_ln61_read, i21 %v1_1_2_2_addr" [test_gaussian_4096.cpp:108]   --->   Operation 196 'store' 'store_ln108' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 197 [1/1] (3.25ns)   --->   "%store_ln109 = store i32 %bitcast_ln61_read, i21 %v5_2_0_2_addr" [test_gaussian_4096.cpp:109]   --->   Operation 197 'store' 'store_ln109' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 198 [1/1] (3.25ns)   --->   "%store_ln110 = store i32 %bitcast_ln61_read, i21 %v1_2_0_2_addr" [test_gaussian_4096.cpp:110]   --->   Operation 198 'store' 'store_ln110' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 199 [1/1] (3.25ns)   --->   "%store_ln111 = store i32 %bitcast_ln61_read, i21 %v5_2_1_2_addr" [test_gaussian_4096.cpp:111]   --->   Operation 199 'store' 'store_ln111' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 200 [1/1] (3.25ns)   --->   "%store_ln112 = store i32 %bitcast_ln61_read, i21 %v1_2_1_2_addr" [test_gaussian_4096.cpp:112]   --->   Operation 200 'store' 'store_ln112' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 201 [1/1] (3.25ns)   --->   "%store_ln113 = store i32 %bitcast_ln61_read, i21 %v5_2_2_2_addr" [test_gaussian_4096.cpp:113]   --->   Operation 201 'store' 'store_ln113' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 202 [1/1] (3.25ns)   --->   "%store_ln114 = store i32 %bitcast_ln61_read, i21 %v1_2_2_2_addr" [test_gaussian_4096.cpp:114]   --->   Operation 202 'store' 'store_ln114' <Predicate = true> <Delay = 3.25> <CoreInst = "RAM">   --->   Core 82 'RAM' <Latency = 1> <II = 1> <Delay = 3.25> <Storage> <Opcode : 'load' 'store'> <Ports = 2> <Width = 32> <Depth = 1865956> <RAM>
+ST_5 : Operation 203 [1/1] (0.00ns)   --->   "%br_ln59 = br void %for.inc" [test_gaussian_4096.cpp:59]   --->   Operation 203 'br' 'br_ln59' <Predicate = true> <Delay = 0.00>
+
+
+============================================================
++ Verbose Summary: Timing violations
+============================================================
+Target clock period: 10ns, clock uncertainty: 2.7ns.
+
+ <State 1>: 1.61ns
+The critical path consists of the following:
+	'alloca' operation ('indvar_flatten') [58]  (0 ns)
+	'store' operation ('store_ln0') of constant 0 on local variable 'indvar_flatten' [114]  (1.61 ns)
+
+ <State 2>: 6.46ns
+The critical path consists of the following:
+	'load' operation ('v7_load', test_gaussian_4096.cpp:59) on local variable 'v7' [124]  (0 ns)
+	'icmp' operation ('icmp_ln59', test_gaussian_4096.cpp:59) [129]  (1.81 ns)
+	'select' operation ('select_ln58', test_gaussian_4096.cpp:58) [130]  (0.905 ns)
+	'add' operation ('add_ln59', test_gaussian_4096.cpp:59) [247]  (2.13 ns)
+	'store' operation ('store_ln59', test_gaussian_4096.cpp:59) of variable 'add_ln59', test_gaussian_4096.cpp:59 on local variable 'v7' [250]  (1.61 ns)
+
+ <State 3>: 1.45ns
+The critical path consists of the following:
+	'mul' operation of DSP[135] ('mul_ln59', test_gaussian_4096.cpp:59) [133]  (1.45 ns)
+
+ <State 4>: 2.1ns
+The critical path consists of the following:
+	'mul' operation of DSP[135] ('mul_ln59', test_gaussian_4096.cpp:59) [133]  (0 ns)
+	'add' operation of DSP[135] ('add_ln62', test_gaussian_4096.cpp:62) [135]  (2.1 ns)
+
+ <State 5>: 5.36ns
+The critical path consists of the following:
+	'add' operation of DSP[135] ('add_ln62', test_gaussian_4096.cpp:62) [135]  (2.1 ns)
+	'getelementptr' operation ('v5_0_0_0_addr', test_gaussian_4096.cpp:61) [164]  (0 ns)
+	'store' operation ('store_ln61', test_gaussian_4096.cpp:61) of variable 'bitcast_ln61_read' on array 'v5_0_0_0' [193]  (3.26 ns)
+
+
+============================================================
++ Verbose Summary: Binding
+============================================================
+N/A
+* FSMD analyzer results:
+  - Output states:
+ - Input state : 
+  - Chain level:
+	State 1
+	State 2
+	State 3
+	State 4
+	State 5
+
+
+============================================================
++ Verbose Summary: Datapath Resource usage 
+============================================================
+N/A

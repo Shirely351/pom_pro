@@ -73,8 +73,23 @@ int main(){
     // C.partition({2,2},"cyclic");
     // D.partition({16,2},"cyclic");
     // temp.partition({16,2},"cyclic");
+    fct->auto_DSE_loop_transformation();
+    int count=0;
+    for(auto &comp: fct->leader_computations){
+        auto iterators = comp->get_iteration_variables();
+        int size = iterators.size();
+        if(size==2){
+          comp->apply_opt_strategy({4,8});
+        }
+        if(size==3){
+            comp->apply_opt_strategy({1,4,8});
+        }
+          
+    }
+    
     std::string pwd = std::filesystem::current_path().parent_path();
     std::string path = pwd+"/samples/3mm/";
-    fct->auto_DSE(path);
+    fct->dump_schedule(path);
+    // fct->auto_DSE(path);
     // codegen();
 }

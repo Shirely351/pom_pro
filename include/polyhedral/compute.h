@@ -312,11 +312,17 @@ public:
 
     // TODO: Config file
     int current_factor = 1;
-    int largest_factor = 2;
+    int largest_factor = 5; //@syy
 
     std::string iterator_to_skew;
     std::string iterator_to_modify;
     int skew_factor;
+
+    // 新增：II 相关字段@syy
+    int best_ii = 1;                    // 最优 II 值
+    int current_ii = 1;                 // 当前评估的 II 值
+    long iterLatency = 0;               // 单次迭代的关键路径延迟
+    std::vector<int> ii_candidates;     // II 候选列表
 
     std::vector<std::string> get_loop_level_names();
 

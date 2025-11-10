@@ -1108,9 +1108,11 @@ void compute::check_loop_skewing()
             if(size==3)
             {
                 this->skew(iterator_map[1],iterator_map[2],1,factor,i0,j0);
+                std::cout<<"this is my skewing"<<std::endl;
             }else if(size==2)
             {
                 this->skew(iterator_map[0],iterator_map[1],1,factor,i0,j0);
+                std::cout<<"this is my skewing"<<std::endl;
             }
             this->is_skewed_inDSE = true;
         }
@@ -1125,7 +1127,6 @@ void compute::auto_loop_transformation()
 
 void compute::apply_opt_strategy(std::vector<int> tile_size){
     std::map<int,polyfp::var> iterator_map;
-    
     this->set_schedule(this->original_schedule);
     this->set_loop_level_names(this->original_loop_level_name);
     this->directive_map.clear();
@@ -1148,7 +1149,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
     {
         var i0("i0"), j0("j0"),k0("k0"), i1("i1"), j1("j1"),k1("k1");
         // TODO: Config file
-        if(tile_size[0]<=64 && tile_size[1]<64 && tile_size[2]<64)
+        if (tile_size[0] <= 256 && tile_size[1] <= 256 && tile_size[2] <= 256) 
         {
             int temp_index = this->get_iteration_variables().size()-3;
 
@@ -1159,31 +1160,33 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
             {
                 this->tile(iterator_map[temp_index],iterator_map[temp_index+1],
                     iterator_map[temp_index+2],tile_size[0],tile_size[1],tile_size[2],i0, j0, k0, i1, j1, k1);
+                    // iterator_map[temp_index+2],1,4,16,i0, j0, k0, i1, j1, k1);
+                    // this->tile(iterator_map[temp_index],iterator_map[temp_index+1],
             }
             // std::cout<<iterator_map[temp_index].get_name()<<std::endl;
             if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]!=1)
             {
-                this->pipeline(k0,1);
+                this->pipeline(k0,this->II);
                 this->unroll(k1,-1);
                 this->unroll(j1,-1);
                 this->unroll(i1,-1);
             }
             if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]==1)
             {
-                this->pipeline(k0,1);
+                this->pipeline(k0,this->II);
                 this->unroll(k1,-1);
                 this->unroll(j1,-1);
             }
             if(tile_size[2]==1 && tile_size[1]==1 && tile_size[0]!=1)
             {
-                this->pipeline(iterator_map[temp_index+2],1);
+                this->pipeline(iterator_map[temp_index+2],this->II);
                 // comp->unroll(k1,-1);
                 // comp->unroll(j1,-1);
                 this->unroll(i1,-1);
             }
             if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]!=1)
             {
-                this->pipeline(k0,1);
+                this->pipeline(k0,this->II);
                 this->unroll(k1,-1);
                 this->unroll(i1,-1);
             }
@@ -1195,13 +1198,13 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                 // TODO: Config
                 if(range<=7)
                 {
-                    this->pipeline(iterator_map[temp_index+1],1);
+                    this->pipeline(iterator_map[temp_index+1],this->II);
                     this->unroll(iterator_map[temp_index+2],-1);
                 }
             }
             if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]==1)
             {
-                this->pipeline(k0,1);
+                this->pipeline(k0,this->II);
                 this->unroll(k1,-1);
             }
             if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1)
@@ -1211,13 +1214,13 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                 int range = upper-lower;
                 if(range<=6)
                 {
-                    this->pipeline(j0,1);
+                    this->pipeline(j0,this->II);
                     this->unroll(j1,-1);
                     this->unroll(i1,-1);
                     this->unroll(iterator_map[temp_index+2],-1);
                 }else
                 {
-                    this->pipeline(iterator_map[temp_index+2],1);
+                    this->pipeline(iterator_map[temp_index+2],this->II);
                     this->unroll(j1,-1);
                     this->unroll(i1,-1);
                 }
@@ -1238,7 +1241,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                     else if(part.first->after_level == 0)
                     {
                         part.first->after(this,i0);
-                        part.first->pipeline(iterator_map[temp_index+2],1);   
+                        part.first->pipeline(iterator_map[temp_index+2],this->II);   
                     }
                 }else
                 {
@@ -1249,7 +1252,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                     else if
                     (part.first->after_level == 0){
                         part.first->after(this,iterator_map[temp_index+0]);
-                        part.first->pipeline(iterator_map[temp_index+2],1);   
+                        part.first->pipeline(iterator_map[temp_index+2],this->II);   
                         //TODO
                         part.first->unroll(k1,-1);
                         part.first->unroll(j1,-1);
@@ -1261,22 +1264,22 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
     else if(size == 2)
     {
         var i0("i0"), j0("j0"), i1("i1"), j1("j1");
-        // TODO: Config file
-        if(tile_size[0]<64 && tile_size[1]<64)
+        // TODO: Config file test for equal to 64
+        if(tile_size[0]<=256  && tile_size[1]<=256 )
         {
             this->tile(iterator_map[0],iterator_map[1],tile_size[0],tile_size[1],i0, j0, i1, j1);
             if(tile_size[1]!=1&&tile_size[0]!=1)
             {
-                this->pipeline(j0,1);
+                this->pipeline(j0,this->II);
                 this->unroll(j1,-1);
                 this->unroll(i1,-1);
             }else if(tile_size[1]==1&&tile_size[0]!=1)
             {
-                this->pipeline(iterator_map[1],1);
+                this->pipeline(iterator_map[1],this->II);
                 this->unroll(i1,-1);
             }else if(tile_size[0]==1&&tile_size[1]!=1)
             {
-                this->pipeline(j0,1);
+                this->pipeline(j0,this->II);
                 this->unroll(j1,-1);
             }
             for(auto &part:this->components)
@@ -1301,7 +1304,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                     else if(part.first->after_level == 0)
                     {
                         part.first->after(this,i0);
-                        part.first->pipeline(j0,1);
+                        part.first->pipeline(j0,this->II);
                     }
                     
                 }
@@ -1313,7 +1316,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                     }
                     else if(part.first->after_level == 0)
                     {
-                        part.first->pipeline(iterator_map[1],1);
+                        part.first->pipeline(iterator_map[1],this->II);
                         part.first->after(this,i0);
                     }                  
                 }
@@ -1326,7 +1329,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
                     else if(part.first->after_level == 0)
                     {
                         part.first->after(this,iterator_map[0]);
-                        part.first->pipeline(j0,1);
+                        part.first->pipeline(j0,this->II);
                         part.first->unroll(j1,-1);
                     }
                     else if(part.first->after_level == 2)
@@ -1337,6 +1340,7 @@ void compute::apply_opt_strategy(std::vector<int> tile_size){
             }
         } 
     }
+   
 }
 
 

@@ -1,0 +1,25 @@
+{
+    "configurations": [
+    {
+        "type": "lldb",
+        "request": "launch",
+        "name": "Launch",
+        "program": "${workspaceFolder}/build/bin/gemm",
+        "args": [],
+        "cwd": "${workspaceFolder}"
+    },
+    
+    {
+        "type": "lldb",
+        "request": "launch",
+        "name": "debug-scalehls-opt",
+        "program": "${workspaceFolder}/scalehls/build/bin/scalehls-opt",
+        "args": ["${workspaceFolder}/scalehls/samples/polybench/gemm/test_gemm_16_compare.mlir",
+                    "--scalehls-func-preprocess=top-func=test_gemm",
+                    "--scalehls-qor-estimation=target-spec=${workspaceFolder}/samples/config.json",
+                             
+    ],
+        "cwd": "${workspaceFolder}"
+    }
+    ]
+}

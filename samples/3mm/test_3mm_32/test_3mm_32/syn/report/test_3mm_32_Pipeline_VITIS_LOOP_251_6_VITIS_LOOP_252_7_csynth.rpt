@@ -1,0 +1,339 @@
+
+
+================================================================
+== Vitis HLS Report for 'test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7'
+================================================================
+* Date:           Thu Nov  6 22:06:20 2025
+
+* Version:        2022.2 (Build 3670227 on Oct 13 2022)
+* Project:        test_3mm_32
+* Solution:       test_3mm_32 (Vivado IP Flow Target)
+* Product family: artix7
+* Target device:  xc7a100t-csg324-1
+
+
+================================================================
+== Performance Estimates
+================================================================
++ Timing: 
+    * Summary: 
+    +--------+----------+----------+------------+
+    |  Clock |  Target  | Estimated| Uncertainty|
+    +--------+----------+----------+------------+
+    |ap_clk  |  10.00 ns|  5.459 ns|     2.70 ns|
+    +--------+----------+----------+------------+
+
++ Latency: 
+    * Summary: 
+    +---------+---------+----------+----------+-----+-----+---------+
+    |  Latency (cycles) |  Latency (absolute) |  Interval | Pipeline|
+    |   min   |   max   |    min   |    max   | min | max |   Type  |
+    +---------+---------+----------+----------+-----+-----+---------+
+    |       66|       66|  0.660 us|  0.660 us|   66|   66|       no|
+    +---------+---------+----------+----------+-----+-----+---------+
+
+    + Detail: 
+        * Instance: 
+        N/A
+
+        * Loop: 
+        +-------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |                                     |  Latency (cycles) | Iteration|  Initiation Interval  | Trip |          |
+        |              Loop Name              |   min   |   max   |  Latency |  achieved |   target  | Count| Pipelined|
+        +-------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+        |- VITIS_LOOP_251_6_VITIS_LOOP_252_7  |       64|       64|         2|          2|          3|    32|       yes|
+        +-------------------------------------+---------+---------+----------+-----------+-----------+------+----------+
+
+
+
+================================================================
+== Utilization Estimates
+================================================================
+* Summary: 
++-----------------+---------+-----+--------+-------+-----+
+|       Name      | BRAM_18K| DSP |   FF   |  LUT  | URAM|
++-----------------+---------+-----+--------+-------+-----+
+|DSP              |        -|    -|       -|      -|    -|
+|Expression       |        -|    -|       0|     77|    -|
+|FIFO             |        -|    -|       -|      -|    -|
+|Instance         |        -|    -|       -|      -|    -|
+|Memory           |        -|    -|       -|      -|    -|
+|Multiplexer      |        -|    -|       -|    364|    -|
+|Register         |        -|    -|      21|      -|    -|
++-----------------+---------+-----+--------+-------+-----+
+|Total            |        0|    0|      21|    441|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Available        |      270|  240|  126800|  63400|    0|
++-----------------+---------+-----+--------+-------+-----+
+|Utilization (%)  |        0|    0|      ~0|     ~0|    0|
++-----------------+---------+-----+--------+-------+-----+
+
++ Detail: 
+    * Instance: 
+    N/A
+
+    * DSP: 
+    N/A
+
+    * Memory: 
+    N/A
+
+    * FIFO: 
+    N/A
+
+    * Expression: 
+    +--------------------------+----------+----+---+----+------------+------------+
+    |       Variable Name      | Operation| DSP| FF| LUT| Bitwidth P0| Bitwidth P1|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |add_ln251_1_fu_574_p2     |         +|   0|  0|  14|           6|           1|
+    |add_ln251_fu_586_p2       |         +|   0|  0|  13|           4|           1|
+    |add_ln252_fu_636_p2       |         +|   0|  0|  11|           3|           1|
+    |add_ln254_fu_630_p2       |         +|   0|  0|  13|           5|           5|
+    |icmp_ln251_fu_568_p2      |      icmp|   0|  0|  10|           6|           7|
+    |icmp_ln252_fu_592_p2      |      icmp|   0|  0|   9|           3|           4|
+    |select_ln251_1_fu_606_p3  |    select|   0|  0|   4|           1|           4|
+    |select_ln251_fu_598_p3    |    select|   0|  0|   3|           1|           1|
+    +--------------------------+----------+----+---+----+------------+------------+
+    |Total                     |          |   0|  0|  77|          29|          24|
+    +--------------------------+----------+----+---+----+------------+------------+
+
+    * Multiplexer: 
+    +----------------------------------------+----+-----------+-----+-----------+
+    |                  Name                  | LUT| Input Size| Bits| Total Bits|
+    +----------------------------------------+----+-----------+-----+-----------+
+    |ap_NS_fsm                               |  13|          3|    1|          3|
+    |ap_done_int                             |   9|          2|    1|          2|
+    |ap_sig_allocacmp_indvar_flatten55_load  |   9|          2|    6|         12|
+    |ap_sig_allocacmp_v121_load              |   9|          2|    4|          8|
+    |ap_sig_allocacmp_v122_load              |   9|          2|    3|          6|
+    |indvar_flatten55_fu_124                 |   9|          2|    6|         12|
+    |v121_fu_120                             |   9|          2|    4|          8|
+    |v122_fu_116                             |   9|          2|    3|          6|
+    |v6_0_0_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_1_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_2_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_3_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_4_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_5_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_6_WEN_A                            |   9|          2|    4|          8|
+    |v6_0_7_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_0_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_1_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_2_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_3_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_4_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_5_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_6_WEN_A                            |   9|          2|    4|          8|
+    |v6_1_7_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_0_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_1_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_2_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_3_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_4_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_5_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_6_WEN_A                            |   9|          2|    4|          8|
+    |v6_2_7_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_0_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_1_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_2_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_3_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_4_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_5_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_6_WEN_A                            |   9|          2|    4|          8|
+    |v6_3_7_WEN_A                            |   9|          2|    4|          8|
+    +----------------------------------------+----+-----------+-----+-----------+
+    |Total                                   | 364|         81|  156|        313|
+    +----------------------------------------+----+-----------+-----+-----------+
+
+    * Register: 
+    +-------------------------+---+----+-----+-----------+
+    |           Name          | FF| LUT| Bits| Const Bits|
+    +-------------------------+---+----+-----+-----------+
+    |add_ln254_reg_752        |  5|   0|    5|          0|
+    |ap_CS_fsm                |  2|   0|    2|          0|
+    |ap_done_reg              |  1|   0|    1|          0|
+    |indvar_flatten55_fu_124  |  6|   0|    6|          0|
+    |v121_fu_120              |  4|   0|    4|          0|
+    |v122_fu_116              |  3|   0|    3|          0|
+    +-------------------------+---+----+-----+-----------+
+    |Total                    | 21|   0|   21|          0|
+    +-------------------------+---+----+-----+-----------+
+
+
+
+================================================================
+== Interface
+================================================================
+* Summary: 
++---------------+-----+-----+------------+--------------------------------------------------------+--------------+
+|   RTL Ports   | Dir | Bits|  Protocol  |                      Source Object                     |    C Type    |
++---------------+-----+-----+------------+--------------------------------------------------------+--------------+
+|ap_clk         |   in|    1|  ap_ctrl_hs|  test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7|  return value|
+|ap_rst         |   in|    1|  ap_ctrl_hs|  test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7|  return value|
+|ap_start       |   in|    1|  ap_ctrl_hs|  test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7|  return value|
+|ap_done        |  out|    1|  ap_ctrl_hs|  test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7|  return value|
+|ap_idle        |  out|    1|  ap_ctrl_hs|  test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7|  return value|
+|ap_ready       |  out|    1|  ap_ctrl_hs|  test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7|  return value|
+|v6_0_0_Addr_A  |  out|   32|        bram|                                                  v6_0_0|         array|
+|v6_0_0_EN_A    |  out|    1|        bram|                                                  v6_0_0|         array|
+|v6_0_0_WEN_A   |  out|    4|        bram|                                                  v6_0_0|         array|
+|v6_0_0_Din_A   |  out|   32|        bram|                                                  v6_0_0|         array|
+|v6_0_0_Dout_A  |   in|   32|        bram|                                                  v6_0_0|         array|
+|v6_0_1_Addr_A  |  out|   32|        bram|                                                  v6_0_1|         array|
+|v6_0_1_EN_A    |  out|    1|        bram|                                                  v6_0_1|         array|
+|v6_0_1_WEN_A   |  out|    4|        bram|                                                  v6_0_1|         array|
+|v6_0_1_Din_A   |  out|   32|        bram|                                                  v6_0_1|         array|
+|v6_0_1_Dout_A  |   in|   32|        bram|                                                  v6_0_1|         array|
+|v6_0_2_Addr_A  |  out|   32|        bram|                                                  v6_0_2|         array|
+|v6_0_2_EN_A    |  out|    1|        bram|                                                  v6_0_2|         array|
+|v6_0_2_WEN_A   |  out|    4|        bram|                                                  v6_0_2|         array|
+|v6_0_2_Din_A   |  out|   32|        bram|                                                  v6_0_2|         array|
+|v6_0_2_Dout_A  |   in|   32|        bram|                                                  v6_0_2|         array|
+|v6_0_3_Addr_A  |  out|   32|        bram|                                                  v6_0_3|         array|
+|v6_0_3_EN_A    |  out|    1|        bram|                                                  v6_0_3|         array|
+|v6_0_3_WEN_A   |  out|    4|        bram|                                                  v6_0_3|         array|
+|v6_0_3_Din_A   |  out|   32|        bram|                                                  v6_0_3|         array|
+|v6_0_3_Dout_A  |   in|   32|        bram|                                                  v6_0_3|         array|
+|v6_0_4_Addr_A  |  out|   32|        bram|                                                  v6_0_4|         array|
+|v6_0_4_EN_A    |  out|    1|        bram|                                                  v6_0_4|         array|
+|v6_0_4_WEN_A   |  out|    4|        bram|                                                  v6_0_4|         array|
+|v6_0_4_Din_A   |  out|   32|        bram|                                                  v6_0_4|         array|
+|v6_0_4_Dout_A  |   in|   32|        bram|                                                  v6_0_4|         array|
+|v6_0_5_Addr_A  |  out|   32|        bram|                                                  v6_0_5|         array|
+|v6_0_5_EN_A    |  out|    1|        bram|                                                  v6_0_5|         array|
+|v6_0_5_WEN_A   |  out|    4|        bram|                                                  v6_0_5|         array|
+|v6_0_5_Din_A   |  out|   32|        bram|                                                  v6_0_5|         array|
+|v6_0_5_Dout_A  |   in|   32|        bram|                                                  v6_0_5|         array|
+|v6_0_6_Addr_A  |  out|   32|        bram|                                                  v6_0_6|         array|
+|v6_0_6_EN_A    |  out|    1|        bram|                                                  v6_0_6|         array|
+|v6_0_6_WEN_A   |  out|    4|        bram|                                                  v6_0_6|         array|
+|v6_0_6_Din_A   |  out|   32|        bram|                                                  v6_0_6|         array|
+|v6_0_6_Dout_A  |   in|   32|        bram|                                                  v6_0_6|         array|
+|v6_0_7_Addr_A  |  out|   32|        bram|                                                  v6_0_7|         array|
+|v6_0_7_EN_A    |  out|    1|        bram|                                                  v6_0_7|         array|
+|v6_0_7_WEN_A   |  out|    4|        bram|                                                  v6_0_7|         array|
+|v6_0_7_Din_A   |  out|   32|        bram|                                                  v6_0_7|         array|
+|v6_0_7_Dout_A  |   in|   32|        bram|                                                  v6_0_7|         array|
+|v6_1_0_Addr_A  |  out|   32|        bram|                                                  v6_1_0|         array|
+|v6_1_0_EN_A    |  out|    1|        bram|                                                  v6_1_0|         array|
+|v6_1_0_WEN_A   |  out|    4|        bram|                                                  v6_1_0|         array|
+|v6_1_0_Din_A   |  out|   32|        bram|                                                  v6_1_0|         array|
+|v6_1_0_Dout_A  |   in|   32|        bram|                                                  v6_1_0|         array|
+|v6_1_1_Addr_A  |  out|   32|        bram|                                                  v6_1_1|         array|
+|v6_1_1_EN_A    |  out|    1|        bram|                                                  v6_1_1|         array|
+|v6_1_1_WEN_A   |  out|    4|        bram|                                                  v6_1_1|         array|
+|v6_1_1_Din_A   |  out|   32|        bram|                                                  v6_1_1|         array|
+|v6_1_1_Dout_A  |   in|   32|        bram|                                                  v6_1_1|         array|
+|v6_1_2_Addr_A  |  out|   32|        bram|                                                  v6_1_2|         array|
+|v6_1_2_EN_A    |  out|    1|        bram|                                                  v6_1_2|         array|
+|v6_1_2_WEN_A   |  out|    4|        bram|                                                  v6_1_2|         array|
+|v6_1_2_Din_A   |  out|   32|        bram|                                                  v6_1_2|         array|
+|v6_1_2_Dout_A  |   in|   32|        bram|                                                  v6_1_2|         array|
+|v6_1_3_Addr_A  |  out|   32|        bram|                                                  v6_1_3|         array|
+|v6_1_3_EN_A    |  out|    1|        bram|                                                  v6_1_3|         array|
+|v6_1_3_WEN_A   |  out|    4|        bram|                                                  v6_1_3|         array|
+|v6_1_3_Din_A   |  out|   32|        bram|                                                  v6_1_3|         array|
+|v6_1_3_Dout_A  |   in|   32|        bram|                                                  v6_1_3|         array|
+|v6_1_4_Addr_A  |  out|   32|        bram|                                                  v6_1_4|         array|
+|v6_1_4_EN_A    |  out|    1|        bram|                                                  v6_1_4|         array|
+|v6_1_4_WEN_A   |  out|    4|        bram|                                                  v6_1_4|         array|
+|v6_1_4_Din_A   |  out|   32|        bram|                                                  v6_1_4|         array|
+|v6_1_4_Dout_A  |   in|   32|        bram|                                                  v6_1_4|         array|
+|v6_1_5_Addr_A  |  out|   32|        bram|                                                  v6_1_5|         array|
+|v6_1_5_EN_A    |  out|    1|        bram|                                                  v6_1_5|         array|
+|v6_1_5_WEN_A   |  out|    4|        bram|                                                  v6_1_5|         array|
+|v6_1_5_Din_A   |  out|   32|        bram|                                                  v6_1_5|         array|
+|v6_1_5_Dout_A  |   in|   32|        bram|                                                  v6_1_5|         array|
+|v6_1_6_Addr_A  |  out|   32|        bram|                                                  v6_1_6|         array|
+|v6_1_6_EN_A    |  out|    1|        bram|                                                  v6_1_6|         array|
+|v6_1_6_WEN_A   |  out|    4|        bram|                                                  v6_1_6|         array|
+|v6_1_6_Din_A   |  out|   32|        bram|                                                  v6_1_6|         array|
+|v6_1_6_Dout_A  |   in|   32|        bram|                                                  v6_1_6|         array|
+|v6_1_7_Addr_A  |  out|   32|        bram|                                                  v6_1_7|         array|
+|v6_1_7_EN_A    |  out|    1|        bram|                                                  v6_1_7|         array|
+|v6_1_7_WEN_A   |  out|    4|        bram|                                                  v6_1_7|         array|
+|v6_1_7_Din_A   |  out|   32|        bram|                                                  v6_1_7|         array|
+|v6_1_7_Dout_A  |   in|   32|        bram|                                                  v6_1_7|         array|
+|v6_2_0_Addr_A  |  out|   32|        bram|                                                  v6_2_0|         array|
+|v6_2_0_EN_A    |  out|    1|        bram|                                                  v6_2_0|         array|
+|v6_2_0_WEN_A   |  out|    4|        bram|                                                  v6_2_0|         array|
+|v6_2_0_Din_A   |  out|   32|        bram|                                                  v6_2_0|         array|
+|v6_2_0_Dout_A  |   in|   32|        bram|                                                  v6_2_0|         array|
+|v6_2_1_Addr_A  |  out|   32|        bram|                                                  v6_2_1|         array|
+|v6_2_1_EN_A    |  out|    1|        bram|                                                  v6_2_1|         array|
+|v6_2_1_WEN_A   |  out|    4|        bram|                                                  v6_2_1|         array|
+|v6_2_1_Din_A   |  out|   32|        bram|                                                  v6_2_1|         array|
+|v6_2_1_Dout_A  |   in|   32|        bram|                                                  v6_2_1|         array|
+|v6_2_2_Addr_A  |  out|   32|        bram|                                                  v6_2_2|         array|
+|v6_2_2_EN_A    |  out|    1|        bram|                                                  v6_2_2|         array|
+|v6_2_2_WEN_A   |  out|    4|        bram|                                                  v6_2_2|         array|
+|v6_2_2_Din_A   |  out|   32|        bram|                                                  v6_2_2|         array|
+|v6_2_2_Dout_A  |   in|   32|        bram|                                                  v6_2_2|         array|
+|v6_2_3_Addr_A  |  out|   32|        bram|                                                  v6_2_3|         array|
+|v6_2_3_EN_A    |  out|    1|        bram|                                                  v6_2_3|         array|
+|v6_2_3_WEN_A   |  out|    4|        bram|                                                  v6_2_3|         array|
+|v6_2_3_Din_A   |  out|   32|        bram|                                                  v6_2_3|         array|
+|v6_2_3_Dout_A  |   in|   32|        bram|                                                  v6_2_3|         array|
+|v6_2_4_Addr_A  |  out|   32|        bram|                                                  v6_2_4|         array|
+|v6_2_4_EN_A    |  out|    1|        bram|                                                  v6_2_4|         array|
+|v6_2_4_WEN_A   |  out|    4|        bram|                                                  v6_2_4|         array|
+|v6_2_4_Din_A   |  out|   32|        bram|                                                  v6_2_4|         array|
+|v6_2_4_Dout_A  |   in|   32|        bram|                                                  v6_2_4|         array|
+|v6_2_5_Addr_A  |  out|   32|        bram|                                                  v6_2_5|         array|
+|v6_2_5_EN_A    |  out|    1|        bram|                                                  v6_2_5|         array|
+|v6_2_5_WEN_A   |  out|    4|        bram|                                                  v6_2_5|         array|
+|v6_2_5_Din_A   |  out|   32|        bram|                                                  v6_2_5|         array|
+|v6_2_5_Dout_A  |   in|   32|        bram|                                                  v6_2_5|         array|
+|v6_2_6_Addr_A  |  out|   32|        bram|                                                  v6_2_6|         array|
+|v6_2_6_EN_A    |  out|    1|        bram|                                                  v6_2_6|         array|
+|v6_2_6_WEN_A   |  out|    4|        bram|                                                  v6_2_6|         array|
+|v6_2_6_Din_A   |  out|   32|        bram|                                                  v6_2_6|         array|
+|v6_2_6_Dout_A  |   in|   32|        bram|                                                  v6_2_6|         array|
+|v6_2_7_Addr_A  |  out|   32|        bram|                                                  v6_2_7|         array|
+|v6_2_7_EN_A    |  out|    1|        bram|                                                  v6_2_7|         array|
+|v6_2_7_WEN_A   |  out|    4|        bram|                                                  v6_2_7|         array|
+|v6_2_7_Din_A   |  out|   32|        bram|                                                  v6_2_7|         array|
+|v6_2_7_Dout_A  |   in|   32|        bram|                                                  v6_2_7|         array|
+|v6_3_0_Addr_A  |  out|   32|        bram|                                                  v6_3_0|         array|
+|v6_3_0_EN_A    |  out|    1|        bram|                                                  v6_3_0|         array|
+|v6_3_0_WEN_A   |  out|    4|        bram|                                                  v6_3_0|         array|
+|v6_3_0_Din_A   |  out|   32|        bram|                                                  v6_3_0|         array|
+|v6_3_0_Dout_A  |   in|   32|        bram|                                                  v6_3_0|         array|
+|v6_3_1_Addr_A  |  out|   32|        bram|                                                  v6_3_1|         array|
+|v6_3_1_EN_A    |  out|    1|        bram|                                                  v6_3_1|         array|
+|v6_3_1_WEN_A   |  out|    4|        bram|                                                  v6_3_1|         array|
+|v6_3_1_Din_A   |  out|   32|        bram|                                                  v6_3_1|         array|
+|v6_3_1_Dout_A  |   in|   32|        bram|                                                  v6_3_1|         array|
+|v6_3_2_Addr_A  |  out|   32|        bram|                                                  v6_3_2|         array|
+|v6_3_2_EN_A    |  out|    1|        bram|                                                  v6_3_2|         array|
+|v6_3_2_WEN_A   |  out|    4|        bram|                                                  v6_3_2|         array|
+|v6_3_2_Din_A   |  out|   32|        bram|                                                  v6_3_2|         array|
+|v6_3_2_Dout_A  |   in|   32|        bram|                                                  v6_3_2|         array|
+|v6_3_3_Addr_A  |  out|   32|        bram|                                                  v6_3_3|         array|
+|v6_3_3_EN_A    |  out|    1|        bram|                                                  v6_3_3|         array|
+|v6_3_3_WEN_A   |  out|    4|        bram|                                                  v6_3_3|         array|
+|v6_3_3_Din_A   |  out|   32|        bram|                                                  v6_3_3|         array|
+|v6_3_3_Dout_A  |   in|   32|        bram|                                                  v6_3_3|         array|
+|v6_3_4_Addr_A  |  out|   32|        bram|                                                  v6_3_4|         array|
+|v6_3_4_EN_A    |  out|    1|        bram|                                                  v6_3_4|         array|
+|v6_3_4_WEN_A   |  out|    4|        bram|                                                  v6_3_4|         array|
+|v6_3_4_Din_A   |  out|   32|        bram|                                                  v6_3_4|         array|
+|v6_3_4_Dout_A  |   in|   32|        bram|                                                  v6_3_4|         array|
+|v6_3_5_Addr_A  |  out|   32|        bram|                                                  v6_3_5|         array|
+|v6_3_5_EN_A    |  out|    1|        bram|                                                  v6_3_5|         array|
+|v6_3_5_WEN_A   |  out|    4|        bram|                                                  v6_3_5|         array|
+|v6_3_5_Din_A   |  out|   32|        bram|                                                  v6_3_5|         array|
+|v6_3_5_Dout_A  |   in|   32|        bram|                                                  v6_3_5|         array|
+|v6_3_6_Addr_A  |  out|   32|        bram|                                                  v6_3_6|         array|
+|v6_3_6_EN_A    |  out|    1|        bram|                                                  v6_3_6|         array|
+|v6_3_6_WEN_A   |  out|    4|        bram|                                                  v6_3_6|         array|
+|v6_3_6_Din_A   |  out|   32|        bram|                                                  v6_3_6|         array|
+|v6_3_6_Dout_A  |   in|   32|        bram|                                                  v6_3_6|         array|
+|v6_3_7_Addr_A  |  out|   32|        bram|                                                  v6_3_7|         array|
+|v6_3_7_EN_A    |  out|    1|        bram|                                                  v6_3_7|         array|
+|v6_3_7_WEN_A   |  out|    4|        bram|                                                  v6_3_7|         array|
+|v6_3_7_Din_A   |  out|   32|        bram|                                                  v6_3_7|         array|
+|v6_3_7_Dout_A  |   in|   32|        bram|                                                  v6_3_7|         array|
+|bitcast_ln70   |   in|   32|     ap_none|                                            bitcast_ln70|        scalar|
++---------------+-----+-----+------------+--------------------------------------------------------+--------------+
+

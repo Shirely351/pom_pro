@@ -10,14 +10,14 @@ if [ -f "execution_times.txt" ]; then
 fi
 
 
-targets=("edgeDetect" "gaussian" "blur" "vgg16"  "resnet" "jacobi" "jacobi2d" "heat" "seidel")
+targets=("edgeDetect" "gaussian" "blur" "vgg16"  "resnet18" "jacobi" "jacobi2d" "heat" "seidel")
 for target in "${targets[@]}"
 do
     cmake --build . --target "$target"
 done
 
 # Run building.
-targets=("vgg16"  "resnet")
+targets=("vgg16"  "resnet18")
 for target in "${targets[@]}"
 do  
     start_time=$(date +%s.%N)
@@ -73,7 +73,6 @@ echo "Lines inserted successfully into the file."
 
 
 N_values=(32 64 128 256 512 1024 2048 4096 8192)
-
 targets=("2mm.cpp" "3mm.cpp" "gemm.cpp" "bicg.cpp" "gesummv.cpp")
 
 

@@ -1,0 +1,7 @@
+test_bicg_2048_fadd_32ns_32ns_32_7_full_dsp_1
+test_bicg_2048_fmul_32ns_32ns_32_4_max_dsp_1
+test_bicg_2048_mux_325_32_1_1
+test_bicg_2048_mux_164_32_1_1
+test_bicg_2048_ctrl_s_axi
+test_bicg_2048_flow_control_loop_pipe
+test_bicg_2048

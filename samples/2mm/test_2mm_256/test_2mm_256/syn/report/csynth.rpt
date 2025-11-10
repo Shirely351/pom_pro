@@ -1,0 +1,1173 @@
+
+
+================================================================
+== Synthesis Summary Report of 'test_2mm_256'
+================================================================
++ General Information: 
+    * Date:           Fri Nov  7 10:11:15 2025
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        test_2mm_256
+    * Solution:       test_2mm_256 (Vivado IP Flow Target)
+    * Product family: artix7
+    * Target device:  xc7a100t-csg324-1
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +---------------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+--------+----------+------+-----------+-------------+-------------+-----+
+    |                                     Modules                                     | Issue|      | Latency |  Latency  | Iteration|         |  Trip  |          |      |           |             |             |     |
+    |                                     & Loops                                     | Type | Slack| (cycles)|    (ns)   |  Latency | Interval|  Count | Pipelined| BRAM |    DSP    |      FF     |     LUT     | URAM|
+    +---------------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+--------+----------+------+-----------+-------------+-------------+-----+
+    |+ test_2mm_256                                                                   |     -|  0.05|  1050672|  1.051e+07|         -|  1050673|       -|        no|     -|  166 (69%)|  69056 (54%)|  60245 (95%)|    -|
+    | + test_2mm_256_Pipeline_VITIS_LOOP_60_1_VITIS_LOOP_61_2                         |     -|  1.16|     1026|  1.026e+04|         -|     1026|       -|        no|     -|          -|     33 (~0%)|    1320 (2%)|    -|
+    |  o VITIS_LOOP_60_1_VITIS_LOOP_61_2                                              |     -|  7.30|     1024|  1.024e+04|         2|        2|     512|       yes|     -|          -|            -|            -|    -|
+    | + test_2mm_256_Pipeline_VITIS_LOOP_744_6_VITIS_LOOP_745_7                       |     -|  1.16|     2056|  2.056e+04|         -|     2056|       -|        no|     -|          -|    9225 (7%)|    4310 (6%)|    -|
+    |  o VITIS_LOOP_744_6_VITIS_LOOP_745_7                                            |     -|  7.30|     2054|  2.054e+04|        11|        4|     512|       yes|     -|          -|            -|            -|    -|
+    | + test_2mm_256_Pipeline_VITIS_LOOP_193_3_VITIS_LOOP_194_4_VITIS_LOOP_195_5      |     -|  0.05|   524308|  5.243e+06|         -|   524308|       -|        no|     -|     6 (2%)|  20558 (16%)|   9949 (15%)|    -|
+    |  o VITIS_LOOP_193_3_VITIS_LOOP_194_4_VITIS_LOOP_195_5                           |     -|  7.30|   524306|  5.243e+06|        23|        4|  131072|       yes|     -|          -|            -|            -|    -|
+    | + test_2mm_256_Pipeline_VITIS_LOOP_1133_8_VITIS_LOOP_1134_9_VITIS_LOOP_1135_10  |     -|  0.59|   524303|  5.243e+06|         -|   524303|       -|        no|     -|          -|  24616 (19%)|  13043 (20%)|    -|
+    |  o VITIS_LOOP_1133_8_VITIS_LOOP_1134_9_VITIS_LOOP_1135_10                       |     -|  7.30|   524301|  5.243e+06|        18|        4|  131072|       yes|     -|          -|            -|            -|    -|
+    +---------------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+--------+----------+------+-----------+-------------+-------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++------------+------------+---------------+--------+----------+
+| Interface  | Data Width | Address Width | Offset | Register |
++------------+------------+---------------+--------+----------+
+| s_axi_ctrl | 32         | 6             | 16     | 0        |
++------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| Interface  | Register | Offset | Width | Access | Description                      | Bit Fields                                                           |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| s_axi_ctrl | CTRL     | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_ctrl | GIER     | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                             |
+| s_axi_ctrl | IP_IER   | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_ctrl | IP_ISR   | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_ctrl | v0       | 0x10   | 32    | W      | Data signal of v0                |                                                                      |
+| s_axi_ctrl | v1       | 0x18   | 32    | W      | Data signal of v1                |                                                                      |
+| s_axi_ctrl | v2       | 0x20   | 32    | W      | Data signal of v2                |                                                                      |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+
+* BRAM
++---------------+------------+---------------+
+| Interface     | Data Width | Address Width |
++---------------+------------+---------------+
+| v3_0_PORTA    | 32         | 32            |
+| v3_1_PORTA    | 32         | 32            |
+| v3_2_PORTA    | 32         | 32            |
+| v3_3_PORTA    | 32         | 32            |
+| v3_4_PORTA    | 32         | 32            |
+| v3_5_PORTA    | 32         | 32            |
+| v3_6_PORTA    | 32         | 32            |
+| v3_7_PORTA    | 32         | 32            |
+| v4_0_PORTA    | 32         | 32            |
+| v4_10_PORTA   | 32         | 32            |
+| v4_11_PORTA   | 32         | 32            |
+| v4_12_PORTA   | 32         | 32            |
+| v4_13_PORTA   | 32         | 32            |
+| v4_14_PORTA   | 32         | 32            |
+| v4_15_PORTA   | 32         | 32            |
+| v4_1_PORTA    | 32         | 32            |
+| v4_2_PORTA    | 32         | 32            |
+| v4_3_PORTA    | 32         | 32            |
+| v4_4_PORTA    | 32         | 32            |
+| v4_5_PORTA    | 32         | 32            |
+| v4_6_PORTA    | 32         | 32            |
+| v4_7_PORTA    | 32         | 32            |
+| v4_8_PORTA    | 32         | 32            |
+| v4_9_PORTA    | 32         | 32            |
+| v5_0_PORTA    | 32         | 32            |
+| v5_10_PORTA   | 32         | 32            |
+| v5_11_PORTA   | 32         | 32            |
+| v5_12_PORTA   | 32         | 32            |
+| v5_13_PORTA   | 32         | 32            |
+| v5_14_PORTA   | 32         | 32            |
+| v5_15_PORTA   | 32         | 32            |
+| v5_1_PORTA    | 32         | 32            |
+| v5_2_PORTA    | 32         | 32            |
+| v5_3_PORTA    | 32         | 32            |
+| v5_4_PORTA    | 32         | 32            |
+| v5_5_PORTA    | 32         | 32            |
+| v5_6_PORTA    | 32         | 32            |
+| v5_7_PORTA    | 32         | 32            |
+| v5_8_PORTA    | 32         | 32            |
+| v5_9_PORTA    | 32         | 32            |
+| v6_0_0_PORTA  | 32         | 32            |
+| v6_0_10_PORTA | 32         | 32            |
+| v6_0_11_PORTA | 32         | 32            |
+| v6_0_12_PORTA | 32         | 32            |
+| v6_0_13_PORTA | 32         | 32            |
+| v6_0_14_PORTA | 32         | 32            |
+| v6_0_15_PORTA | 32         | 32            |
+| v6_0_1_PORTA  | 32         | 32            |
+| v6_0_2_PORTA  | 32         | 32            |
+| v6_0_3_PORTA  | 32         | 32            |
+| v6_0_4_PORTA  | 32         | 32            |
+| v6_0_5_PORTA  | 32         | 32            |
+| v6_0_6_PORTA  | 32         | 32            |
+| v6_0_7_PORTA  | 32         | 32            |
+| v6_0_8_PORTA  | 32         | 32            |
+| v6_0_9_PORTA  | 32         | 32            |
+| v6_1_0_PORTA  | 32         | 32            |
+| v6_1_10_PORTA | 32         | 32            |
+| v6_1_11_PORTA | 32         | 32            |
+| v6_1_12_PORTA | 32         | 32            |
+| v6_1_13_PORTA | 32         | 32            |
+| v6_1_14_PORTA | 32         | 32            |
+| v6_1_15_PORTA | 32         | 32            |
+| v6_1_1_PORTA  | 32         | 32            |
+| v6_1_2_PORTA  | 32         | 32            |
+| v6_1_3_PORTA  | 32         | 32            |
+| v6_1_4_PORTA  | 32         | 32            |
+| v6_1_5_PORTA  | 32         | 32            |
+| v6_1_6_PORTA  | 32         | 32            |
+| v6_1_7_PORTA  | 32         | 32            |
+| v6_1_8_PORTA  | 32         | 32            |
+| v6_1_9_PORTA  | 32         | 32            |
+| v6_2_0_PORTA  | 32         | 32            |
+| v6_2_10_PORTA | 32         | 32            |
+| v6_2_11_PORTA | 32         | 32            |
+| v6_2_12_PORTA | 32         | 32            |
+| v6_2_13_PORTA | 32         | 32            |
+| v6_2_14_PORTA | 32         | 32            |
+| v6_2_15_PORTA | 32         | 32            |
+| v6_2_1_PORTA  | 32         | 32            |
+| v6_2_2_PORTA  | 32         | 32            |
+| v6_2_3_PORTA  | 32         | 32            |
+| v6_2_4_PORTA  | 32         | 32            |
+| v6_2_5_PORTA  | 32         | 32            |
+| v6_2_6_PORTA  | 32         | 32            |
+| v6_2_7_PORTA  | 32         | 32            |
+| v6_2_8_PORTA  | 32         | 32            |
+| v6_2_9_PORTA  | 32         | 32            |
+| v6_3_0_PORTA  | 32         | 32            |
+| v6_3_10_PORTA | 32         | 32            |
+| v6_3_11_PORTA | 32         | 32            |
+| v6_3_12_PORTA | 32         | 32            |
+| v6_3_13_PORTA | 32         | 32            |
+| v6_3_14_PORTA | 32         | 32            |
+| v6_3_15_PORTA | 32         | 32            |
+| v6_3_1_PORTA  | 32         | 32            |
+| v6_3_2_PORTA  | 32         | 32            |
+| v6_3_3_PORTA  | 32         | 32            |
+| v6_3_4_PORTA  | 32         | 32            |
+| v6_3_5_PORTA  | 32         | 32            |
+| v6_3_6_PORTA  | 32         | 32            |
+| v6_3_7_PORTA  | 32         | 32            |
+| v6_3_8_PORTA  | 32         | 32            |
+| v6_3_9_PORTA  | 32         | 32            |
+| v6_4_0_PORTA  | 32         | 32            |
+| v6_4_0_PORTB  | 32         | 32            |
+| v6_4_10_PORTA | 32         | 32            |
+| v6_4_10_PORTB | 32         | 32            |
+| v6_4_11_PORTA | 32         | 32            |
+| v6_4_11_PORTB | 32         | 32            |
+| v6_4_12_PORTA | 32         | 32            |
+| v6_4_12_PORTB | 32         | 32            |
+| v6_4_13_PORTA | 32         | 32            |
+| v6_4_13_PORTB | 32         | 32            |
+| v6_4_14_PORTA | 32         | 32            |
+| v6_4_14_PORTB | 32         | 32            |
+| v6_4_15_PORTA | 32         | 32            |
+| v6_4_15_PORTB | 32         | 32            |
+| v6_4_1_PORTA  | 32         | 32            |
+| v6_4_1_PORTB  | 32         | 32            |
+| v6_4_2_PORTA  | 32         | 32            |
+| v6_4_2_PORTB  | 32         | 32            |
+| v6_4_3_PORTA  | 32         | 32            |
+| v6_4_3_PORTB  | 32         | 32            |
+| v6_4_4_PORTA  | 32         | 32            |
+| v6_4_4_PORTB  | 32         | 32            |
+| v6_4_5_PORTA  | 32         | 32            |
+| v6_4_5_PORTB  | 32         | 32            |
+| v6_4_6_PORTA  | 32         | 32            |
+| v6_4_6_PORTB  | 32         | 32            |
+| v6_4_7_PORTA  | 32         | 32            |
+| v6_4_7_PORTB  | 32         | 32            |
+| v6_4_8_PORTA  | 32         | 32            |
+| v6_4_8_PORTB  | 32         | 32            |
+| v6_4_9_PORTA  | 32         | 32            |
+| v6_4_9_PORTB  | 32         | 32            |
+| v6_5_0_PORTA  | 32         | 32            |
+| v6_5_0_PORTB  | 32         | 32            |
+| v6_5_10_PORTA | 32         | 32            |
+| v6_5_10_PORTB | 32         | 32            |
+| v6_5_11_PORTA | 32         | 32            |
+| v6_5_11_PORTB | 32         | 32            |
+| v6_5_12_PORTA | 32         | 32            |
+| v6_5_12_PORTB | 32         | 32            |
+| v6_5_13_PORTA | 32         | 32            |
+| v6_5_13_PORTB | 32         | 32            |
+| v6_5_14_PORTA | 32         | 32            |
+| v6_5_14_PORTB | 32         | 32            |
+| v6_5_15_PORTA | 32         | 32            |
+| v6_5_15_PORTB | 32         | 32            |
+| v6_5_1_PORTA  | 32         | 32            |
+| v6_5_1_PORTB  | 32         | 32            |
+| v6_5_2_PORTA  | 32         | 32            |
+| v6_5_2_PORTB  | 32         | 32            |
+| v6_5_3_PORTA  | 32         | 32            |
+| v6_5_3_PORTB  | 32         | 32            |
+| v6_5_4_PORTA  | 32         | 32            |
+| v6_5_4_PORTB  | 32         | 32            |
+| v6_5_5_PORTA  | 32         | 32            |
+| v6_5_5_PORTB  | 32         | 32            |
+| v6_5_6_PORTA  | 32         | 32            |
+| v6_5_6_PORTB  | 32         | 32            |
+| v6_5_7_PORTA  | 32         | 32            |
+| v6_5_7_PORTB  | 32         | 32            |
+| v6_5_8_PORTA  | 32         | 32            |
+| v6_5_8_PORTB  | 32         | 32            |
+| v6_5_9_PORTA  | 32         | 32            |
+| v6_5_9_PORTB  | 32         | 32            |
+| v6_6_0_PORTA  | 32         | 32            |
+| v6_6_0_PORTB  | 32         | 32            |
+| v6_6_10_PORTA | 32         | 32            |
+| v6_6_10_PORTB | 32         | 32            |
+| v6_6_11_PORTA | 32         | 32            |
+| v6_6_11_PORTB | 32         | 32            |
+| v6_6_12_PORTA | 32         | 32            |
+| v6_6_12_PORTB | 32         | 32            |
+| v6_6_13_PORTA | 32         | 32            |
+| v6_6_13_PORTB | 32         | 32            |
+| v6_6_14_PORTA | 32         | 32            |
+| v6_6_14_PORTB | 32         | 32            |
+| v6_6_15_PORTA | 32         | 32            |
+| v6_6_15_PORTB | 32         | 32            |
+| v6_6_1_PORTA  | 32         | 32            |
+| v6_6_1_PORTB  | 32         | 32            |
+| v6_6_2_PORTA  | 32         | 32            |
+| v6_6_2_PORTB  | 32         | 32            |
+| v6_6_3_PORTA  | 32         | 32            |
+| v6_6_3_PORTB  | 32         | 32            |
+| v6_6_4_PORTA  | 32         | 32            |
+| v6_6_4_PORTB  | 32         | 32            |
+| v6_6_5_PORTA  | 32         | 32            |
+| v6_6_5_PORTB  | 32         | 32            |
+| v6_6_6_PORTA  | 32         | 32            |
+| v6_6_6_PORTB  | 32         | 32            |
+| v6_6_7_PORTA  | 32         | 32            |
+| v6_6_7_PORTB  | 32         | 32            |
+| v6_6_8_PORTA  | 32         | 32            |
+| v6_6_8_PORTB  | 32         | 32            |
+| v6_6_9_PORTA  | 32         | 32            |
+| v6_6_9_PORTB  | 32         | 32            |
+| v6_7_0_PORTA  | 32         | 32            |
+| v6_7_0_PORTB  | 32         | 32            |
+| v6_7_10_PORTA | 32         | 32            |
+| v6_7_10_PORTB | 32         | 32            |
+| v6_7_11_PORTA | 32         | 32            |
+| v6_7_11_PORTB | 32         | 32            |
+| v6_7_12_PORTA | 32         | 32            |
+| v6_7_12_PORTB | 32         | 32            |
+| v6_7_13_PORTA | 32         | 32            |
+| v6_7_13_PORTB | 32         | 32            |
+| v6_7_14_PORTA | 32         | 32            |
+| v6_7_14_PORTB | 32         | 32            |
+| v6_7_15_PORTA | 32         | 32            |
+| v6_7_15_PORTB | 32         | 32            |
+| v6_7_1_PORTA  | 32         | 32            |
+| v6_7_1_PORTB  | 32         | 32            |
+| v6_7_2_PORTA  | 32         | 32            |
+| v6_7_2_PORTB  | 32         | 32            |
+| v6_7_3_PORTA  | 32         | 32            |
+| v6_7_3_PORTB  | 32         | 32            |
+| v6_7_4_PORTA  | 32         | 32            |
+| v6_7_4_PORTB  | 32         | 32            |
+| v6_7_5_PORTA  | 32         | 32            |
+| v6_7_5_PORTB  | 32         | 32            |
+| v6_7_6_PORTA  | 32         | 32            |
+| v6_7_6_PORTB  | 32         | 32            |
+| v6_7_7_PORTA  | 32         | 32            |
+| v6_7_7_PORTB  | 32         | 32            |
+| v6_7_8_PORTA  | 32         | 32            |
+| v6_7_8_PORTB  | 32         | 32            |
+| v6_7_9_PORTA  | 32         | 32            |
+| v6_7_9_PORTB  | 32         | 32            |
+| v7_0_0_PORTA  | 32         | 32            |
+| v7_0_0_PORTB  | 32         | 32            |
+| v7_0_10_PORTA | 32         | 32            |
+| v7_0_10_PORTB | 32         | 32            |
+| v7_0_11_PORTA | 32         | 32            |
+| v7_0_11_PORTB | 32         | 32            |
+| v7_0_12_PORTA | 32         | 32            |
+| v7_0_12_PORTB | 32         | 32            |
+| v7_0_13_PORTA | 32         | 32            |
+| v7_0_13_PORTB | 32         | 32            |
+| v7_0_14_PORTA | 32         | 32            |
+| v7_0_14_PORTB | 32         | 32            |
+| v7_0_15_PORTA | 32         | 32            |
+| v7_0_15_PORTB | 32         | 32            |
+| v7_0_1_PORTA  | 32         | 32            |
+| v7_0_1_PORTB  | 32         | 32            |
+| v7_0_2_PORTA  | 32         | 32            |
+| v7_0_2_PORTB  | 32         | 32            |
+| v7_0_3_PORTA  | 32         | 32            |
+| v7_0_3_PORTB  | 32         | 32            |
+| v7_0_4_PORTA  | 32         | 32            |
+| v7_0_4_PORTB  | 32         | 32            |
+| v7_0_5_PORTA  | 32         | 32            |
+| v7_0_5_PORTB  | 32         | 32            |
+| v7_0_6_PORTA  | 32         | 32            |
+| v7_0_6_PORTB  | 32         | 32            |
+| v7_0_7_PORTA  | 32         | 32            |
+| v7_0_7_PORTB  | 32         | 32            |
+| v7_0_8_PORTA  | 32         | 32            |
+| v7_0_8_PORTB  | 32         | 32            |
+| v7_0_9_PORTA  | 32         | 32            |
+| v7_0_9_PORTB  | 32         | 32            |
+| v7_1_0_PORTA  | 32         | 32            |
+| v7_1_0_PORTB  | 32         | 32            |
+| v7_1_10_PORTA | 32         | 32            |
+| v7_1_10_PORTB | 32         | 32            |
+| v7_1_11_PORTA | 32         | 32            |
+| v7_1_11_PORTB | 32         | 32            |
+| v7_1_12_PORTA | 32         | 32            |
+| v7_1_12_PORTB | 32         | 32            |
+| v7_1_13_PORTA | 32         | 32            |
+| v7_1_13_PORTB | 32         | 32            |
+| v7_1_14_PORTA | 32         | 32            |
+| v7_1_14_PORTB | 32         | 32            |
+| v7_1_15_PORTA | 32         | 32            |
+| v7_1_15_PORTB | 32         | 32            |
+| v7_1_1_PORTA  | 32         | 32            |
+| v7_1_1_PORTB  | 32         | 32            |
+| v7_1_2_PORTA  | 32         | 32            |
+| v7_1_2_PORTB  | 32         | 32            |
+| v7_1_3_PORTA  | 32         | 32            |
+| v7_1_3_PORTB  | 32         | 32            |
+| v7_1_4_PORTA  | 32         | 32            |
+| v7_1_4_PORTB  | 32         | 32            |
+| v7_1_5_PORTA  | 32         | 32            |
+| v7_1_5_PORTB  | 32         | 32            |
+| v7_1_6_PORTA  | 32         | 32            |
+| v7_1_6_PORTB  | 32         | 32            |
+| v7_1_7_PORTA  | 32         | 32            |
+| v7_1_7_PORTB  | 32         | 32            |
+| v7_1_8_PORTA  | 32         | 32            |
+| v7_1_8_PORTB  | 32         | 32            |
+| v7_1_9_PORTA  | 32         | 32            |
+| v7_1_9_PORTB  | 32         | 32            |
+| v7_2_0_PORTA  | 32         | 32            |
+| v7_2_0_PORTB  | 32         | 32            |
+| v7_2_10_PORTA | 32         | 32            |
+| v7_2_10_PORTB | 32         | 32            |
+| v7_2_11_PORTA | 32         | 32            |
+| v7_2_11_PORTB | 32         | 32            |
+| v7_2_12_PORTA | 32         | 32            |
+| v7_2_12_PORTB | 32         | 32            |
+| v7_2_13_PORTA | 32         | 32            |
+| v7_2_13_PORTB | 32         | 32            |
+| v7_2_14_PORTA | 32         | 32            |
+| v7_2_14_PORTB | 32         | 32            |
+| v7_2_15_PORTA | 32         | 32            |
+| v7_2_15_PORTB | 32         | 32            |
+| v7_2_1_PORTA  | 32         | 32            |
+| v7_2_1_PORTB  | 32         | 32            |
+| v7_2_2_PORTA  | 32         | 32            |
+| v7_2_2_PORTB  | 32         | 32            |
+| v7_2_3_PORTA  | 32         | 32            |
+| v7_2_3_PORTB  | 32         | 32            |
+| v7_2_4_PORTA  | 32         | 32            |
+| v7_2_4_PORTB  | 32         | 32            |
+| v7_2_5_PORTA  | 32         | 32            |
+| v7_2_5_PORTB  | 32         | 32            |
+| v7_2_6_PORTA  | 32         | 32            |
+| v7_2_6_PORTB  | 32         | 32            |
+| v7_2_7_PORTA  | 32         | 32            |
+| v7_2_7_PORTB  | 32         | 32            |
+| v7_2_8_PORTA  | 32         | 32            |
+| v7_2_8_PORTB  | 32         | 32            |
+| v7_2_9_PORTA  | 32         | 32            |
+| v7_2_9_PORTB  | 32         | 32            |
+| v7_3_0_PORTA  | 32         | 32            |
+| v7_3_0_PORTB  | 32         | 32            |
+| v7_3_10_PORTA | 32         | 32            |
+| v7_3_10_PORTB | 32         | 32            |
+| v7_3_11_PORTA | 32         | 32            |
+| v7_3_11_PORTB | 32         | 32            |
+| v7_3_12_PORTA | 32         | 32            |
+| v7_3_12_PORTB | 32         | 32            |
+| v7_3_13_PORTA | 32         | 32            |
+| v7_3_13_PORTB | 32         | 32            |
+| v7_3_14_PORTA | 32         | 32            |
+| v7_3_14_PORTB | 32         | 32            |
+| v7_3_15_PORTA | 32         | 32            |
+| v7_3_15_PORTB | 32         | 32            |
+| v7_3_1_PORTA  | 32         | 32            |
+| v7_3_1_PORTB  | 32         | 32            |
+| v7_3_2_PORTA  | 32         | 32            |
+| v7_3_2_PORTB  | 32         | 32            |
+| v7_3_3_PORTA  | 32         | 32            |
+| v7_3_3_PORTB  | 32         | 32            |
+| v7_3_4_PORTA  | 32         | 32            |
+| v7_3_4_PORTB  | 32         | 32            |
+| v7_3_5_PORTA  | 32         | 32            |
+| v7_3_5_PORTB  | 32         | 32            |
+| v7_3_6_PORTA  | 32         | 32            |
+| v7_3_6_PORTB  | 32         | 32            |
+| v7_3_7_PORTA  | 32         | 32            |
+| v7_3_7_PORTB  | 32         | 32            |
+| v7_3_8_PORTA  | 32         | 32            |
+| v7_3_8_PORTB  | 32         | 32            |
+| v7_3_9_PORTA  | 32         | 32            |
+| v7_3_9_PORTB  | 32         | 32            |
+| v7_4_0_PORTA  | 32         | 32            |
+| v7_4_0_PORTB  | 32         | 32            |
+| v7_4_10_PORTA | 32         | 32            |
+| v7_4_10_PORTB | 32         | 32            |
+| v7_4_11_PORTA | 32         | 32            |
+| v7_4_11_PORTB | 32         | 32            |
+| v7_4_12_PORTA | 32         | 32            |
+| v7_4_12_PORTB | 32         | 32            |
+| v7_4_13_PORTA | 32         | 32            |
+| v7_4_13_PORTB | 32         | 32            |
+| v7_4_14_PORTA | 32         | 32            |
+| v7_4_14_PORTB | 32         | 32            |
+| v7_4_15_PORTA | 32         | 32            |
+| v7_4_15_PORTB | 32         | 32            |
+| v7_4_1_PORTA  | 32         | 32            |
+| v7_4_1_PORTB  | 32         | 32            |
+| v7_4_2_PORTA  | 32         | 32            |
+| v7_4_2_PORTB  | 32         | 32            |
+| v7_4_3_PORTA  | 32         | 32            |
+| v7_4_3_PORTB  | 32         | 32            |
+| v7_4_4_PORTA  | 32         | 32            |
+| v7_4_4_PORTB  | 32         | 32            |
+| v7_4_5_PORTA  | 32         | 32            |
+| v7_4_5_PORTB  | 32         | 32            |
+| v7_4_6_PORTA  | 32         | 32            |
+| v7_4_6_PORTB  | 32         | 32            |
+| v7_4_7_PORTA  | 32         | 32            |
+| v7_4_7_PORTB  | 32         | 32            |
+| v7_4_8_PORTA  | 32         | 32            |
+| v7_4_8_PORTB  | 32         | 32            |
+| v7_4_9_PORTA  | 32         | 32            |
+| v7_4_9_PORTB  | 32         | 32            |
+| v7_5_0_PORTA  | 32         | 32            |
+| v7_5_0_PORTB  | 32         | 32            |
+| v7_5_10_PORTA | 32         | 32            |
+| v7_5_10_PORTB | 32         | 32            |
+| v7_5_11_PORTA | 32         | 32            |
+| v7_5_11_PORTB | 32         | 32            |
+| v7_5_12_PORTA | 32         | 32            |
+| v7_5_12_PORTB | 32         | 32            |
+| v7_5_13_PORTA | 32         | 32            |
+| v7_5_13_PORTB | 32         | 32            |
+| v7_5_14_PORTA | 32         | 32            |
+| v7_5_14_PORTB | 32         | 32            |
+| v7_5_15_PORTA | 32         | 32            |
+| v7_5_15_PORTB | 32         | 32            |
+| v7_5_1_PORTA  | 32         | 32            |
+| v7_5_1_PORTB  | 32         | 32            |
+| v7_5_2_PORTA  | 32         | 32            |
+| v7_5_2_PORTB  | 32         | 32            |
+| v7_5_3_PORTA  | 32         | 32            |
+| v7_5_3_PORTB  | 32         | 32            |
+| v7_5_4_PORTA  | 32         | 32            |
+| v7_5_4_PORTB  | 32         | 32            |
+| v7_5_5_PORTA  | 32         | 32            |
+| v7_5_5_PORTB  | 32         | 32            |
+| v7_5_6_PORTA  | 32         | 32            |
+| v7_5_6_PORTB  | 32         | 32            |
+| v7_5_7_PORTA  | 32         | 32            |
+| v7_5_7_PORTB  | 32         | 32            |
+| v7_5_8_PORTA  | 32         | 32            |
+| v7_5_8_PORTB  | 32         | 32            |
+| v7_5_9_PORTA  | 32         | 32            |
+| v7_5_9_PORTB  | 32         | 32            |
+| v7_6_0_PORTA  | 32         | 32            |
+| v7_6_0_PORTB  | 32         | 32            |
+| v7_6_10_PORTA | 32         | 32            |
+| v7_6_10_PORTB | 32         | 32            |
+| v7_6_11_PORTA | 32         | 32            |
+| v7_6_11_PORTB | 32         | 32            |
+| v7_6_12_PORTA | 32         | 32            |
+| v7_6_12_PORTB | 32         | 32            |
+| v7_6_13_PORTA | 32         | 32            |
+| v7_6_13_PORTB | 32         | 32            |
+| v7_6_14_PORTA | 32         | 32            |
+| v7_6_14_PORTB | 32         | 32            |
+| v7_6_15_PORTA | 32         | 32            |
+| v7_6_15_PORTB | 32         | 32            |
+| v7_6_1_PORTA  | 32         | 32            |
+| v7_6_1_PORTB  | 32         | 32            |
+| v7_6_2_PORTA  | 32         | 32            |
+| v7_6_2_PORTB  | 32         | 32            |
+| v7_6_3_PORTA  | 32         | 32            |
+| v7_6_3_PORTB  | 32         | 32            |
+| v7_6_4_PORTA  | 32         | 32            |
+| v7_6_4_PORTB  | 32         | 32            |
+| v7_6_5_PORTA  | 32         | 32            |
+| v7_6_5_PORTB  | 32         | 32            |
+| v7_6_6_PORTA  | 32         | 32            |
+| v7_6_6_PORTB  | 32         | 32            |
+| v7_6_7_PORTA  | 32         | 32            |
+| v7_6_7_PORTB  | 32         | 32            |
+| v7_6_8_PORTA  | 32         | 32            |
+| v7_6_8_PORTB  | 32         | 32            |
+| v7_6_9_PORTA  | 32         | 32            |
+| v7_6_9_PORTB  | 32         | 32            |
+| v7_7_0_PORTA  | 32         | 32            |
+| v7_7_0_PORTB  | 32         | 32            |
+| v7_7_10_PORTA | 32         | 32            |
+| v7_7_10_PORTB | 32         | 32            |
+| v7_7_11_PORTA | 32         | 32            |
+| v7_7_11_PORTB | 32         | 32            |
+| v7_7_12_PORTA | 32         | 32            |
+| v7_7_12_PORTB | 32         | 32            |
+| v7_7_13_PORTA | 32         | 32            |
+| v7_7_13_PORTB | 32         | 32            |
+| v7_7_14_PORTA | 32         | 32            |
+| v7_7_14_PORTB | 32         | 32            |
+| v7_7_15_PORTA | 32         | 32            |
+| v7_7_15_PORTB | 32         | 32            |
+| v7_7_1_PORTA  | 32         | 32            |
+| v7_7_1_PORTB  | 32         | 32            |
+| v7_7_2_PORTA  | 32         | 32            |
+| v7_7_2_PORTB  | 32         | 32            |
+| v7_7_3_PORTA  | 32         | 32            |
+| v7_7_3_PORTB  | 32         | 32            |
+| v7_7_4_PORTA  | 32         | 32            |
+| v7_7_4_PORTB  | 32         | 32            |
+| v7_7_5_PORTA  | 32         | 32            |
+| v7_7_5_PORTB  | 32         | 32            |
+| v7_7_6_PORTA  | 32         | 32            |
+| v7_7_6_PORTB  | 32         | 32            |
+| v7_7_7_PORTA  | 32         | 32            |
+| v7_7_7_PORTB  | 32         | 32            |
+| v7_7_8_PORTA  | 32         | 32            |
+| v7_7_8_PORTB  | 32         | 32            |
+| v7_7_9_PORTA  | 32         | 32            |
+| v7_7_9_PORTB  | 32         | 32            |
++---------------+------------+---------------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+----------+
+| Argument | Direction | Datatype |
++----------+-----------+----------+
+| v0       | in        | float    |
+| v1       | in        | float    |
+| v2       | in        | float    |
+| v3       | in        | float*   |
+| v4       | in        | float*   |
+| v5       | in        | float*   |
+| v6       | inout     | float*   |
+| v7       | inout     | float*   |
++----------+-----------+----------+
+
+* SW-to-HW Mapping
++----------+---------------+-----------+------------------------------+
+| Argument | HW Interface  | HW Type   | HW Info                      |
++----------+---------------+-----------+------------------------------+
+| v0       | s_axi_ctrl    | register  | name=v0 offset=0x10 range=32 |
+| v1       | s_axi_ctrl    | register  | name=v1 offset=0x18 range=32 |
+| v2       | s_axi_ctrl    | register  | name=v2 offset=0x20 range=32 |
+| v3       | v3_0_PORTA    | interface |                              |
+| v3       | v3_1_PORTA    | interface |                              |
+| v3       | v3_2_PORTA    | interface |                              |
+| v3       | v3_3_PORTA    | interface |                              |
+| v3       | v3_4_PORTA    | interface |                              |
+| v3       | v3_5_PORTA    | interface |                              |
+| v3       | v3_6_PORTA    | interface |                              |
+| v3       | v3_7_PORTA    | interface |                              |
+| v4       | v4_0_PORTA    | interface |                              |
+| v4       | v4_1_PORTA    | interface |                              |
+| v4       | v4_2_PORTA    | interface |                              |
+| v4       | v4_3_PORTA    | interface |                              |
+| v4       | v4_4_PORTA    | interface |                              |
+| v4       | v4_5_PORTA    | interface |                              |
+| v4       | v4_6_PORTA    | interface |                              |
+| v4       | v4_7_PORTA    | interface |                              |
+| v4       | v4_8_PORTA    | interface |                              |
+| v4       | v4_9_PORTA    | interface |                              |
+| v4       | v4_10_PORTA   | interface |                              |
+| v4       | v4_11_PORTA   | interface |                              |
+| v4       | v4_12_PORTA   | interface |                              |
+| v4       | v4_13_PORTA   | interface |                              |
+| v4       | v4_14_PORTA   | interface |                              |
+| v4       | v4_15_PORTA   | interface |                              |
+| v5       | v5_0_PORTA    | interface |                              |
+| v5       | v5_1_PORTA    | interface |                              |
+| v5       | v5_2_PORTA    | interface |                              |
+| v5       | v5_3_PORTA    | interface |                              |
+| v5       | v5_4_PORTA    | interface |                              |
+| v5       | v5_5_PORTA    | interface |                              |
+| v5       | v5_6_PORTA    | interface |                              |
+| v5       | v5_7_PORTA    | interface |                              |
+| v5       | v5_8_PORTA    | interface |                              |
+| v5       | v5_9_PORTA    | interface |                              |
+| v5       | v5_10_PORTA   | interface |                              |
+| v5       | v5_11_PORTA   | interface |                              |
+| v5       | v5_12_PORTA   | interface |                              |
+| v5       | v5_13_PORTA   | interface |                              |
+| v5       | v5_14_PORTA   | interface |                              |
+| v5       | v5_15_PORTA   | interface |                              |
+| v6       | v6_0_0_PORTA  | interface |                              |
+| v6       | v6_0_1_PORTA  | interface |                              |
+| v6       | v6_0_2_PORTA  | interface |                              |
+| v6       | v6_0_3_PORTA  | interface |                              |
+| v6       | v6_0_4_PORTA  | interface |                              |
+| v6       | v6_0_5_PORTA  | interface |                              |
+| v6       | v6_0_6_PORTA  | interface |                              |
+| v6       | v6_0_7_PORTA  | interface |                              |
+| v6       | v6_0_8_PORTA  | interface |                              |
+| v6       | v6_0_9_PORTA  | interface |                              |
+| v6       | v6_0_10_PORTA | interface |                              |
+| v6       | v6_0_11_PORTA | interface |                              |
+| v6       | v6_0_12_PORTA | interface |                              |
+| v6       | v6_0_13_PORTA | interface |                              |
+| v6       | v6_0_14_PORTA | interface |                              |
+| v6       | v6_0_15_PORTA | interface |                              |
+| v6       | v6_1_0_PORTA  | interface |                              |
+| v6       | v6_1_1_PORTA  | interface |                              |
+| v6       | v6_1_2_PORTA  | interface |                              |
+| v6       | v6_1_3_PORTA  | interface |                              |
+| v6       | v6_1_4_PORTA  | interface |                              |
+| v6       | v6_1_5_PORTA  | interface |                              |
+| v6       | v6_1_6_PORTA  | interface |                              |
+| v6       | v6_1_7_PORTA  | interface |                              |
+| v6       | v6_1_8_PORTA  | interface |                              |
+| v6       | v6_1_9_PORTA  | interface |                              |
+| v6       | v6_1_10_PORTA | interface |                              |
+| v6       | v6_1_11_PORTA | interface |                              |
+| v6       | v6_1_12_PORTA | interface |                              |
+| v6       | v6_1_13_PORTA | interface |                              |
+| v6       | v6_1_14_PORTA | interface |                              |
+| v6       | v6_1_15_PORTA | interface |                              |
+| v6       | v6_2_0_PORTA  | interface |                              |
+| v6       | v6_2_1_PORTA  | interface |                              |
+| v6       | v6_2_2_PORTA  | interface |                              |
+| v6       | v6_2_3_PORTA  | interface |                              |
+| v6       | v6_2_4_PORTA  | interface |                              |
+| v6       | v6_2_5_PORTA  | interface |                              |
+| v6       | v6_2_6_PORTA  | interface |                              |
+| v6       | v6_2_7_PORTA  | interface |                              |
+| v6       | v6_2_8_PORTA  | interface |                              |
+| v6       | v6_2_9_PORTA  | interface |                              |
+| v6       | v6_2_10_PORTA | interface |                              |
+| v6       | v6_2_11_PORTA | interface |                              |
+| v6       | v6_2_12_PORTA | interface |                              |
+| v6       | v6_2_13_PORTA | interface |                              |
+| v6       | v6_2_14_PORTA | interface |                              |
+| v6       | v6_2_15_PORTA | interface |                              |
+| v6       | v6_3_0_PORTA  | interface |                              |
+| v6       | v6_3_1_PORTA  | interface |                              |
+| v6       | v6_3_2_PORTA  | interface |                              |
+| v6       | v6_3_3_PORTA  | interface |                              |
+| v6       | v6_3_4_PORTA  | interface |                              |
+| v6       | v6_3_5_PORTA  | interface |                              |
+| v6       | v6_3_6_PORTA  | interface |                              |
+| v6       | v6_3_7_PORTA  | interface |                              |
+| v6       | v6_3_8_PORTA  | interface |                              |
+| v6       | v6_3_9_PORTA  | interface |                              |
+| v6       | v6_3_10_PORTA | interface |                              |
+| v6       | v6_3_11_PORTA | interface |                              |
+| v6       | v6_3_12_PORTA | interface |                              |
+| v6       | v6_3_13_PORTA | interface |                              |
+| v6       | v6_3_14_PORTA | interface |                              |
+| v6       | v6_3_15_PORTA | interface |                              |
+| v6       | v6_4_0_PORTA  | interface |                              |
+| v6       | v6_4_0_PORTB  | interface |                              |
+| v6       | v6_4_1_PORTA  | interface |                              |
+| v6       | v6_4_1_PORTB  | interface |                              |
+| v6       | v6_4_2_PORTA  | interface |                              |
+| v6       | v6_4_2_PORTB  | interface |                              |
+| v6       | v6_4_3_PORTA  | interface |                              |
+| v6       | v6_4_3_PORTB  | interface |                              |
+| v6       | v6_4_4_PORTA  | interface |                              |
+| v6       | v6_4_4_PORTB  | interface |                              |
+| v6       | v6_4_5_PORTA  | interface |                              |
+| v6       | v6_4_5_PORTB  | interface |                              |
+| v6       | v6_4_6_PORTA  | interface |                              |
+| v6       | v6_4_6_PORTB  | interface |                              |
+| v6       | v6_4_7_PORTA  | interface |                              |
+| v6       | v6_4_7_PORTB  | interface |                              |
+| v6       | v6_4_8_PORTA  | interface |                              |
+| v6       | v6_4_8_PORTB  | interface |                              |
+| v6       | v6_4_9_PORTA  | interface |                              |
+| v6       | v6_4_9_PORTB  | interface |                              |
+| v6       | v6_4_10_PORTA | interface |                              |
+| v6       | v6_4_10_PORTB | interface |                              |
+| v6       | v6_4_11_PORTA | interface |                              |
+| v6       | v6_4_11_PORTB | interface |                              |
+| v6       | v6_4_12_PORTA | interface |                              |
+| v6       | v6_4_12_PORTB | interface |                              |
+| v6       | v6_4_13_PORTA | interface |                              |
+| v6       | v6_4_13_PORTB | interface |                              |
+| v6       | v6_4_14_PORTA | interface |                              |
+| v6       | v6_4_14_PORTB | interface |                              |
+| v6       | v6_4_15_PORTA | interface |                              |
+| v6       | v6_4_15_PORTB | interface |                              |
+| v6       | v6_5_0_PORTA  | interface |                              |
+| v6       | v6_5_0_PORTB  | interface |                              |
+| v6       | v6_5_1_PORTA  | interface |                              |
+| v6       | v6_5_1_PORTB  | interface |                              |
+| v6       | v6_5_2_PORTA  | interface |                              |
+| v6       | v6_5_2_PORTB  | interface |                              |
+| v6       | v6_5_3_PORTA  | interface |                              |
+| v6       | v6_5_3_PORTB  | interface |                              |
+| v6       | v6_5_4_PORTA  | interface |                              |
+| v6       | v6_5_4_PORTB  | interface |                              |
+| v6       | v6_5_5_PORTA  | interface |                              |
+| v6       | v6_5_5_PORTB  | interface |                              |
+| v6       | v6_5_6_PORTA  | interface |                              |
+| v6       | v6_5_6_PORTB  | interface |                              |
+| v6       | v6_5_7_PORTA  | interface |                              |
+| v6       | v6_5_7_PORTB  | interface |                              |
+| v6       | v6_5_8_PORTA  | interface |                              |
+| v6       | v6_5_8_PORTB  | interface |                              |
+| v6       | v6_5_9_PORTA  | interface |                              |
+| v6       | v6_5_9_PORTB  | interface |                              |
+| v6       | v6_5_10_PORTA | interface |                              |
+| v6       | v6_5_10_PORTB | interface |                              |
+| v6       | v6_5_11_PORTA | interface |                              |
+| v6       | v6_5_11_PORTB | interface |                              |
+| v6       | v6_5_12_PORTA | interface |                              |
+| v6       | v6_5_12_PORTB | interface |                              |
+| v6       | v6_5_13_PORTA | interface |                              |
+| v6       | v6_5_13_PORTB | interface |                              |
+| v6       | v6_5_14_PORTA | interface |                              |
+| v6       | v6_5_14_PORTB | interface |                              |
+| v6       | v6_5_15_PORTA | interface |                              |
+| v6       | v6_5_15_PORTB | interface |                              |
+| v6       | v6_6_0_PORTA  | interface |                              |
+| v6       | v6_6_0_PORTB  | interface |                              |
+| v6       | v6_6_1_PORTA  | interface |                              |
+| v6       | v6_6_1_PORTB  | interface |                              |
+| v6       | v6_6_2_PORTA  | interface |                              |
+| v6       | v6_6_2_PORTB  | interface |                              |
+| v6       | v6_6_3_PORTA  | interface |                              |
+| v6       | v6_6_3_PORTB  | interface |                              |
+| v6       | v6_6_4_PORTA  | interface |                              |
+| v6       | v6_6_4_PORTB  | interface |                              |
+| v6       | v6_6_5_PORTA  | interface |                              |
+| v6       | v6_6_5_PORTB  | interface |                              |
+| v6       | v6_6_6_PORTA  | interface |                              |
+| v6       | v6_6_6_PORTB  | interface |                              |
+| v6       | v6_6_7_PORTA  | interface |                              |
+| v6       | v6_6_7_PORTB  | interface |                              |
+| v6       | v6_6_8_PORTA  | interface |                              |
+| v6       | v6_6_8_PORTB  | interface |                              |
+| v6       | v6_6_9_PORTA  | interface |                              |
+| v6       | v6_6_9_PORTB  | interface |                              |
+| v6       | v6_6_10_PORTA | interface |                              |
+| v6       | v6_6_10_PORTB | interface |                              |
+| v6       | v6_6_11_PORTA | interface |                              |
+| v6       | v6_6_11_PORTB | interface |                              |
+| v6       | v6_6_12_PORTA | interface |                              |
+| v6       | v6_6_12_PORTB | interface |                              |
+| v6       | v6_6_13_PORTA | interface |                              |
+| v6       | v6_6_13_PORTB | interface |                              |
+| v6       | v6_6_14_PORTA | interface |                              |
+| v6       | v6_6_14_PORTB | interface |                              |
+| v6       | v6_6_15_PORTA | interface |                              |
+| v6       | v6_6_15_PORTB | interface |                              |
+| v6       | v6_7_0_PORTA  | interface |                              |
+| v6       | v6_7_0_PORTB  | interface |                              |
+| v6       | v6_7_1_PORTA  | interface |                              |
+| v6       | v6_7_1_PORTB  | interface |                              |
+| v6       | v6_7_2_PORTA  | interface |                              |
+| v6       | v6_7_2_PORTB  | interface |                              |
+| v6       | v6_7_3_PORTA  | interface |                              |
+| v6       | v6_7_3_PORTB  | interface |                              |
+| v6       | v6_7_4_PORTA  | interface |                              |
+| v6       | v6_7_4_PORTB  | interface |                              |
+| v6       | v6_7_5_PORTA  | interface |                              |
+| v6       | v6_7_5_PORTB  | interface |                              |
+| v6       | v6_7_6_PORTA  | interface |                              |
+| v6       | v6_7_6_PORTB  | interface |                              |
+| v6       | v6_7_7_PORTA  | interface |                              |
+| v6       | v6_7_7_PORTB  | interface |                              |
+| v6       | v6_7_8_PORTA  | interface |                              |
+| v6       | v6_7_8_PORTB  | interface |                              |
+| v6       | v6_7_9_PORTA  | interface |                              |
+| v6       | v6_7_9_PORTB  | interface |                              |
+| v6       | v6_7_10_PORTA | interface |                              |
+| v6       | v6_7_10_PORTB | interface |                              |
+| v6       | v6_7_11_PORTA | interface |                              |
+| v6       | v6_7_11_PORTB | interface |                              |
+| v6       | v6_7_12_PORTA | interface |                              |
+| v6       | v6_7_12_PORTB | interface |                              |
+| v6       | v6_7_13_PORTA | interface |                              |
+| v6       | v6_7_13_PORTB | interface |                              |
+| v6       | v6_7_14_PORTA | interface |                              |
+| v6       | v6_7_14_PORTB | interface |                              |
+| v6       | v6_7_15_PORTA | interface |                              |
+| v6       | v6_7_15_PORTB | interface |                              |
+| v7       | v7_0_0_PORTA  | interface |                              |
+| v7       | v7_0_0_PORTB  | interface |                              |
+| v7       | v7_0_1_PORTA  | interface |                              |
+| v7       | v7_0_1_PORTB  | interface |                              |
+| v7       | v7_0_2_PORTA  | interface |                              |
+| v7       | v7_0_2_PORTB  | interface |                              |
+| v7       | v7_0_3_PORTA  | interface |                              |
+| v7       | v7_0_3_PORTB  | interface |                              |
+| v7       | v7_0_4_PORTA  | interface |                              |
+| v7       | v7_0_4_PORTB  | interface |                              |
+| v7       | v7_0_5_PORTA  | interface |                              |
+| v7       | v7_0_5_PORTB  | interface |                              |
+| v7       | v7_0_6_PORTA  | interface |                              |
+| v7       | v7_0_6_PORTB  | interface |                              |
+| v7       | v7_0_7_PORTA  | interface |                              |
+| v7       | v7_0_7_PORTB  | interface |                              |
+| v7       | v7_0_8_PORTA  | interface |                              |
+| v7       | v7_0_8_PORTB  | interface |                              |
+| v7       | v7_0_9_PORTA  | interface |                              |
+| v7       | v7_0_9_PORTB  | interface |                              |
+| v7       | v7_0_10_PORTA | interface |                              |
+| v7       | v7_0_10_PORTB | interface |                              |
+| v7       | v7_0_11_PORTA | interface |                              |
+| v7       | v7_0_11_PORTB | interface |                              |
+| v7       | v7_0_12_PORTA | interface |                              |
+| v7       | v7_0_12_PORTB | interface |                              |
+| v7       | v7_0_13_PORTA | interface |                              |
+| v7       | v7_0_13_PORTB | interface |                              |
+| v7       | v7_0_14_PORTA | interface |                              |
+| v7       | v7_0_14_PORTB | interface |                              |
+| v7       | v7_0_15_PORTA | interface |                              |
+| v7       | v7_0_15_PORTB | interface |                              |
+| v7       | v7_1_0_PORTA  | interface |                              |
+| v7       | v7_1_0_PORTB  | interface |                              |
+| v7       | v7_1_1_PORTA  | interface |                              |
+| v7       | v7_1_1_PORTB  | interface |                              |
+| v7       | v7_1_2_PORTA  | interface |                              |
+| v7       | v7_1_2_PORTB  | interface |                              |
+| v7       | v7_1_3_PORTA  | interface |                              |
+| v7       | v7_1_3_PORTB  | interface |                              |
+| v7       | v7_1_4_PORTA  | interface |                              |
+| v7       | v7_1_4_PORTB  | interface |                              |
+| v7       | v7_1_5_PORTA  | interface |                              |
+| v7       | v7_1_5_PORTB  | interface |                              |
+| v7       | v7_1_6_PORTA  | interface |                              |
+| v7       | v7_1_6_PORTB  | interface |                              |
+| v7       | v7_1_7_PORTA  | interface |                              |
+| v7       | v7_1_7_PORTB  | interface |                              |
+| v7       | v7_1_8_PORTA  | interface |                              |
+| v7       | v7_1_8_PORTB  | interface |                              |
+| v7       | v7_1_9_PORTA  | interface |                              |
+| v7       | v7_1_9_PORTB  | interface |                              |
+| v7       | v7_1_10_PORTA | interface |                              |
+| v7       | v7_1_10_PORTB | interface |                              |
+| v7       | v7_1_11_PORTA | interface |                              |
+| v7       | v7_1_11_PORTB | interface |                              |
+| v7       | v7_1_12_PORTA | interface |                              |
+| v7       | v7_1_12_PORTB | interface |                              |
+| v7       | v7_1_13_PORTA | interface |                              |
+| v7       | v7_1_13_PORTB | interface |                              |
+| v7       | v7_1_14_PORTA | interface |                              |
+| v7       | v7_1_14_PORTB | interface |                              |
+| v7       | v7_1_15_PORTA | interface |                              |
+| v7       | v7_1_15_PORTB | interface |                              |
+| v7       | v7_2_0_PORTA  | interface |                              |
+| v7       | v7_2_0_PORTB  | interface |                              |
+| v7       | v7_2_1_PORTA  | interface |                              |
+| v7       | v7_2_1_PORTB  | interface |                              |
+| v7       | v7_2_2_PORTA  | interface |                              |
+| v7       | v7_2_2_PORTB  | interface |                              |
+| v7       | v7_2_3_PORTA  | interface |                              |
+| v7       | v7_2_3_PORTB  | interface |                              |
+| v7       | v7_2_4_PORTA  | interface |                              |
+| v7       | v7_2_4_PORTB  | interface |                              |
+| v7       | v7_2_5_PORTA  | interface |                              |
+| v7       | v7_2_5_PORTB  | interface |                              |
+| v7       | v7_2_6_PORTA  | interface |                              |
+| v7       | v7_2_6_PORTB  | interface |                              |
+| v7       | v7_2_7_PORTA  | interface |                              |
+| v7       | v7_2_7_PORTB  | interface |                              |
+| v7       | v7_2_8_PORTA  | interface |                              |
+| v7       | v7_2_8_PORTB  | interface |                              |
+| v7       | v7_2_9_PORTA  | interface |                              |
+| v7       | v7_2_9_PORTB  | interface |                              |
+| v7       | v7_2_10_PORTA | interface |                              |
+| v7       | v7_2_10_PORTB | interface |                              |
+| v7       | v7_2_11_PORTA | interface |                              |
+| v7       | v7_2_11_PORTB | interface |                              |
+| v7       | v7_2_12_PORTA | interface |                              |
+| v7       | v7_2_12_PORTB | interface |                              |
+| v7       | v7_2_13_PORTA | interface |                              |
+| v7       | v7_2_13_PORTB | interface |                              |
+| v7       | v7_2_14_PORTA | interface |                              |
+| v7       | v7_2_14_PORTB | interface |                              |
+| v7       | v7_2_15_PORTA | interface |                              |
+| v7       | v7_2_15_PORTB | interface |                              |
+| v7       | v7_3_0_PORTA  | interface |                              |
+| v7       | v7_3_0_PORTB  | interface |                              |
+| v7       | v7_3_1_PORTA  | interface |                              |
+| v7       | v7_3_1_PORTB  | interface |                              |
+| v7       | v7_3_2_PORTA  | interface |                              |
+| v7       | v7_3_2_PORTB  | interface |                              |
+| v7       | v7_3_3_PORTA  | interface |                              |
+| v7       | v7_3_3_PORTB  | interface |                              |
+| v7       | v7_3_4_PORTA  | interface |                              |
+| v7       | v7_3_4_PORTB  | interface |                              |
+| v7       | v7_3_5_PORTA  | interface |                              |
+| v7       | v7_3_5_PORTB  | interface |                              |
+| v7       | v7_3_6_PORTA  | interface |                              |
+| v7       | v7_3_6_PORTB  | interface |                              |
+| v7       | v7_3_7_PORTA  | interface |                              |
+| v7       | v7_3_7_PORTB  | interface |                              |
+| v7       | v7_3_8_PORTA  | interface |                              |
+| v7       | v7_3_8_PORTB  | interface |                              |
+| v7       | v7_3_9_PORTA  | interface |                              |
+| v7       | v7_3_9_PORTB  | interface |                              |
+| v7       | v7_3_10_PORTA | interface |                              |
+| v7       | v7_3_10_PORTB | interface |                              |
+| v7       | v7_3_11_PORTA | interface |                              |
+| v7       | v7_3_11_PORTB | interface |                              |
+| v7       | v7_3_12_PORTA | interface |                              |
+| v7       | v7_3_12_PORTB | interface |                              |
+| v7       | v7_3_13_PORTA | interface |                              |
+| v7       | v7_3_13_PORTB | interface |                              |
+| v7       | v7_3_14_PORTA | interface |                              |
+| v7       | v7_3_14_PORTB | interface |                              |
+| v7       | v7_3_15_PORTA | interface |                              |
+| v7       | v7_3_15_PORTB | interface |                              |
+| v7       | v7_4_0_PORTA  | interface |                              |
+| v7       | v7_4_0_PORTB  | interface |                              |
+| v7       | v7_4_1_PORTA  | interface |                              |
+| v7       | v7_4_1_PORTB  | interface |                              |
+| v7       | v7_4_2_PORTA  | interface |                              |
+| v7       | v7_4_2_PORTB  | interface |                              |
+| v7       | v7_4_3_PORTA  | interface |                              |
+| v7       | v7_4_3_PORTB  | interface |                              |
+| v7       | v7_4_4_PORTA  | interface |                              |
+| v7       | v7_4_4_PORTB  | interface |                              |
+| v7       | v7_4_5_PORTA  | interface |                              |
+| v7       | v7_4_5_PORTB  | interface |                              |
+| v7       | v7_4_6_PORTA  | interface |                              |
+| v7       | v7_4_6_PORTB  | interface |                              |
+| v7       | v7_4_7_PORTA  | interface |                              |
+| v7       | v7_4_7_PORTB  | interface |                              |
+| v7       | v7_4_8_PORTA  | interface |                              |
+| v7       | v7_4_8_PORTB  | interface |                              |
+| v7       | v7_4_9_PORTA  | interface |                              |
+| v7       | v7_4_9_PORTB  | interface |                              |
+| v7       | v7_4_10_PORTA | interface |                              |
+| v7       | v7_4_10_PORTB | interface |                              |
+| v7       | v7_4_11_PORTA | interface |                              |
+| v7       | v7_4_11_PORTB | interface |                              |
+| v7       | v7_4_12_PORTA | interface |                              |
+| v7       | v7_4_12_PORTB | interface |                              |
+| v7       | v7_4_13_PORTA | interface |                              |
+| v7       | v7_4_13_PORTB | interface |                              |
+| v7       | v7_4_14_PORTA | interface |                              |
+| v7       | v7_4_14_PORTB | interface |                              |
+| v7       | v7_4_15_PORTA | interface |                              |
+| v7       | v7_4_15_PORTB | interface |                              |
+| v7       | v7_5_0_PORTA  | interface |                              |
+| v7       | v7_5_0_PORTB  | interface |                              |
+| v7       | v7_5_1_PORTA  | interface |                              |
+| v7       | v7_5_1_PORTB  | interface |                              |
+| v7       | v7_5_2_PORTA  | interface |                              |
+| v7       | v7_5_2_PORTB  | interface |                              |
+| v7       | v7_5_3_PORTA  | interface |                              |
+| v7       | v7_5_3_PORTB  | interface |                              |
+| v7       | v7_5_4_PORTA  | interface |                              |
+| v7       | v7_5_4_PORTB  | interface |                              |
+| v7       | v7_5_5_PORTA  | interface |                              |
+| v7       | v7_5_5_PORTB  | interface |                              |
+| v7       | v7_5_6_PORTA  | interface |                              |
+| v7       | v7_5_6_PORTB  | interface |                              |
+| v7       | v7_5_7_PORTA  | interface |                              |
+| v7       | v7_5_7_PORTB  | interface |                              |
+| v7       | v7_5_8_PORTA  | interface |                              |
+| v7       | v7_5_8_PORTB  | interface |                              |
+| v7       | v7_5_9_PORTA  | interface |                              |
+| v7       | v7_5_9_PORTB  | interface |                              |
+| v7       | v7_5_10_PORTA | interface |                              |
+| v7       | v7_5_10_PORTB | interface |                              |
+| v7       | v7_5_11_PORTA | interface |                              |
+| v7       | v7_5_11_PORTB | interface |                              |
+| v7       | v7_5_12_PORTA | interface |                              |
+| v7       | v7_5_12_PORTB | interface |                              |
+| v7       | v7_5_13_PORTA | interface |                              |
+| v7       | v7_5_13_PORTB | interface |                              |
+| v7       | v7_5_14_PORTA | interface |                              |
+| v7       | v7_5_14_PORTB | interface |                              |
+| v7       | v7_5_15_PORTA | interface |                              |
+| v7       | v7_5_15_PORTB | interface |                              |
+| v7       | v7_6_0_PORTA  | interface |                              |
+| v7       | v7_6_0_PORTB  | interface |                              |
+| v7       | v7_6_1_PORTA  | interface |                              |
+| v7       | v7_6_1_PORTB  | interface |                              |
+| v7       | v7_6_2_PORTA  | interface |                              |
+| v7       | v7_6_2_PORTB  | interface |                              |
+| v7       | v7_6_3_PORTA  | interface |                              |
+| v7       | v7_6_3_PORTB  | interface |                              |
+| v7       | v7_6_4_PORTA  | interface |                              |
+| v7       | v7_6_4_PORTB  | interface |                              |
+| v7       | v7_6_5_PORTA  | interface |                              |
+| v7       | v7_6_5_PORTB  | interface |                              |
+| v7       | v7_6_6_PORTA  | interface |                              |
+| v7       | v7_6_6_PORTB  | interface |                              |
+| v7       | v7_6_7_PORTA  | interface |                              |
+| v7       | v7_6_7_PORTB  | interface |                              |
+| v7       | v7_6_8_PORTA  | interface |                              |
+| v7       | v7_6_8_PORTB  | interface |                              |
+| v7       | v7_6_9_PORTA  | interface |                              |
+| v7       | v7_6_9_PORTB  | interface |                              |
+| v7       | v7_6_10_PORTA | interface |                              |
+| v7       | v7_6_10_PORTB | interface |                              |
+| v7       | v7_6_11_PORTA | interface |                              |
+| v7       | v7_6_11_PORTB | interface |                              |
+| v7       | v7_6_12_PORTA | interface |                              |
+| v7       | v7_6_12_PORTB | interface |                              |
+| v7       | v7_6_13_PORTA | interface |                              |
+| v7       | v7_6_13_PORTB | interface |                              |
+| v7       | v7_6_14_PORTA | interface |                              |
+| v7       | v7_6_14_PORTB | interface |                              |
+| v7       | v7_6_15_PORTA | interface |                              |
+| v7       | v7_6_15_PORTB | interface |                              |
+| v7       | v7_7_0_PORTA  | interface |                              |
+| v7       | v7_7_0_PORTB  | interface |                              |
+| v7       | v7_7_1_PORTA  | interface |                              |
+| v7       | v7_7_1_PORTB  | interface |                              |
+| v7       | v7_7_2_PORTA  | interface |                              |
+| v7       | v7_7_2_PORTB  | interface |                              |
+| v7       | v7_7_3_PORTA  | interface |                              |
+| v7       | v7_7_3_PORTB  | interface |                              |
+| v7       | v7_7_4_PORTA  | interface |                              |
+| v7       | v7_7_4_PORTB  | interface |                              |
+| v7       | v7_7_5_PORTA  | interface |                              |
+| v7       | v7_7_5_PORTB  | interface |                              |
+| v7       | v7_7_6_PORTA  | interface |                              |
+| v7       | v7_7_6_PORTB  | interface |                              |
+| v7       | v7_7_7_PORTA  | interface |                              |
+| v7       | v7_7_7_PORTB  | interface |                              |
+| v7       | v7_7_8_PORTA  | interface |                              |
+| v7       | v7_7_8_PORTB  | interface |                              |
+| v7       | v7_7_9_PORTA  | interface |                              |
+| v7       | v7_7_9_PORTB  | interface |                              |
+| v7       | v7_7_10_PORTA | interface |                              |
+| v7       | v7_7_10_PORTB | interface |                              |
+| v7       | v7_7_11_PORTA | interface |                              |
+| v7       | v7_7_11_PORTB | interface |                              |
+| v7       | v7_7_12_PORTA | interface |                              |
+| v7       | v7_7_12_PORTB | interface |                              |
+| v7       | v7_7_13_PORTA | interface |                              |
+| v7       | v7_7_13_PORTB | interface |                              |
+| v7       | v7_7_14_PORTA | interface |                              |
+| v7       | v7_7_14_PORTB | interface |                              |
+| v7       | v7_7_15_PORTA | interface |                              |
+| v7       | v7_7_15_PORTB | interface |                              |
++----------+---------------+-----------+------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++---------------------------------------------------------------------------------+-----+--------+--------------+------+--------+---------+
+| Name                                                                            | DSP | Pragma | Variable     | Op   | Impl   | Latency |
++---------------------------------------------------------------------------------+-----+--------+--------------+------+--------+---------+
+| + test_2mm_256                                                                  | 166 |        |              |      |        |         |
+|  + test_2mm_256_Pipeline_VITIS_LOOP_60_1_VITIS_LOOP_61_2                        | 0   |        |              |      |        |         |
+|    add_ln60_1_fu_2014_p2                                                        | -   |        | add_ln60_1   | add  | fabric | 0       |
+|    add_ln60_fu_2026_p2                                                          | -   |        | add_ln60     | add  | fabric | 0       |
+|    add_ln63_fu_2070_p2                                                          | -   |        | add_ln63     | add  | fabric | 0       |
+|    add_ln61_fu_2076_p2                                                          | -   |        | add_ln61     | add  | fabric | 0       |
+|  + test_2mm_256_Pipeline_VITIS_LOOP_744_6_VITIS_LOOP_745_7                      | 0   |        |              |      |        |         |
+|    add_ln744_1_fu_2398_p2                                                       | -   |        | add_ln744_1  | add  | fabric | 0       |
+|    add_ln744_fu_2410_p2                                                         | -   |        | add_ln744    | add  | fabric | 0       |
+|    add_ln747_fu_2454_p2                                                         | -   |        | add_ln747    | add  | fabric | 0       |
+|    add_ln745_fu_2460_p2                                                         | -   |        | add_ln745    | add  | fabric | 0       |
+|  + test_2mm_256_Pipeline_VITIS_LOOP_193_3_VITIS_LOOP_194_4_VITIS_LOOP_195_5     | 6   |        |              |      |        |         |
+|    empty_fu_2942_p2                                                             | -   |        | empty        | add  | fabric | 0       |
+|    add_ln193_1_fu_2954_p2                                                       | -   |        | add_ln193_1  | add  | fabric | 0       |
+|    add_ln193_fu_2966_p2                                                         | -   |        | add_ln193    | add  | fabric | 0       |
+|    add_ln194_fu_3032_p2                                                         | -   |        | add_ln194    | add  | fabric | 0       |
+|    empty_19_fu_3064_p2                                                          | -   |        | empty_19     | add  | fabric | 0       |
+|    add_ln199_fu_3175_p2                                                         | -   |        | add_ln199    | add  | fabric | 0       |
+|    add_ln201_fu_3114_p2                                                         | -   |        | add_ln201    | add  | fabric | 0       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U66                                            | 3   |        | v105         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U67                                            | 3   |        | v108         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U66                                            | 3   |        | v211         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U67                                            | 3   |        | v214         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U66                                            | 3   |        | v317         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U67                                            | 3   |        | v320         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U66                                            | 3   |        | v423         | fmul | maxdsp | 3       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U67                                            | 3   |        | v426         | fmul | maxdsp | 3       |
+|    add_ln195_fu_3181_p2                                                         | -   |        | add_ln195    | add  | fabric | 0       |
+|    add_ln194_1_fu_3120_p2                                                       | -   |        | add_ln194_1  | add  | fabric | 0       |
+|  + test_2mm_256_Pipeline_VITIS_LOOP_1133_8_VITIS_LOOP_1134_9_VITIS_LOOP_1135_10 | 0   |        |              |      |        |         |
+|    add_ln1133_1_fu_7440_p2                                                      | -   |        | add_ln1133_1 | add  | fabric | 0       |
+|    add_ln1133_fu_7452_p2                                                        | -   |        | add_ln1133   | add  | fabric | 0       |
+|    add_ln1134_fu_7648_p2                                                        | -   |        | add_ln1134   | add  | fabric | 0       |
+|    add_ln1138_fu_9513_p2                                                        | -   |        | add_ln1138   | add  | fabric | 0       |
+|    add_ln1140_fu_9539_p2                                                        | -   |        | add_ln1140   | add  | fabric | 0       |
+|    add_ln1135_fu_9677_p2                                                        | -   |        | add_ln1135   | add  | fabric | 0       |
+|    add_ln1134_1_fu_7674_p2                                                      | -   |        | add_ln1134_1 | add  | fabric | 0       |
++---------------------------------------------------------------------------------+-----+--------+--------------+------+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Pragmas with Warnings
++----------+-------------------------------+-----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Type     | Options                       | Location                                | Messages                                                                                                                         |
++----------+-------------------------------+-----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| resource | variable=v3 core=ram_s2p_bram | test_2mm_256.cpp:44 in test_2mm_256, v3 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                         | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v4 core=ram_s2p_bram | test_2mm_256.cpp:47 in test_2mm_256, v4 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                         | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v5 core=ram_s2p_bram | test_2mm_256.cpp:50 in test_2mm_256, v5 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                         | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v6 core=ram_s2p_bram | test_2mm_256.cpp:54 in test_2mm_256, v6 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                         | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v7 core=ram_s2p_bram | test_2mm_256.cpp:58 in test_2mm_256, v7 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                         | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
++----------+-------------------------------+-----------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+* Valid Pragma Syntax
++-----------------+------------------------------------+---------------------------------------------+
+| Type            | Options                            | Location                                    |
++-----------------+------------------------------------+---------------------------------------------+
+| interface       | s_axilite port=return bundle=ctrl  | test_2mm_256.cpp:33 in test_2mm_256, return |
+| interface       | s_axilite port=v0 bundle=ctrl      | test_2mm_256.cpp:34 in test_2mm_256, v0     |
+| interface       | s_axilite port=v1 bundle=ctrl      | test_2mm_256.cpp:35 in test_2mm_256, v1     |
+| interface       | s_axilite port=v2 bundle=ctrl      | test_2mm_256.cpp:36 in test_2mm_256, v2     |
+| interface       | bram port=v3                       | test_2mm_256.cpp:37 in test_2mm_256, v3     |
+| interface       | bram port=v4                       | test_2mm_256.cpp:38 in test_2mm_256, v4     |
+| interface       | bram port=v5                       | test_2mm_256.cpp:39 in test_2mm_256, v5     |
+| interface       | bram port=v6                       | test_2mm_256.cpp:40 in test_2mm_256, v6     |
+| interface       | bram port=v7                       | test_2mm_256.cpp:41 in test_2mm_256, v7     |
+| array_partition | variable=v3 cyclic factor=8 dim=1  | test_2mm_256.cpp:43 in test_2mm_256, v3     |
+| array_partition | variable=v4 cyclic factor=16 dim=2 | test_2mm_256.cpp:46 in test_2mm_256, v4     |
+| array_partition | variable=v5 cyclic factor=16 dim=2 | test_2mm_256.cpp:49 in test_2mm_256, v5     |
+| array_partition | variable=v6 cyclic factor=8 dim=1  | test_2mm_256.cpp:52 in test_2mm_256, v6     |
+| array_partition | variable=v6 cyclic factor=16 dim=2 | test_2mm_256.cpp:53 in test_2mm_256, v6     |
+| array_partition | variable=v7 cyclic factor=8 dim=1  | test_2mm_256.cpp:56 in test_2mm_256, v7     |
+| array_partition | variable=v7 cyclic factor=16 dim=2 | test_2mm_256.cpp:57 in test_2mm_256, v7     |
+| pipeline        | II=4                               | test_2mm_256.cpp:62 in test_2mm_256         |
+| pipeline        | II=4                               | test_2mm_256.cpp:196 in test_2mm_256        |
+| pipeline        | II=4                               | test_2mm_256.cpp:746 in test_2mm_256        |
+| pipeline        | II=4                               | test_2mm_256.cpp:1136 in test_2mm_256       |
++-----------------+------------------------------------+---------------------------------------------+
+
+

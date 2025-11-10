@@ -1,14 +1,14 @@
 {
     "__max_init_parallel": "The maximum loop parallelism in the initial sampling",
-    "max_init_parallel": 32,
+    "max_init_parallel": 256,
     "__max_expl_parallel": "The maximum loop parallelism in the exploration",
-    "max_expl_parallel": 128,
+    "max_expl_parallel": 256,
     "__max_loop_parallel": "The maximum unroll factor of each loop",
-    "max_loop_parallel": 16,
+    "max_loop_parallel": 256,
     "__max_iter_num": "The maximum iteration number in the exploration",
     "frequency": "100MHz",
-    "dsp": 220,
-    "bram": 180,
+    "dsp": 240,
+    "bram": 270,
     "dsp_usage": {
         "fadd": 2,
         "fmul": 3,
@@ -17,8 +17,8 @@
         "fexp": 7
     },
     "100MHz": {
-        "fadd": 4,
-        "fmul": 3,
+        "fadd": 7,
+        "fmul": 4,
         "fdiv": 15,
         "fcmp": 1,
         "fexp": 8,

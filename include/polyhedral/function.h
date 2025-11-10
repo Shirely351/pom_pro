@@ -362,6 +362,17 @@ public:
     void gen_c_code() const;
 
     void trans();
+    //// 新增：II 枚举相关函数 @syy
+    std::vector<int> generate_ii_candidates(int minII, int iterLatency, int max_ii = 8);
+    
+    void apply_dynamic_pipeline_strategy(
+        polyfp::compute *comp,
+        const std::vector<int> &tile_size,
+        int ii_value,
+        const polyfp::var &k0, const polyfp::var &j0, const polyfp::var &i0,
+        const polyfp::var &k1, const polyfp::var &j1, const polyfp::var &i1,
+        const std::map<int, polyfp::var> &iterator_map,
+        int size);
 
 
 };

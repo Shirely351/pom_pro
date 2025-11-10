@@ -43,4 +43,3 @@ int main(){
     fct->auto_DSE(path);
 }
 
-}

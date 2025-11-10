@@ -10,7 +10,7 @@ polyfp::expr& polyfp::expr::operator=(polyfp::expr const & e)
     this->_operator = e._operator;
     this->op = e.op;
     this->access_vector = e.access_vector;
-    this->defined = e.defined;
+    this->defined = e.defined;  
     this->name = e.name;
     this->dtype = e.dtype;
     this->etype = e.etype;
@@ -92,8 +92,6 @@ polyfp::var::var(std::string name)
     assert(!name.empty());
 
     auto declared = var::declared_vars.find(name);
-
-
     if (declared != var::declared_vars.end())
     {
         *this = declared->second;

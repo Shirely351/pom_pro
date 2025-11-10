@@ -1,0 +1,369 @@
+
+
+================================================================
+== Synthesis Summary Report of 'test_gesummv_32'
+================================================================
++ General Information: 
+    * Date:           Fri Jun 13 15:27:47 2025
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        test_gesummv_32
+    * Solution:       test_gesummv_32 (Vivado IP Flow Target)
+    * Product family: artix7
+    * Target device:  xc7a100t-csg324-1
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +-------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+------+----------+-----------+------------+-----+
+    |                           Modules                           |  Issue |       | Latency |  Latency  | Iteration|         | Trip |          |      |          |           |            |     |
+    |                           & Loops                           |  Type  | Slack | (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined| BRAM |    DSP   |     FF    |     LUT    | URAM|
+    +-------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+------+----------+-----------+------------+-----+
+    |+ test_gesummv_32                                            |  Timing|  -0.78|      322|  3.220e+03|         -|      323|     -|        no|     -|  40 (16%)|  8608 (6%)|  8081 (12%)|    -|
+    | + test_gesummv_32_Pipeline_VITIS_LOOP_55_1_VITIS_LOOP_56_2  |  Timing|  -0.78|      269|  2.690e+03|         -|      269|     -|        no|     -|  32 (13%)|  6525 (5%)|   4848 (7%)|    -|
+    |  o VITIS_LOOP_55_1_VITIS_LOOP_56_2                          |      II|   7.30|      267|  2.670e+03|        16|        4|    64|       yes|     -|         -|          -|           -|    -|
+    | + test_gesummv_32_Pipeline_VITIS_LOOP_221_3                 |       -|   1.37|       50|    500.000|         -|       50|     -|        no|     -|         -|  1309 (1%)|    880 (1%)|    -|
+    |  o VITIS_LOOP_221_3                                         |       -|   7.30|       48|    480.000|        18|        1|    32|       yes|     -|         -|          -|           -|    -|
+    +-------------------------------------------------------------+--------+-------+---------+-----------+----------+---------+------+----------+------+----------+-----------+------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++------------+------------+---------------+--------+----------+
+| Interface  | Data Width | Address Width | Offset | Register |
++------------+------------+---------------+--------+----------+
+| s_axi_ctrl | 32         | 5             | 16     | 0        |
++------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| Interface  | Register | Offset | Width | Access | Description                      | Bit Fields                                                           |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| s_axi_ctrl | CTRL     | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_ctrl | GIER     | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                             |
+| s_axi_ctrl | IP_IER   | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_ctrl | IP_ISR   | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_ctrl | v0       | 0x10   | 32    | W      | Data signal of v0                |                                                                      |
+| s_axi_ctrl | v1       | 0x18   | 32    | W      | Data signal of v1                |                                                                      |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+
+* BRAM
++-------------+------------+---------------+
+| Interface   | Data Width | Address Width |
++-------------+------------+---------------+
+| v2_0_PORTA  | 32         | 32            |
+| v2_10_PORTA | 32         | 32            |
+| v2_11_PORTA | 32         | 32            |
+| v2_12_PORTA | 32         | 32            |
+| v2_13_PORTA | 32         | 32            |
+| v2_14_PORTA | 32         | 32            |
+| v2_15_PORTA | 32         | 32            |
+| v2_1_PORTA  | 32         | 32            |
+| v2_2_PORTA  | 32         | 32            |
+| v2_3_PORTA  | 32         | 32            |
+| v2_4_PORTA  | 32         | 32            |
+| v2_5_PORTA  | 32         | 32            |
+| v2_6_PORTA  | 32         | 32            |
+| v2_7_PORTA  | 32         | 32            |
+| v2_8_PORTA  | 32         | 32            |
+| v2_9_PORTA  | 32         | 32            |
+| v3_0_PORTA  | 32         | 32            |
+| v3_10_PORTA | 32         | 32            |
+| v3_11_PORTA | 32         | 32            |
+| v3_12_PORTA | 32         | 32            |
+| v3_13_PORTA | 32         | 32            |
+| v3_14_PORTA | 32         | 32            |
+| v3_15_PORTA | 32         | 32            |
+| v3_1_PORTA  | 32         | 32            |
+| v3_2_PORTA  | 32         | 32            |
+| v3_3_PORTA  | 32         | 32            |
+| v3_4_PORTA  | 32         | 32            |
+| v3_5_PORTA  | 32         | 32            |
+| v3_6_PORTA  | 32         | 32            |
+| v3_7_PORTA  | 32         | 32            |
+| v3_8_PORTA  | 32         | 32            |
+| v3_9_PORTA  | 32         | 32            |
+| v4_0_PORTA  | 32         | 32            |
+| v4_10_PORTA | 32         | 32            |
+| v4_11_PORTA | 32         | 32            |
+| v4_12_PORTA | 32         | 32            |
+| v4_13_PORTA | 32         | 32            |
+| v4_14_PORTA | 32         | 32            |
+| v4_15_PORTA | 32         | 32            |
+| v4_1_PORTA  | 32         | 32            |
+| v4_2_PORTA  | 32         | 32            |
+| v4_3_PORTA  | 32         | 32            |
+| v4_4_PORTA  | 32         | 32            |
+| v4_5_PORTA  | 32         | 32            |
+| v4_6_PORTA  | 32         | 32            |
+| v4_7_PORTA  | 32         | 32            |
+| v4_8_PORTA  | 32         | 32            |
+| v4_9_PORTA  | 32         | 32            |
+| v5_PORTA    | 32         | 32            |
+| v6_0_PORTA  | 32         | 32            |
+| v6_0_PORTB  | 32         | 32            |
+| v6_10_PORTA | 32         | 32            |
+| v6_10_PORTB | 32         | 32            |
+| v6_11_PORTA | 32         | 32            |
+| v6_11_PORTB | 32         | 32            |
+| v6_12_PORTA | 32         | 32            |
+| v6_12_PORTB | 32         | 32            |
+| v6_13_PORTA | 32         | 32            |
+| v6_13_PORTB | 32         | 32            |
+| v6_14_PORTA | 32         | 32            |
+| v6_14_PORTB | 32         | 32            |
+| v6_15_PORTA | 32         | 32            |
+| v6_15_PORTB | 32         | 32            |
+| v6_1_PORTA  | 32         | 32            |
+| v6_1_PORTB  | 32         | 32            |
+| v6_2_PORTA  | 32         | 32            |
+| v6_2_PORTB  | 32         | 32            |
+| v6_3_PORTA  | 32         | 32            |
+| v6_3_PORTB  | 32         | 32            |
+| v6_4_PORTA  | 32         | 32            |
+| v6_4_PORTB  | 32         | 32            |
+| v6_5_PORTA  | 32         | 32            |
+| v6_5_PORTB  | 32         | 32            |
+| v6_6_PORTA  | 32         | 32            |
+| v6_6_PORTB  | 32         | 32            |
+| v6_7_PORTA  | 32         | 32            |
+| v6_7_PORTB  | 32         | 32            |
+| v6_8_PORTA  | 32         | 32            |
+| v6_8_PORTB  | 32         | 32            |
+| v6_9_PORTA  | 32         | 32            |
+| v6_9_PORTB  | 32         | 32            |
++-------------+------------+---------------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+----------+
+| Argument | Direction | Datatype |
++----------+-----------+----------+
+| v0       | in        | float    |
+| v1       | in        | float    |
+| v2       | in        | float*   |
+| v3       | in        | float*   |
+| v4       | inout     | float*   |
+| v5       | in        | float*   |
+| v6       | inout     | float*   |
++----------+-----------+----------+
+
+* SW-to-HW Mapping
++----------+--------------+-----------+------------------------------+
+| Argument | HW Interface | HW Type   | HW Info                      |
++----------+--------------+-----------+------------------------------+
+| v0       | s_axi_ctrl   | register  | name=v0 offset=0x10 range=32 |
+| v1       | s_axi_ctrl   | register  | name=v1 offset=0x18 range=32 |
+| v2       | v2_0_PORTA   | interface |                              |
+| v2       | v2_1_PORTA   | interface |                              |
+| v2       | v2_2_PORTA   | interface |                              |
+| v2       | v2_3_PORTA   | interface |                              |
+| v2       | v2_4_PORTA   | interface |                              |
+| v2       | v2_5_PORTA   | interface |                              |
+| v2       | v2_6_PORTA   | interface |                              |
+| v2       | v2_7_PORTA   | interface |                              |
+| v2       | v2_8_PORTA   | interface |                              |
+| v2       | v2_9_PORTA   | interface |                              |
+| v2       | v2_10_PORTA  | interface |                              |
+| v2       | v2_11_PORTA  | interface |                              |
+| v2       | v2_12_PORTA  | interface |                              |
+| v2       | v2_13_PORTA  | interface |                              |
+| v2       | v2_14_PORTA  | interface |                              |
+| v2       | v2_15_PORTA  | interface |                              |
+| v3       | v3_0_PORTA   | interface |                              |
+| v3       | v3_1_PORTA   | interface |                              |
+| v3       | v3_2_PORTA   | interface |                              |
+| v3       | v3_3_PORTA   | interface |                              |
+| v3       | v3_4_PORTA   | interface |                              |
+| v3       | v3_5_PORTA   | interface |                              |
+| v3       | v3_6_PORTA   | interface |                              |
+| v3       | v3_7_PORTA   | interface |                              |
+| v3       | v3_8_PORTA   | interface |                              |
+| v3       | v3_9_PORTA   | interface |                              |
+| v3       | v3_10_PORTA  | interface |                              |
+| v3       | v3_11_PORTA  | interface |                              |
+| v3       | v3_12_PORTA  | interface |                              |
+| v3       | v3_13_PORTA  | interface |                              |
+| v3       | v3_14_PORTA  | interface |                              |
+| v3       | v3_15_PORTA  | interface |                              |
+| v4       | v4_0_PORTA   | interface |                              |
+| v4       | v4_1_PORTA   | interface |                              |
+| v4       | v4_2_PORTA   | interface |                              |
+| v4       | v4_3_PORTA   | interface |                              |
+| v4       | v4_4_PORTA   | interface |                              |
+| v4       | v4_5_PORTA   | interface |                              |
+| v4       | v4_6_PORTA   | interface |                              |
+| v4       | v4_7_PORTA   | interface |                              |
+| v4       | v4_8_PORTA   | interface |                              |
+| v4       | v4_9_PORTA   | interface |                              |
+| v4       | v4_10_PORTA  | interface |                              |
+| v4       | v4_11_PORTA  | interface |                              |
+| v4       | v4_12_PORTA  | interface |                              |
+| v4       | v4_13_PORTA  | interface |                              |
+| v4       | v4_14_PORTA  | interface |                              |
+| v4       | v4_15_PORTA  | interface |                              |
+| v5       | v5_PORTA     | interface |                              |
+| v6       | v6_0_PORTA   | interface |                              |
+| v6       | v6_0_PORTB   | interface |                              |
+| v6       | v6_1_PORTA   | interface |                              |
+| v6       | v6_1_PORTB   | interface |                              |
+| v6       | v6_2_PORTA   | interface |                              |
+| v6       | v6_2_PORTB   | interface |                              |
+| v6       | v6_3_PORTA   | interface |                              |
+| v6       | v6_3_PORTB   | interface |                              |
+| v6       | v6_4_PORTA   | interface |                              |
+| v6       | v6_4_PORTB   | interface |                              |
+| v6       | v6_5_PORTA   | interface |                              |
+| v6       | v6_5_PORTB   | interface |                              |
+| v6       | v6_6_PORTA   | interface |                              |
+| v6       | v6_6_PORTB   | interface |                              |
+| v6       | v6_7_PORTA   | interface |                              |
+| v6       | v6_7_PORTB   | interface |                              |
+| v6       | v6_8_PORTA   | interface |                              |
+| v6       | v6_8_PORTB   | interface |                              |
+| v6       | v6_9_PORTA   | interface |                              |
+| v6       | v6_9_PORTB   | interface |                              |
+| v6       | v6_10_PORTA  | interface |                              |
+| v6       | v6_10_PORTB  | interface |                              |
+| v6       | v6_11_PORTA  | interface |                              |
+| v6       | v6_11_PORTB  | interface |                              |
+| v6       | v6_12_PORTA  | interface |                              |
+| v6       | v6_12_PORTB  | interface |                              |
+| v6       | v6_13_PORTA  | interface |                              |
+| v6       | v6_13_PORTB  | interface |                              |
+| v6       | v6_14_PORTA  | interface |                              |
+| v6       | v6_14_PORTB  | interface |                              |
+| v6       | v6_15_PORTA  | interface |                              |
+| v6       | v6_15_PORTB  | interface |                              |
++----------+--------------+-----------+------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++-------------------------------------------------------------+-----+--------+------------+------+---------+---------+
+| Name                                                        | DSP | Pragma | Variable   | Op   | Impl    | Latency |
++-------------------------------------------------------------+-----+--------+------------+------+---------+---------+
+| + test_gesummv_32                                           | 40  |        |            |      |         |         |
+|  + test_gesummv_32_Pipeline_VITIS_LOOP_55_1_VITIS_LOOP_56_2 | 32  |        |            |      |         |         |
+|    add_ln55_1_fu_1101_p2                                    | -   |        | add_ln55_1 | add  | fabric  | 0       |
+|    add_ln55_fu_1113_p2                                      | -   |        | add_ln55   | add  | fabric  | 0       |
+|    add_ln58_fu_1158_p2                                      | -   |        | add_ln58   | add  | fabric  | 0       |
+|    fadd_32ns_32ns_32_6_no_dsp_1_U9                          | -   |        | v13        | fadd | fabric  | 5       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U2                        | 2   |        | v21        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U12                        | 3   |        | v23        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U3                        | 2   |        | v25        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U13                        | 3   |        | v27        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U4                        | 2   |        | v29        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U14                        | 3   |        | v31        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U5                        | 2   |        | v33        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U15                        | 3   |        | v35        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U6                        | 2   |        | v37        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U16                        | 3   |        | v39        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U7                        | 2   |        | v41        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U17                        | 3   |        | v43        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U8                        | 2   |        | v45        | fadd | fulldsp | 6       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U2                        | 2   |        | v53        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U12                        | 3   |        | v55        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U3                        | 2   |        | v57        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U13                        | 3   |        | v59        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U4                        | 2   |        | v61        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U14                        | 3   |        | v63        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U5                        | 2   |        | v65        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U15                        | 3   |        | v67        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U6                        | 2   |        | v69        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U16                        | 3   |        | v71        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U7                        | 2   |        | v73        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U17                        | 3   |        | v75        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U8                        | 2   |        | v77        | fadd | fulldsp | 6       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U2                        | 2   |        | v85        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U12                        | 3   |        | v87        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U3                        | 2   |        | v89        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U13                        | 3   |        | v91        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U4                        | 2   |        | v93        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U14                        | 3   |        | v95        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U5                        | 2   |        | v97        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U15                        | 3   |        | v99        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U6                        | 2   |        | v101       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U16                        | 3   |        | v103       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U7                        | 2   |        | v105       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U17                        | 3   |        | v107       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U8                        | 2   |        | v109       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U12                        | 3   |        | v115       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U2                        | 2   |        | v117       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U13                        | 3   |        | v119       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U3                        | 2   |        | v121       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U14                        | 3   |        | v123       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U4                        | 2   |        | v125       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U15                        | 3   |        | v127       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U5                        | 2   |        | v129       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U16                        | 3   |        | v131       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U6                        | 2   |        | v133       | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U17                        | 3   |        | v135       | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U7                        | 2   |        | v137       | fadd | fulldsp | 6       |
+|    add_ln56_fu_1200_p2                                      | -   |        | add_ln56   | add  | fabric  | 0       |
+|  + test_gesummv_32_Pipeline_VITIS_LOOP_221_3                | 0   |        |            |      |         |         |
+|    add_ln221_fu_642_p2                                      | -   |        | add_ln221  | add  | fabric  | 0       |
++-------------------------------------------------------------+-----+--------+------------+------+---------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Pragmas with Warnings
++----------+-------------------------------+-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Type     | Options                       | Location                                      | Messages                                                                                                                         |
++----------+-------------------------------+-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| resource | variable=v2 core=ram_s2p_bram | test_gesummv_32.cpp:42 in test_gesummv_32, v2 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                               | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v3 core=ram_s2p_bram | test_gesummv_32.cpp:45 in test_gesummv_32, v3 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                               | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v4 core=ram_s2p_bram | test_gesummv_32.cpp:48 in test_gesummv_32, v4 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                               | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v5 core=ram_s2p_bram | test_gesummv_32.cpp:50 in test_gesummv_32, v5 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                               | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v6 core=ram_s2p_bram | test_gesummv_32.cpp:53 in test_gesummv_32, v6 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                               | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
++----------+-------------------------------+-----------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+* Valid Pragma Syntax
++-----------------+------------------------------------+---------------------------------------------------+
+| Type            | Options                            | Location                                          |
++-----------------+------------------------------------+---------------------------------------------------+
+| interface       | s_axilite port=return bundle=ctrl  | test_gesummv_32.cpp:32 in test_gesummv_32, return |
+| interface       | s_axilite port=v0 bundle=ctrl      | test_gesummv_32.cpp:33 in test_gesummv_32, v0     |
+| interface       | s_axilite port=v1 bundle=ctrl      | test_gesummv_32.cpp:34 in test_gesummv_32, v1     |
+| interface       | bram port=v2                       | test_gesummv_32.cpp:35 in test_gesummv_32, v2     |
+| interface       | bram port=v3                       | test_gesummv_32.cpp:36 in test_gesummv_32, v3     |
+| interface       | bram port=v4                       | test_gesummv_32.cpp:37 in test_gesummv_32, v4     |
+| interface       | bram port=v5                       | test_gesummv_32.cpp:38 in test_gesummv_32, v5     |
+| interface       | bram port=v6                       | test_gesummv_32.cpp:39 in test_gesummv_32, v6     |
+| array_partition | variable=v2 cyclic factor=16 dim=1 | test_gesummv_32.cpp:41 in test_gesummv_32, v2     |
+| array_partition | variable=v3 cyclic factor=16 dim=1 | test_gesummv_32.cpp:44 in test_gesummv_32, v3     |
+| array_partition | variable=v4 cyclic factor=16 dim=1 | test_gesummv_32.cpp:47 in test_gesummv_32, v4     |
+| array_partition | variable=v6 cyclic factor=16 dim=1 | test_gesummv_32.cpp:52 in test_gesummv_32, v6     |
+| pipeline        | II=1                               | test_gesummv_32.cpp:57 in test_gesummv_32         |
+| pipeline        | II=1                               | test_gesummv_32.cpp:222 in test_gesummv_32        |
++-----------------+------------------------------------+---------------------------------------------------+
+
+

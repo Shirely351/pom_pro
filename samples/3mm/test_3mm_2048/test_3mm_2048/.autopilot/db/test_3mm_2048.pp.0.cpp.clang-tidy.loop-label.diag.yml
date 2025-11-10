@@ -1,0 +1,1474 @@
+---
+MainSourceFile:  /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+Diagnostics:     
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1211_1:  '
+    FileOffset:      1211
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_base.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          527352
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1211_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_676_1:  '
+    FileOffset:      676
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          734592
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_676_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_690_1:  '
+    FileOffset:      690
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          735031
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_690_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_704_1:  '
+    FileOffset:      704
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_int_ref.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          735471
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_704_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1245_1:  '
+    FileOffset:      1245
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/ap_fixed_base.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          997476
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1245_1: '
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      117
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      118
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      119
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      120
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      121
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      151
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      152
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      153
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      154
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      155
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      156
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      157
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      158
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      159
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      160
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      210
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      211
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      212
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      239
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      240
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      241
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      242
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      243
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      244
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      280
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Invalid Directive: for current device, ROM_1P + LUTRAM is invalid combination for BIND_STORAGE''s option ''type + impl'''
+    FileOffset:      281
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hotbm_apfixed.h
+    Replacements:    
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_87_1:  '
+    FileOffset:      87
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1555356
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_87_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_143_1:  '
+    FileOffset:      143
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1556175
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_143_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_315_1:  '
+    FileOffset:      315
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1558827
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_315_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_475_1:  '
+    FileOffset:      475
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1561555
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_475_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_655_1:  '
+    FileOffset:      655
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1564716
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_655_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_659_2:  '
+    FileOffset:      659
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1564797
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_659_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_769_1:  '
+    FileOffset:      769
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1567106
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_769_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_866_1:  '
+    FileOffset:      866
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1568605
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_866_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_885_2:  '
+    FileOffset:      885
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1568835
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_885_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1199_1:  '
+    FileOffset:      1199
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1575027
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1199_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1282_1:  '
+    FileOffset:      1282
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cordic_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1576630
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1282_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_94_1:  '
+    FileOffset:      94
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1584496
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_94_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_100_2:  '
+    FileOffset:      100
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1584646
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_100_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_104_3:  '
+    FileOffset:      104
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1584743
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_104_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_171_4:  '
+    FileOffset:      171
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1586608
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_171_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_177_5:  '
+    FileOffset:      177
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1586758
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_177_5: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_181_6:  '
+    FileOffset:      181
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1586855
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_181_6: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_196_7:  '
+    FileOffset:      196
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1587236
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_196_7: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_204_8:  '
+    FileOffset:      204
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1587467
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_204_8: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_269_9:  '
+    FileOffset:      269
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1590914
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_269_9: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_275_10:  '
+    FileOffset:      275
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1591066
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_275_10: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_279_11:  '
+    FileOffset:      279
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1591166
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_279_11: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_294_12:  '
+    FileOffset:      294
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1591548
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_294_12: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_302_13:  '
+    FileOffset:      302
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1591786
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_302_13: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_531_14:  '
+    FileOffset:      531
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1607341
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_531_14: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_537_15:  '
+    FileOffset:      537
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1607493
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_537_15: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_541_16:  '
+    FileOffset:      541
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1607592
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_541_16: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_551_17:  '
+    FileOffset:      551
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1607769
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_551_17: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_555_18:  '
+    FileOffset:      555
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1607867
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_555_18: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_565_19:  '
+    FileOffset:      565
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1608152
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_565_19: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_573_20:  '
+    FileOffset:      573
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1608407
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_573_20: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_934_21:  '
+    FileOffset:      934
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1640646
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_934_21: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_940_22:  '
+    FileOffset:      940
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1640798
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_940_22: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_944_23:  '
+    FileOffset:      944
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1640898
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_944_23: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1060_1:  '
+    FileOffset:      1060
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1643574
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1060_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1066_2:  '
+    FileOffset:      1066
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1643724
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1066_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1070_3:  '
+    FileOffset:      1070
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1643822
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1070_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1157_4:  '
+    FileOffset:      1157
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1647292
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1157_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1163_5:  '
+    FileOffset:      1163
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1647443
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1163_5: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1167_6:  '
+    FileOffset:      1167
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1647542
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1167_6: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1186_7:  '
+    FileOffset:      1186
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1648022
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1186_7: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1193_8:  '
+    FileOffset:      1193
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1648264
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1193_8: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1309_9:  '
+    FileOffset:      1309
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1653836
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1309_9: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1315_10:  '
+    FileOffset:      1315
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1653988
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1315_10: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1319_11:  '
+    FileOffset:      1319
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1654087
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1319_11: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1339_12:  '
+    FileOffset:      1339
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1654596
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1339_12: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1346_13:  '
+    FileOffset:      1346
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1654845
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1346_13: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1608_14:  '
+    FileOffset:      1608
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1672202
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1608_14: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1614_15:  '
+    FileOffset:      1614
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1672354
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1614_15: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1618_16:  '
+    FileOffset:      1618
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1672454
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1618_16: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1642_17:  '
+    FileOffset:      1642
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1672928
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1642_17: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1649_18:  '
+    FileOffset:      1649
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1673195
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1649_18: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2079_19:  '
+    FileOffset:      2079
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1711766
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2079_19: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2085_20:  '
+    FileOffset:      2085
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1711918
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2085_20: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2089_21:  '
+    FileOffset:      2089
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1712018
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2089_21: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2219_1:  '
+    FileOffset:      2219
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1714638
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2219_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2226_2:  '
+    FileOffset:      2226
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1714801
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2226_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2230_3:  '
+    FileOffset:      2230
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1714893
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2230_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2277_4:  '
+    FileOffset:      2277
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1716502
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2277_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2284_5:  '
+    FileOffset:      2284
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1716664
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2284_5: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2288_6:  '
+    FileOffset:      2288
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1716756
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2288_6: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2306_7:  '
+    FileOffset:      2306
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1717129
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2306_7: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2361_8:  '
+    FileOffset:      2361
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1719595
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2361_8: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2368_9:  '
+    FileOffset:      2368
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1719762
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2368_9: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2372_10:  '
+    FileOffset:      2372
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1719855
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2372_10: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2390_11:  '
+    FileOffset:      2390
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1720236
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2390_11: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2479_12:  '
+    FileOffset:      2479
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1725677
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2479_12: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2486_13:  '
+    FileOffset:      2486
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1725845
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2486_13: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2490_14:  '
+    FileOffset:      2490
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1725939
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2490_14: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2500_15:  '
+    FileOffset:      2500
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1726110
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2500_15: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2504_16:  '
+    FileOffset:      2504
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1726201
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2504_16: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2515_17:  '
+    FileOffset:      2515
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1726483
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2515_17: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2523_18:  '
+    FileOffset:      2523
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1726670
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2523_18: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2848_19:  '
+    FileOffset:      2848
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1761140
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2848_19: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2855_20:  '
+    FileOffset:      2855
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1761308
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2855_20: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2859_21:  '
+    FileOffset:      2859
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1761402
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2859_21: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2947_1:  '
+    FileOffset:      2947
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1763204
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2947_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2954_2:  '
+    FileOffset:      2954
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1763312
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2954_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2958_3:  '
+    FileOffset:      2958
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1763383
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2958_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_2973_4:  '
+    FileOffset:      2973
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1763671
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_2973_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3005_5:  '
+    FileOffset:      3005
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1764885
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3005_5: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3012_6:  '
+    FileOffset:      3012
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1764996
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3012_6: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3016_7:  '
+    FileOffset:      3016
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1765069
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3016_7: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3031_8:  '
+    FileOffset:      3031
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1765364
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3031_8: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3081_9:  '
+    FileOffset:      3081
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1768697
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3081_9: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3088_10:  '
+    FileOffset:      3088
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1768808
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3088_10: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3092_11:  '
+    FileOffset:      3092
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1768881
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3092_11: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3107_12:  '
+    FileOffset:      3107
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1769177
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3107_12: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3244_13:  '
+    FileOffset:      3244
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1788489
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3244_13: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3251_14:  '
+    FileOffset:      3251
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1788603
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3251_14: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3255_15:  '
+    FileOffset:      3255
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1788678
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3255_15: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3270_16:  '
+    FileOffset:      3270
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1788965
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3270_16: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3430_17:  '
+    FileOffset:      3430
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1814575
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3430_17: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3437_18:  '
+    FileOffset:      3437
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1814689
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3437_18: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_3441_19:  '
+    FileOffset:      3441
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_exp_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1814766
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_3441_19: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_729_1:  '
+    FileOffset:      729
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_log_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1848857
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_729_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_947_1:  '
+    FileOffset:      947
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_log_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1857246
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_947_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_1371_1:  '
+    FileOffset:      1371
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_log_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1876225
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_1371_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_266_1:  '
+    FileOffset:      266
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_sqrt_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1891196
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_266_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_294_2:  '
+    FileOffset:      294
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_sqrt_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1891717
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_294_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_74_1:  '
+    FileOffset:      74
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1907777
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_74_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_135_2:  '
+    FileOffset:      135
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1908932
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_135_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_149_3:  '
+    FileOffset:      149
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1909241
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_149_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_179_4:  '
+    FileOffset:      179
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1909751
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_179_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_307_1:  '
+    FileOffset:      307
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1911675
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_307_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_327_2:  '
+    FileOffset:      327
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1912040
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_327_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_341_3:  '
+    FileOffset:      341
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1912348
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_341_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_459_1:  '
+    FileOffset:      459
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1914181
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_459_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_473_2:  '
+    FileOffset:      473
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_pow_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1914506
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_473_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_59_1:  '
+    FileOffset:      59
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_diff_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1917272
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_59_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_209_1:  '
+    FileOffset:      209
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_diff_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1920180
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_209_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_274_1:  '
+    FileOffset:      274
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_diff_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1921472
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_274_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_42_1:  '
+    FileOffset:      42
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1932650
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_42_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_53_1:  '
+    FileOffset:      53
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1932825
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_53_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_64_1:  '
+    FileOffset:      64
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1932986
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_64_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_75_1:  '
+    FileOffset:      75
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1933148
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_75_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_86_1:  '
+    FileOffset:      86
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1933322
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_86_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_97_1:  '
+    FileOffset:      97
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1933497
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_97_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_108_1:  '
+    FileOffset:      108
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1933658
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_108_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_119_1:  '
+    FileOffset:      119
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_all_any_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          1933820
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_119_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_23_1:  '
+    FileOffset:      23
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_mad_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2005159
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_23_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_66_1:  '
+    FileOffset:      66
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_cbrt_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2006921
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_66_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_75_1:  '
+    FileOffset:      75
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hypot_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2011474
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_75_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_107_2:  '
+    FileOffset:      107
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hypot_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2012211
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_107_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_195_3:  '
+    FileOffset:      195
+    FilePath:        /home/yuyes/Xilinx/Vitis_HLS/2022.2/common/technology/autopilot/hls_hypot_apfixed.h
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2013901
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_195_3: '
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      44
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      47
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      50
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      53
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      57
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      61
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  clang-diagnostic-error
+    Message:         'Resource with core_name: ram_s2p_bram pragma is ignored, because this core doesn''t exist at all '
+    FileOffset:      65
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_67_1:  '
+    FileOffset:      67
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2082462
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_67_1: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_68_2:  '
+    FileOffset:      68
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2082504
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_68_2: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_104_3:  '
+    FileOffset:      104
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2084007
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_104_3: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_105_4:  '
+    FileOffset:      105
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2084053
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_105_4: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_106_5:  '
+    FileOffset:      106
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2084100
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_106_5: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_251_6:  '
+    FileOffset:      251
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2090122
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_251_6: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_252_7:  '
+    FileOffset:      252
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2090170
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_252_7: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_288_8:  '
+    FileOffset:      288
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2091807
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_288_8: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_289_9:  '
+    FileOffset:      289
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2091856
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_289_9: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_290_10:  '
+    FileOffset:      290
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2091906
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_290_10: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_435_11:  '
+    FileOffset:      435
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2098309
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_435_11: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_436_12:  '
+    FileOffset:      436
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2098357
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_436_12: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_472_13:  '
+    FileOffset:      472
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2099994
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_472_13: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_473_14:  '
+    FileOffset:      473
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2100043
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_473_14: '
+  - DiagnosticName:  xilinx-label-all-loops
+    Message:         'Added loop label VITIS_LOOP_474_15:  '
+    FileOffset:      474
+    FilePath:        test_3mm_2048.cpp
+    Replacements:    
+      - FilePath:        /home/yuyes/workdir/pom/samples/3mm/test_3mm_2048/test_3mm_2048/.autopilot/db/test_3mm_2048.pp.0.cpp
+        Offset:          2100093
+        Length:          0
+        ReplacementText: 'VITIS_LOOP_474_15: '
+...

@@ -1,0 +1,18 @@
+{"sourceFile": [{
+      "name": "",
+      "directive": [{
+          "functionName": "test_2mm_2048",
+          "label": "",
+          "functionLabel": "",
+          "id": "1",
+          "sourceFile": "\/home\/yuyes\/workdir\/pom\/samples\/2mm\/script_2048.tcl",
+          "sourceLine": "7",
+          "pragma": {
+            "name": "TOP",
+            "option": [{
+                "name": "name",
+                "value": "test_2mm_2048"
+              }]
+          }
+        }]
+    }]}

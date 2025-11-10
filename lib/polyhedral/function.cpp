@@ -969,6 +969,7 @@ void polyfp::function::auto_DSE(std::string path)
         comp->final_loop_level_names = comp->final_loop_level_names_reserved;
         if(comp->is_optimized == true)
         {
+            if (comp->II <= 0) comp->II = std::max(1, comp->minII);
             if(comp->final_strategy.size()!=0)
             {
                 comp->apply_opt_strategy(comp->final_strategy);
@@ -985,13 +986,13 @@ void polyfp::function::auto_DSE(std::string path)
                 }
                 if(size >= 3)
                 {
-                    comp->pipeline(iterator_map[size-3+2],1);
+                    comp->pipeline(iterator_map[size-3+2],comp->II);
                 }else if(size == 2)
                 {
-                    comp->pipeline(iterator_map[1],1);
+                    comp->pipeline(iterator_map[1],comp->II);
                 }else if(size == 1)
                 {
-                    comp->pipeline(iterator_map[0],1);
+                    comp->pipeline(iterator_map[0],comp->II);
                 }
             }
         }
@@ -1007,19 +1008,22 @@ void polyfp::function::auto_DSE(std::string path)
             }
             if(size >= 3)
             {
-                comp->pipeline(iterator_map[size-3+2],1);
+                comp->pipeline(iterator_map[size-3+2],comp->II);
             }
             else if(size == 2)
             {
-                comp->pipeline(iterator_map[1],1);
+                comp->pipeline(iterator_map[1],comp->II);
             }
             if(size == 1)
             {
-                comp->pipeline(iterator_map[0],1);
+                comp->pipeline(iterator_map[0],comp->II);
             }
         }
     }
     this->dump_schedule(path);
+    std::cout<<"Auto DSE finished!(syy test)"<<std::endl;
+    std::cout<<"Best latency: "<<this->best_latency<<std::endl;
+    std::cout<<"Best DSP usage: "<<this->best_dsp_usage<<std::endl;
 }
 void polyfp::function::auto_DSE_loop_transformation()
 {
@@ -1240,7 +1244,11 @@ void polyfp::function::dump_schedule(std::string path)
     
     SmallVector<int64_t, 8> factors;
     std::string errorMessage;
+    #ifdef DEBUG
+    std::string pwd = std::filesystem::current_path();
+    #else
     std::string pwd = std::filesystem::current_path().parent_path();
+    #endif
     auto configFile = mlir::openInputFile(pwd+"/samples/config.json", &errorMessage);
     if (!configFile) 
     {
@@ -1296,7 +1304,7 @@ void polyfp::function::dump_schedule(std::string path)
     std::string path1 = path+s+".mlir";
     llvm::raw_fd_ostream os(path1, error);
     os << *module;
-    // std::cout<<"Note: "+s+".cpp has been generated!"<<std::endl;
+    std::cout<<"Note: "+s+".cpp has been generated!"<<std::endl;
 
 }
 void polyfp::function::evaluate_func()
@@ -1541,7 +1549,7 @@ void polyfp::function::evaluate_func()
             }    
         }
         else{
-            // std::cout<< comp->get_name()+"evaluation initialization failed"<<std::endl;
+            std::cout<< comp->get_name()+"evaluation initialization failed"<<std::endl;
         }
     }
 
@@ -1630,7 +1638,11 @@ void polyfp::function::evaluate_func()
     mlir::scalehls::applyAutoArrayPartition(manager.get_funcs()[0]);
     SmallVector<int64_t, 8> factors;
     std::string errorMessage;
+    #ifdef DEBUG
+    std::string pwd = std::filesystem::current_path();
+    #else
     std::string pwd = std::filesystem::current_path().parent_path();
+    #endif
     auto configFile = mlir::openInputFile(pwd+"/samples/config.json", &errorMessage);
     if (!configFile) {
       llvm::errs() << errorMessage << "\n";
@@ -1674,12 +1686,13 @@ void polyfp::function::evaluate_func()
     {
         mlir::scalehls::ScaleHLSEstimator(latencyMap, dspUsageMap, true).estimateLoop(manager.ops[loop],manager.funcs[0]);
         // manager.getModule().dump(); 
+        std::cout<<"=======================this is new iteration======================"<<std::endl;
         auto latency = mlir::scalehls::getTiming(manager.ops[loop]).getLatency();
-        // std::cout<<"latency: "+std::to_string(latency)<<std::endl;
+        std::cout<<"latency: "+std::to_string(latency)<<std::endl;
         auto dspNum = mlir::scalehls::getResource(manager.ops[loop]).getDsp();
-        // std::cout<<"dsp: "+std::to_string(dspNum)<<std::endl;
+        std::cout<<"dsp: "+std::to_string(dspNum)<<std::endl;
         auto minII = mlir::scalehls::getLoopInfo(manager.ops[loop]).getMinII();
-        // std::cout<<"minII: "+std::to_string(minII)<<std::endl;
+        std::cout<<"minII: "+std::to_string(minII)<<std::endl;
         this->leader_computations[loc]->latency = latency;
         this->leader_computations[loc]->dsp = dspNum;
         this->leader_computations[loc]->minII = minII;
@@ -1702,7 +1715,7 @@ void polyfp::function::evaluate_func()
         }
         // total_dsp+=dspNum;
         total_latency+=latency;
-        // std::cout<<"total_latency: "+std::to_string(total_latency)<<std::endl;
+        std::cout<<"total_latency: "+std::to_string(total_latency)<<std::endl;
         this->latency_map[loc] = latency;
         this->resource_map[loc] = dspNum;
         loc+=1;  
@@ -1712,18 +1725,1770 @@ void polyfp::function::evaluate_func()
    
     this->dsp_usage = total_dsp;
     this->current_latency = total_latency;
-    // std::cout<<"current latency"+std::to_string(total_latency)<<std::endl;
-    // if(this->dsp_usage>this->dsp_max){
-    //     this->new_strategy = false;
-    // }
+    std::cout<<"current latency"+std::to_string(total_latency)<<std::endl;
+    if(this->dsp_usage>this->dsp_max){
+        this->new_strategy = false;
+    }
     // manager.getModule().dump(); 
 }
+//@syy
+static void write_dse_record(std::ofstream& csv_file,
+                             const std::vector<int>& tile_size,
+                             int ii,
+                             long cycle,
+                             int dsp,
+                             int minii) {
+    for (size_t i = 0; i < tile_size.size(); ++i) {
+        csv_file << tile_size[i] << ",";
+    }
+    csv_file << ii << "," << cycle << "," << dsp << "," << minii << "\n";
+    csv_file.flush();  // 立即写入
+}
+static void generate3DTileCandidates(const std::vector<int> &dim_ranges,
+                                     std::vector<std::vector<int>> &tilesize_list,
+                                     int product_limit = 128,
+                                     int max_per_dim = 128)
+{
+    tilesize_list.clear();
+    // 基础候选集合（可按需扩展）
+    std::vector<int> base = {1,2,4,8,16,32,64,128};
+    // 也可加入一些非 2 次幂（如需要）： // base.insert(base.end(), {3,5,6,10});
 
+    // 针对每个维度裁剪候选值到其范围
+    std::vector<int> cand0, cand1, cand2;
+    for (int v: base) if (v <= dim_ranges[0] && v <= max_per_dim) cand0.push_back(v);
+    for (int v: base) if (v <= dim_ranges[1] && v <= max_per_dim) cand1.push_back(v);
+    for (int v: base) if (v <= dim_ranges[2] && v <= max_per_dim) cand2.push_back(v);
+
+    if (cand0.empty()) cand0.push_back(1);
+    if (cand1.empty()) cand1.push_back(1);
+    if (cand2.empty()) cand2.push_back(1);
+
+    for (int a: cand0) {
+        if (a != 1) continue;       // 仅保留 a==1
+        for (int b: cand1) {
+            for (int c: cand2) {
+                if (b == 1 && c == 1) continue; // (a 已经是 1) 排除全1
+                long prod = 1L * a * b * c;
+                if (prod <= product_limit) tilesize_list.push_back({a,b,c});
+            }
+        }
+    }
+
+    // 去重 & 稳定排序（可选）
+    std::sort(tilesize_list.begin(), tilesize_list.end());
+    tilesize_list.erase(std::unique(tilesize_list.begin(),
+                                    tilesize_list.end()),
+                        tilesize_list.end());
+}
+static void generate2DTileCandidates(const std::vector<int> &dim_ranges,
+                                     std::vector<std::vector<int>> &tilesize_list,
+                                     int product_limit = 128,
+                                     int max_per_dim = 128)
+{
+    tilesize_list.clear();
+    std::vector<int> base = {1,2,4,8,16,32,64,128};
+    std::vector<int> cand0, cand1;
+    for (int v: base) if (v <= dim_ranges[0] && v <= max_per_dim) cand0.push_back(v);
+    for (int v: base) if (v <= dim_ranges[1] && v <= max_per_dim) cand1.push_back(v);
+    if (cand0.empty()) cand0.push_back(1);
+    if (cand1.empty()) cand1.push_back(1);
+    for (int a: cand0) {
+        for (int b: cand1) {
+            if (a == 1 && b == 1) continue;
+            if ((b== dim_ranges[1]) ||
+                (a == dim_ranges[0])) {
+                continue;
+            }
+            long prod = 1L * a * b;
+            if (prod <= product_limit) {
+                tilesize_list.push_back({a,b});
+            }
+        }
+    }
+    std::sort(tilesize_list.begin(), tilesize_list.end());
+    tilesize_list.erase(std::unique(tilesize_list.begin(),
+                                    tilesize_list.end()),
+                        tilesize_list.end());
+}
+// void polyfp::function::auto_DSE_tile_size(polyfp::compute *comp, int factor, std::string path)
+// {
+//     std::cout<<"Currently optimized compute: "<<comp->get_name()<<std::endl;
+//     if (!path.empty() && path.back() != '/') {
+//         path += "/";
+//     }
+    
+//     // 确保目录存在
+//     std::filesystem::create_directories(path);
+//     int scale;
+//     //TODO components'domain is different from the leader's
+//     comp->set_schedule(comp->original_schedule);
+//     comp->set_loop_level_names(comp->original_loop_level_name);
+//     comp->directive_map.clear();
+//     comp->is_unrolled = false;
+//     comp->unroll_factor.clear();
+//     comp->unroll_dimension.clear();
+//     comp->tile_map.clear();
+//     comp->tile_size_map.clear();
+//     comp->access_map.clear();
+//     auto iterators = comp->get_iteration_variables();
+//     std::vector<polyfp::var> temp_iterators;
+//     int temp_size = iterators.size();
+//     //@syy 
+//     auto dump_row_3d = [&](std::ofstream& f,
+//                            const std::vector<int>& ts,
+//                            int ii, long cycle, int dsp, int minii) {
+//         f << ts[0] << "," << ts[1] << "," << ts[2] << ","
+//           << ii << "," << cycle << "," << dsp << "," << minii << "\n";
+//         f.flush(); // 保障中途崩了也尽可能留下记录
+//     };
+
+//     auto dump_row_2d = [&](std::ofstream& f,
+//                            const std::vector<int>& ts,
+//                            int ii, long cycle, int dsp, int minii) {
+//         f << ts[0] << "," << ts[1] << ","
+//           << ii << "," << cycle << "," << dsp << "," << minii << "\n";
+//         f.flush();
+//     };
+    
+//     if(temp_size>3)
+//     {
+//         int border = temp_size-3;
+//         for(auto &iter: iterators)
+//         {
+//             int loc = comp->get_loop_level_number_from_dimension_name(iter.get_name());
+//             if(loc>=border)
+//             {
+//                 temp_iterators.push_back(iter);
+//             }
+//         }
+//         iterators.clear();
+//         iterators=temp_iterators;
+//     }
+
+//     std::vector<int> dim_ranges;
+//     std::map<int, std::vector<int>> dim_tile_sizes;
+//     bool not_2_pow = false;
+//     int count = 0;
+//     for(auto &iter: iterators)
+//     {
+//         int lower = stoi(iter.get_lower().to_str());
+//         int upper = stoi(iter.get_upper().to_str());
+//         int range = upper-lower;
+//         dim_ranges.push_back(range);
+//         std::vector<int> temp;
+//         //矩阵大小非32的指数
+//         if(range%32 != 0)
+//         {
+//             not_2_pow = true;
+//             for(int i=2; i<range; i++)
+//             {
+//                 if(range % i == 0)
+//                 {
+//                     if(i == 2)
+//                     {
+//                         temp.push_back(i);   
+//                     }
+//                     else if(i == 3||i==5 ||i==7)
+//                     {
+//                         temp.push_back(i);   
+//                     }
+//                 }
+
+//             }
+//             if(temp.size()==0)
+//             {
+//                 temp.push_back(1);  
+//             }
+//         }
+//         else
+//         {
+//             temp.push_back(1);   
+//         }
+//         dim_tile_sizes.insert(std::make_pair(count,temp));
+//         count++;
+//     }
+//     //TODO: SKEW MAP
+//     std::map<int,polyfp::var> iterator_map;
+//     int size = iterators.size();
+
+//     scale = 8*pow(2,factor-1); //@syy空间规模
+
+//     for(auto &iter: iterators)
+//     {
+//         int loc = comp->get_loop_level_number_from_dimension_name(iter.get_name());
+//         iterator_map[loc] = iter;
+//     }
+
+//     if(comp->is_optimized == true )
+//     {
+//         if(comp->current_factor < comp->largest_factor && comp->opt_finished == false)
+//         {
+//             comp->current_factor+=1;
+//             factor = comp->current_factor;
+//             scale = 16*pow(2,comp->current_factor-1);
+//         }
+//         else{
+//             this->finish_list.push_back(comp->get_name());
+//             if(comp->current_strategy.size()!=0)
+//             {
+//                 comp->final_strategy = comp->current_strategy;
+//             }else{
+//                 // TODO
+//                 // std::cout<<"no final strategy"<<std::endl;       
+//             }
+//             // 切换到路径上下一个未完成的 leader
+//             if(this->leader_computations.size()!=1)
+//             {
+//                 int path_index = this->get_longest_path();
+//                 std::vector<long> current_longest_path = paths[path_index];
+//                 std::vector<long> current_longest_path_latency;
+//                 std::map<long, int> current_longest_map;
+//                 int num = current_longest_path.size();
+//                 //syy todo
+//                 for(int i=0; i<num; i++)
+//                 {
+//                     long temp_latency = this->latency_map[current_longest_path[i]];
+//                     current_longest_path_latency.push_back(temp_latency);
+//                     current_longest_map.insert(std::make_pair(temp_latency,current_longest_path[i]));
+//                 }
+//                 std::sort(current_longest_path_latency.begin(),current_longest_path_latency.end(),std::greater<long>());
+                
+                
+//                 for(int i=0; i<num; i++)
+//                 {
+//                     int node_index = current_longest_path[i]; 
+//                     int final_index = this->path_map[path_index][node_index];
+//                     std::map<polyfp::compute *,int>::iterator it;
+//                     polyfp::compute *comp;
+//                     for( it= this->leader_computation_index.begin();it!=this->leader_computation_index.end();it++) 
+//                     {
+//                         if(it->second==final_index)
+//                         {
+//                             comp = it->first;
+//                             std::string name = comp->get_name();
+//                             if (std::find(finish_list.begin(), finish_list.end(), name) == finish_list.end())
+//                             {
+//                                 auto_DSE_tile_size(comp, 1,path);
+//                                 return;
+//                             }   
+//                         }
+                            
+//                     } 
+//                 } 
+//             }
+//             return;
+//         }
+
+//     }
+
+//     else
+//     {
+//         comp->is_optimized = true;
+//         comp->current_factor = factor;
+//     }
+
+//     int factor1=1;
+//     int factor2=1;
+//     int factor3=1;
+
+//     std::vector<std::vector<int>> tilesize_list;
+//     std::vector<int> current_design;
+//     std::vector<int> final_design;
+//     int best_ii_current = -1;
+//     int best_ii_final   = -1;
+//     // std::vector<int> final_strategy;
+//     // std::vector<int> current_strategy;
+
+//     // Print header row.
+//     std::string s = this->get_name();
+//     std::string path1 = path+s+".csv";
+//     std::ifstream ifs(path1,std::ios::in);
+//     char ch;
+//     ifs>>ch;
+//     std::ofstream myfile;
+//     myfile.open(path1,std::ios::app);
+//     if (ifs.eof()) {
+//         for (unsigned i = 0; i < (unsigned)size; ++i) myfile << "l" << i << ",";
+//         myfile << "ii,cycle,dsp,minii\n";
+//     }
+ 
+//     if(size >= 3)
+//     {
+//         // TODO, here 4 is desided by the scale
+        
+//         if(not_2_pow == false)
+//         {
+//             //config: 5,3
+//             // for (int i = 0; ; i++) {
+//             //     factor1 = (int)std::pow(2, i);
+//             //     if (factor1 > scale) break;                  // 防溢出
+//             //     for (int j = 0; ; j++) {
+//             //         factor2 = (int)std::pow(2, j);
+//             //         if ((long long)factor1 * factor2 > scale) break;  // 防止 factor3 变 0
+//             //         factor3 = scale / (factor1 * factor2);
+//             //         if (factor3 <= 0) break;                 // 双保险
+//             //         tilesize_list.push_back({factor1, factor2, factor3});
+//             //         if (j >= 5 + factor - i) break;          // 保留原来的“宽度”，也可去掉
+//             //     }
+//             //     if (i >= 7 + factor) break;
+                
+//             // }
+//             // const int BASE = 256;  // 目标解空间“块内乘积”上限
+//             // auto pow2 = [](int e){ return 1 << e; };
+//             // for (int a = 0; pow2(a) <= BASE; ++a) {
+//             //   int f1 = pow2(a);
+//             //   for (int b = 0; f1 * pow2(b) <= BASE; ++b) {
+//             //     int f2 = pow2(b);
+//             //     for (int c = 0; f1 * f2 * pow2(c) <= BASE; ++c) {
+//             //       int f3 = pow2(c);
+//             //       // 过滤掉 trivially 0 的（不会出现），以及 <=0 的
+//             //       tilesize_list.push_back({f1, f2, f3});
+//             //     }
+//             //   }
+//             // }
+//              tilesize_list.clear();
+//                 generate3DTileCandidates(dim_ranges, tilesize_list, /*product_limit=*/128, /*max_per_dim=*/128);
+//                 std::cout << "[DSE] 3D 候选数量(约束:prod<=128,≠1,1,1): "
+//               << tilesize_list.size() << std::endl;
+//         }else
+//         {
+//             std::vector<int> dim0 = dim_tile_sizes[0];
+//             std::vector<int> dim1 = dim_tile_sizes[1];
+//             std::vector<int> dim2 = dim_tile_sizes[2];
+//             if(dim0.size()==0)
+//             {
+//                 dim0.push_back(1);
+//             }
+//             if(dim1.size()==0)
+//             {
+//                 dim1.push_back(1);
+//             }
+//             for(auto &size0: dim0)
+//             {
+//                 for(auto &size1: dim1)
+//                 {
+//                     for(auto &size2: dim2)
+//                     {
+//                         tilesize_list.push_back({size0,size1,size2});
+//                         std::cout<<"tile factor: ";
+//                         std::cout<<size0;
+//                         std::cout<<"; ";
+//                         std::cout<<size1;
+//                         std::cout<<"; ";
+//                         std::cout<<size2<<std::endl;
+//                     }
+//                 }
+//             }
+//             comp->current_factor=3;
+
+//         }
+
+//         bool larger_factor = true;
+//         if(larger_factor == true)
+//         {
+//             std::vector<int> best_tile_overall;      // 全局最优 tile
+//             int best_ii_overall = -1;                // 全局最优 II
+//             long best_latency_overall = LONG_MAX;    // 全局最优延迟
+    
+//             for(auto &tile_size: tilesize_list)
+//             {
+
+//                 comp->set_schedule(comp->original_schedule);
+//                 comp->set_loop_level_names(comp->original_loop_level_name);
+//                 comp->directive_map.clear();
+//                 comp->is_unrolled = false;
+//                 comp->unroll_factor.clear();
+//                 comp->unroll_dimension.clear();
+//                 comp->tile_map.clear();
+//                 comp->tile_size_map.clear();
+//                 comp->access_map.clear();
+//                 comp->opt_finished = false;
+
+//                 var i0("i0"), j0("j0"),k0("k0"), i1("i1"), j1("j1"),k1("k1");
+//                 int temp_index = comp->get_iteration_variables().size() - 3;
+//                 int r0 = stoi(iterator_map[temp_index + 0].get_upper().to_str()) - stoi(iterator_map[temp_index + 0].get_lower().to_str());
+//                 int r1 = stoi(iterator_map[temp_index + 1].get_upper().to_str()) - stoi(iterator_map[temp_index + 1].get_lower().to_str());
+//                 int r2 = stoi(iterator_map[temp_index + 2].get_upper().to_str()) - stoi(iterator_map[temp_index + 2].get_lower().to_str());
+//                 if (tile_size[0] <= 256 && tile_size[1] <= 256 && tile_size[2] <= 256
+//                  && tile_size[0] <= r0 && tile_size[1] <= r1 && tile_size[2] <= r2) {
+//                 // if(tile_size[0]<=16 && tile_size[1]<32 && tile_size[2]<32){
+//                 // if(tile_size[0]<2 && tile_size[1]<4 && tile_size[2]<4){
+//                     int temp_index = comp->get_iteration_variables().size()-3;
+//                     // std::cout<<iterator_map[0].get_name()<<std::endl;
+//                     // std::cout<<iterator_map[1].get_name()<<std::endl;
+//                     // std::cout<<iterator_map[2].get_name()<<std::endl;
+//                     if(tile_size[2]==1 && tile_size[1]==1 && tile_size[0]==1)
+//                     {
+                        
+//                     }else{
+//                         comp->tile(iterator_map[temp_index],iterator_map[temp_index+1],iterator_map[temp_index+2],tile_size[0],tile_size[1],tile_size[2],i0, j0, k0, i1, j1, k1);
+//                     }
+                    
+//                     if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]!=1){
+//                         comp->pipeline(k0,1);
+//                         comp->unroll(k1,-1);
+//                         comp->unroll(j1,-1);
+//                         comp->unroll(i1,-1);
+//                     }
+//                     if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]==1){
+//                         comp->pipeline(k0,1);
+//                         comp->unroll(k1,-1);
+//                         comp->unroll(j1,-1);
+//                     }
+//                     if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]!=1){
+//                         comp->pipeline(k0,1);
+//                         comp->unroll(k1,-1);
+//                         comp->unroll(i1,-1);
+//                     }
+//                     if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]==1){
+//                         comp->pipeline(k0,1);
+//                         comp->unroll(k1,-1);
+//                         // comp->unroll(i1,-1);
+//                     }
+//                     if(tile_size[2]==1 && tile_size[1]==1 && tile_size[0]==1){
+//                         int lower = stoi(iterator_map[temp_index+2].get_lower().to_str());
+//                         int upper = stoi(iterator_map[temp_index+2].get_upper().to_str());
+//                         int range = upper-lower;
+//                         if(range<=7){
+//                             comp->pipeline(iterator_map[temp_index+1],1);
+//                             comp->unroll(iterator_map[temp_index+2],-1);
+//                         }
+//                     }
+//                     if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1){
+//                         int lower = stoi(iterator_map[temp_index+2].get_lower().to_str());
+//                         int upper = stoi(iterator_map[temp_index+2].get_upper().to_str());
+//                         int range = upper-lower;
+//                         if(range<=6){
+//                             comp->pipeline(j0,1);
+//                             comp->unroll(j1,-1);
+//                             comp->unroll(i1,-1);
+//                             comp->unroll(iterator_map[temp_index+2],-1);
+//                         }else{
+//                             comp->pipeline(iterator_map[temp_index+2],1);
+//                             comp->unroll(j1,-1);
+//                             comp->unroll(i1,-1);
+//                         }
+                        
+//                     }
+//                     for(auto &part:comp->components){
+//                         part.first->set_schedule(part.first->original_schedule);
+//                         part.first->set_loop_level_names(part.first->original_loop_level_name);
+//                         part.first->tile(iterator_map[temp_index+0],iterator_map[temp_index+1],iterator_map[temp_index+2],tile_size[0],tile_size[1],tile_size[2],i0, j0, k0, i1, j1, k1);
+//                         if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1){
+//                             if(part.first->after_level == 2){
+//                                 part.first->after(comp,j1);
+//                             }else if(part.first->after_level == 0){
+//                                 part.first->after(comp,i0);
+//                                 part.first->pipeline(iterator_map[temp_index+2],1);   
+//                             }
+//                             // part.first->after(comp,j1);
+//                         }else{
+//                             if(part.first->after_level == 2){
+//                                 part.first->after(comp,k1);
+//                             }else if(part.first->after_level == 0){
+//                                 part.first->after(comp,iterator_map[temp_index+0]);
+//                                 part.first->pipeline(iterator_map[temp_index+2],1);   
+//                                 //TODO
+//                                 part.first->unroll(k1,-1);
+//                                 part.first->unroll(j1,-1);
+//                             }
+//                             // part.first->after(comp,k1);
+//                         }
+//                     }
+//                     // int II = 1;
+//                     // this->current_opt_comp = comp;
+//                     // //TODO
+//                     // if(this->leader_computations.size() == -1){                          
+//                     //     this->evaluate_func();
+//                     //     if(this->current_latency < this->best_latency && this->dsp_max>= this->dsp_usage){
+//                     //         this->best_latency = this->current_latency;
+//                     //         this->best_dsp_usage = this->dsp_usage;
+//                     //         // std::cout<<"best_latency:  ";
+//                     //         // std::cout<<best_latency<<std::endl;
+//                     //         this->dump_schedule(path);
+//                     //     }
+
+//                     // }else
+//                     // {  
+//                     //     comp->temp_strategy = tile_size;
+//                     //     this->evaluate_func();
+//                     //     auto latency = comp->latency;
+//                     //     int dsp = comp->dsp;
+//                     //     // std::cout<<"schedule: "+std::to_string(tile_size[0])+", "+std::to_string(tile_size[1])+", "+std::to_string(tile_size[2])+": "+std::to_string(latency)+": "+std::to_string(dsp)<<std::endl;
+//                     //     // this->update_latency();
+//                     //     // std::cout<<"after evaluation"<<std::endl;
+//                     //     // auto new_comp = this->update_latency();
+//                     //     int used_ii = 1; // 目前你的 pipeline(...,1)，若以后枚举 II，这里写实际 II
+//                     //     dump_row_3d(myfile, tile_size, used_ii, latency, this->dsp_usage, comp->minII);
+//                     //     polyfp::compute * new_comp = NULL;
+//                     //     if((this->current_latency < this->best_latency || this->consistent_flag == false) && this->dsp_max>=this->dsp_usage){
+//                     //         auto comp = this->update_latency();
+//                     //         int path_index = this->get_longest_path();
+//                     //         std::vector<long> current_longest_path = paths[path_index];
+//                     //         std::vector<long> current_longest_path_latency;
+//                     //         std::map<long, int> current_longest_map;
+//                     //         int num = current_longest_path.size();
+                            
+//                     //         for(int i=0; i<num; i++){
+//                     //             long temp_latency = this->latency_map[current_longest_path[i]];
+//                     //             current_longest_path_latency.push_back(temp_latency);
+//                     //             current_longest_map.insert(std::make_pair(temp_latency,current_longest_path[i]));
+//                     //         }
+//                     //         std::sort(current_longest_path_latency.begin(),current_longest_path_latency.end(),std::greater<long>());
+//                     //         bool comp_flag = false;
+//                     //         for(int i=0; i<num; i++)
+//                     //         {
+//                     //             int node_index = current_longest_path[i]; 
+//                     //             int final_index = this->path_map[path_index][node_index];
+//                     //             // int final_index = current_longest_map[current_longest_path_latency[i]];
+//                     //             // std::cout<<"the final_index"+std::to_string(final_index);
+//                     //             std::map<polyfp::compute *,int>::iterator it;
+//                     //             polyfp::compute *comp1;
+//                     //             for( it= this->leader_computation_index.begin();it!=this->leader_computation_index.end();it++) 
+//                     //             {
+//                     //                 if(it->second==final_index)
+//                     //                 {
+//                     //                     comp1 = it->first;
+//                     //                     std::string name = comp1->get_name();
+//                     //                     if (std::find(finish_list.begin(), finish_list.end(), name) == finish_list.end())
+//                     //                     {
+//                     //                         new_comp = comp1;
+//                     //                         comp_flag = true;
+                                            
+//                     //                         break;
+//                     //                     }   
+//                     //                 }
+                                        
+//                     //             } 
+//                     //             if(comp_flag == true)
+//                     //             {
+//                     //                 break;
+//                     //             }
+//                     //         }        
+//                     //         if(new_comp == NULL)
+//                     //         {
+//                     //             return;
+//                     //         }
+//                     //         if(new_comp->get_name() != comp->get_name() && this->dsp_max>=this->dsp_usage)
+//                     //         {
+//                     //             this->best_latency = this->current_latency;
+//                     //             final_design = tile_size;
+//                     //             break;
+//                     //         }else if(new_comp->get_name() == comp->get_name() &&this->current_latency < this->best_latency && this->dsp_max>= this->dsp_usage)
+//                     //         {
+//                     //             this->best_latency = this->current_latency;
+//                     //             this->best_dsp_usage = this->dsp_usage;               
+//                     //             current_design = tile_size;                             
+//                     //             long latency = comp->latency;
+//                     //             int dsp = comp->dsp;
+                               
+//                     //         }else{
+//                     //             // TODO
+//                     //         }
+//                     //         auto latency = comp->latency;
+//                     //             int dsp = comp->dsp;                       
+//                     //     }
+                      
+//                     // }
+                    
+//                     // auto latency = comp->latency;
+//                     //     int dsp = comp->dsp;
+                 
+//                     // myfile << tile_size[0] << ",";
+//                     // myfile << tile_size[1] << ",";
+//                     // myfile << tile_size[2] << ",";
+//                     // myfile << latency<< ",";
+//                     // myfile << this->dsp_usage << ",";
+//                     // myfile << comp->minII << "\n";
+//                     // 4) 探测评估（此处不要忘了设置 current_opt_comp / temp_strategy）
+//                     this->current_opt_comp = comp;
+//                     comp->temp_strategy = tile_size;
+//                     comp->II = 1;
+//                     this->evaluate_func();
+//                     std::cout<<"开始II扫描。。。。。。。。。。。。"<<std::endl;
+//                     // 5) 扫描上下界
+//                     int minII = std::max(1, comp->minII);
+//                     // int crit  = (int)(comp->iterLatency > 0 ? comp->iterLatency : comp->latency);
+//                     int crit  = 12;
+//                     if (crit < minII) crit = minII;
+//                     std::cout << "Tile [" << tile_size[0] << "," << tile_size[1] << "," 
+//                     << tile_size[2] << "] minII=" << minII << std::endl;
+//                     // ===== [3D] 从 minII 到 crit 全枚举 =====
+//                     for (int ii = minII; ii <= crit; ++ii) {
+//                         // a) 每次 ii 都 reset（顺序同上）
+//                         comp->set_schedule(comp->original_schedule);
+//                         comp->set_loop_level_names(comp->original_loop_level_name);
+//                         comp->directive_map.clear();
+//                         comp->is_unrolled = false; comp->unroll_factor.clear(); comp->unroll_dimension.clear();
+//                         comp->tile_map.clear(); comp->tile_size_map.clear(); comp->access_map.clear();
+                        
+//                         // b) 复刻 tile
+//                         if (!(tile_size[0]==1 && tile_size[1]==1 && tile_size[2]==1)) {
+//                             comp->tile(iterator_map[temp_index+0], iterator_map[temp_index+1], iterator_map[temp_index+2],
+//                                        tile_size[0], tile_size[1], tile_size[2], i0, j0, k0, i1, j1, k1);
+//                         }
+                    
+//                         // c) 复刻“pipeline层 + 内层全展开”，**唯一改动**：把所有 pipeline(...,1) 改为 pipeline(...,ii)
+//                         if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]!=1){
+//                             comp->pipeline(k0,ii);
+//                             comp->unroll(k1,-1); comp->unroll(j1,-1); comp->unroll(i1,-1);
+//                         }
+//                         if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]==1){
+//                             comp->pipeline(k0,ii);
+//                             comp->unroll(k1,-1); comp->unroll(j1,-1);
+//                         }
+//                         if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]!=1){
+//                             comp->pipeline(k0,ii);
+//                             comp->unroll(k1,-1); comp->unroll(i1,-1);
+//                         }
+//                         if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]==1){
+//                             comp->pipeline(k0,ii);
+//                             comp->unroll(k1,-1);
+//                         }
+//                         if(tile_size[2]==1 && tile_size[1]==1 && tile_size[0]==1){
+//                             int lower = stoi(iterator_map[temp_index+2].get_lower().to_str());
+//                             int upper = stoi(iterator_map[temp_index+2].get_upper().to_str());
+//                             int range = upper-lower;
+//                             if(range<=7){
+//                                 comp->pipeline(iterator_map[temp_index+1],ii);
+//                                 comp->unroll(iterator_map[temp_index+2],-1);
+//                             }
+//                         }
+//                         if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1){
+//                             int lower = stoi(iterator_map[temp_index+2].get_lower().to_str());
+//                             int upper = stoi(iterator_map[temp_index+2].get_upper().to_str());
+//                             int range = upper-lower;
+//                             if(range<=6){
+//                                 comp->pipeline(j0,ii);
+//                                 comp->unroll(j1,-1); comp->unroll(i1,-1);
+//                                 comp->unroll(iterator_map[temp_index+2],-1);
+//                             }else{
+//                                 comp->pipeline(iterator_map[temp_index+2],ii);
+//                                 comp->unroll(j1,-1); comp->unroll(i1,-1);
+//                             }
+//                         }
+                    
+//                         // d) 子组件同理：把 part.first->pipeline(...,1) 改为 (...,ii)，其余不变
+//                         for(auto &part: comp->components){
+//                             part.first->set_schedule(part.first->original_schedule);
+//                             part.first->set_loop_level_names(part.first->original_loop_level_name);
+//                             part.first->tile(iterator_map[temp_index+0], iterator_map[temp_index+1], iterator_map[temp_index+2],
+//                                              tile_size[0], tile_size[1], tile_size[2], i0, j0, k0, i1, j1, k1);
+//                             if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1){
+//                                 if(part.first->after_level == 2) part.first->after(comp,j1);
+//                                 else if(part.first->after_level == 0){
+//                                     part.first->after(comp,i0);
+//                                     part.first->pipeline(iterator_map[temp_index+2],ii);
+//                                 }
+//                             }else{
+//                                 if(part.first->after_level == 2) part.first->after(comp,k1);
+//                                 else if(part.first->after_level == 0){
+//                                     part.first->after(comp,iterator_map[temp_index+0]);
+//                                     part.first->pipeline(iterator_map[temp_index+2],ii);
+//                                     part.first->unroll(k1,-1); part.first->unroll(j1,-1);
+//                                 }
+//                             }
+//                         }
+//                         this->current_opt_comp = comp;
+//                         comp->current_ii = ii;
+//                         comp->temp_strategy = tile_size;
+//                         comp->II = ii;                     // 让 apply_opt_strategy 等也感知当前 II
+//                         this->evaluate_func();
+
+//                         long latency = comp->latency;
+//                         int dsp =this->dsp_usage;
+//                         // ===== 写入 CSV =====
+//                             write_dse_record(myfile, tile_size, ii, latency, dsp, comp->minII);
+
+//                             std::cout << "  II=" << ii << ": latency=" << latency 
+//                             << ", dsp=" << dsp << std::endl;
+//                         if (latency < best_latency_overall && dsp <= this->dsp_max) {
+//                             best_latency_overall = latency;
+//                             best_tile_overall = tile_size;
+//                             best_ii_overall = ii;
+
+//                             std::cout << "    ✓ New global best: tile=[" 
+//                                       << tile_size[0] << "," << tile_size[1] << "," << tile_size[2] 
+//                                       << "], II=" << ii << ", latency=" << latency << std::endl;
+//                         }
+//                         // f) 若需更新 best / leader，照你原逻辑放这里，但避免 break/return 以免漏记录后续 ii
+//                         if ((this->current_latency < this->best_latency || this->consistent_flag == false) &&
+//                             this->dsp_max >= this->dsp_usage) {
+//                             this->best_latency = this->current_latency;
+//                             this->best_dsp_usage = this->dsp_usage;
+//                             current_design = tile_size;
+//                         }
+                    
+//                     }
+                
+//                 }
+//             }
+//              myfile.close();
+//             // ===== 应用最优解并递归 =====
+//             if (!best_tile_overall.empty()) {
+//                 comp->final_strategy = best_tile_overall;
+//                 comp->current_strategy = best_tile_overall;
+//                 comp->II = (best_ii_overall > 0) ? best_ii_overall : std::max(1, comp->minII);
+
+//                 std::cout << "\n=== 找到最优解 ===" << std::endl;
+//                 std::cout << "Tile: [" << best_tile_overall[0] << "," 
+//                           << best_tile_overall[1] << "," << best_tile_overall[2] << "]" << std::endl;
+//                 std::cout << "II: " << comp->II << std::endl;
+//                 std::cout << "Latency: " << best_latency_overall << std::endl;
+
+//                 // 应用最优策略
+//                 comp->apply_opt_strategy(comp->final_strategy);
+//                 this->evaluate_func();
+
+//                 // 检查是否需要切换到下一个计算
+//                 if (this->leader_computations.size() != 1) {
+//                     auto new_comp = this->update_latency();
+//                     if (std::find(finish_list.begin(), finish_list.end(), comp->get_name()) 
+//                         == finish_list.end()) {
+//                         auto_DSE_tile_size(new_comp, 1, path);
+//                     }
+//                 }
+//             } else {
+//                 comp->opt_finished = true;
+//                 auto_DSE_tile_size(comp, 1, path);
+//             }
+
+//         }
+        
+//     }
+//     else if(size == 2)
+//     {
+//         // ===== 生成 2D tile 候选 (乘积 ≤ 128, 排除 (1,1)) =====
+//         tilesize_list.clear();
+//         generate2DTileCandidates(dim_ranges, tilesize_list, 128, 128);
+//         std::cout << "[DSE] 2D 候选数量(约束:prod<=128,≠1,1): "
+//                   << tilesize_list.size() << std::endl;
+
+//         // ===== 全局最优解跟踪 =====
+//         std::vector<int> best_tile_overall;
+//         int best_ii_overall = -1;
+//         long best_latency_overall = LONG_MAX;
+
+//         // ===== 遍历所有 tile 候选 =====
+//         for(auto &tile_size: tilesize_list)
+//         {
+//             // 1) Reset 状态
+//             comp->set_schedule(comp->original_schedule);
+//             comp->set_loop_level_names(comp->original_loop_level_name);
+//             comp->directive_map.clear();
+//             comp->is_unrolled = false;
+//             comp->unroll_factor.clear();
+//             comp->unroll_dimension.clear();
+//             comp->tile_map.clear();
+//             comp->tile_size_map.clear();
+//             comp->access_map.clear();
+//             comp->opt_finished = false;
+
+//             // 2) 获取循环范围
+//             int lower1 = stoi(iterator_map[0].get_lower().to_str());
+//             int upper1 = stoi(iterator_map[0].get_upper().to_str());
+//             int range1 = upper1 - lower1;
+
+//             int lower2 = stoi(iterator_map[1].get_lower().to_str());
+//         int upper2 = stoi(iterator_map[1].get_upper().to_str());
+//         int range2 = upper2 - lower2;
+
+//         // 3) 检查 tile 是否合法
+//         if (tile_size[0] > 128 || tile_size[1] > 128 ||
+//             tile_size[0] > range1 || tile_size[1] > range2) {
+//             continue;  // 跳过不合法的 tile
+//         }
+
+//         // 4) 应用 tile
+//         var i0("i0"), j0("j0"), i1("i1"), j1("j1");
+//         comp->tile(iterator_map[0], iterator_map[1], 
+//                       tile_size[0], tile_size[1], i0, j0, i1, j1);
+
+//             // 5) 第一次评估：获取 minII
+//             if (tile_size[1] != 1 && tile_size[0] != 1) {
+//                 comp->pipeline(j0, 1);
+//                 comp->unroll(j1, -1);
+//                 comp->unroll(i1, -1);
+//             } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+//                 comp->pipeline(iterator_map[1], 1);
+//                 comp->unroll(i1, -1);
+//             } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+//                 comp->pipeline(j0, 1);
+//                 comp->unroll(j1, -1);
+//             }
+
+//             this->current_opt_comp = comp;
+//             comp->temp_strategy = tile_size;
+//             comp->II = 1;
+//             this->evaluate_func();
+
+//             int minII = std::max(1, comp->minII);
+//             int maxII = 12;  // 或根据 iterLatency 设置上界
+
+//             std::cout << "Tile [" << tile_size[0] << "," << tile_size[1] 
+//                       << "] minII=" << minII << std::endl;
+
+//             // ===== II 全枚举 =====
+//             for (int ii = minII; ii <= maxII; ++ii) {
+//                 // a) Reset 状态
+//                 comp->set_schedule(comp->original_schedule);
+//                 comp->set_loop_level_names(comp->original_loop_level_name);
+//                 comp->directive_map.clear();
+//                 comp->is_unrolled = false;
+//                 comp->unroll_factor.clear();
+//                 comp->unroll_dimension.clear();
+//                 comp->tile_map.clear();
+//                 comp->tile_size_map.clear();
+//                 comp->access_map.clear();
+
+//                 // b) 重新应用 tile
+//                 comp->tile(iterator_map[0], iterator_map[1], 
+//                           tile_size[0], tile_size[1], i0, j0, i1, j1);
+
+//                 // c) 应用 pipeline 和 unroll（使用当前 II）
+//                 if (tile_size[1] != 1 && tile_size[0] != 1) {
+//                     comp->pipeline(j0, ii);
+//                     comp->unroll(j1, -1);
+//                     comp->unroll(i1, -1);
+//                 } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+//                     comp->pipeline(iterator_map[1], ii);
+//                     comp->unroll(i1, -1);
+//                 } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+//                     comp->pipeline(j0, ii);
+//                     comp->unroll(j1, -1);
+//                 }
+
+//                 // d) 应用到子组件
+//             for (auto &part : comp->components) {
+//                 part.first->set_schedule(part.first->original_schedule);
+//                 part.first->set_loop_level_names(part.first->original_loop_level_name);
+//                 part.first->directive_map.clear();
+//                 part.first->is_unrolled = false;
+//                 part.first->unroll_factor.clear();
+//                 part.first->unroll_dimension.clear();
+//                 part.first->tile_map.clear();
+//                 part.first->tile_size_map.clear();
+//                 part.first->access_map.clear();
+
+//                 part.first->tile(iterator_map[0], iterator_map[1], 
+//                                tile_size[0], tile_size[1], i0, j0, i1, j1);
+
+//                 if (tile_size[1] != 1 && tile_size[0] != 1) {
+//                     if (part.first->after_level == 1) {
+//                         part.first->after(comp, j1);
+//                     } else if (part.first->after_level == 0) {
+//                         part.first->pipeline(j0, ii);
+//                         part.first->after(comp, i0);
+//                     }
+//                 } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+//                     if (part.first->after_level == 1) {
+//                         part.first->after(comp, i1);
+//                     } else if (part.first->after_level == 0) {
+//                         part.first->after(comp, i0);
+//                         part.first->pipeline(iterator_map[1], ii);
+//                     }
+//                 } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+//                     if (part.first->after_level == 1) {
+//                         part.first->after(comp, j1);
+//                     } else if (part.first->after_level == 0) {
+//                         part.first->after(comp, iterator_map[0]);
+//                         part.first->pipeline(j0, ii);
+//                         part.first->unroll(j1, -1);
+//                     }
+//                 }
+//             }
+
+//             // e) 评估当前 (tile, II) 组合
+//             this->current_opt_comp = comp;
+//             comp->current_ii = ii;
+//             comp->temp_strategy = tile_size;
+//             comp->II = ii;
+//             this->evaluate_func();
+
+//             long latency = comp->latency;
+//             int dsp = this->dsp_usage;
+
+//             // f) 写入 CSV
+//             write_dse_record(myfile, tile_size, ii, latency, dsp, comp->minII);
+
+//             std::cout << "  II=" << ii << ": latency=" << latency 
+//                       << ", dsp=" << dsp << std::endl;
+
+//             // g) 更新全局最优解
+//             if (latency < best_latency_overall && dsp <= this->dsp_max) {
+//                 best_latency_overall = latency;
+//                 best_tile_overall = tile_size;
+//                     best_ii_overall = ii;
+
+//                     std::cout << "    ✓ New global best: tile=[" 
+//                               << tile_size[0] << "," << tile_size[1] 
+//                               << "], II=" << ii << ", latency=" << latency << std::endl;
+//                 }
+
+//                 // h) 更新 function 级别的最优解
+//                 if ((this->current_latency < this->best_latency || !this->consistent_flag) &&
+//                     dsp <= this->dsp_max) {
+//                     this->best_latency = this->current_latency;
+//                     this->best_dsp_usage = dsp;
+//                     current_design = tile_size;
+//                     best_ii_current = ii;
+//                 }
+//             }  // 结束 II 枚举
+//         }  // 结束 tile 枚举
+
+//         myfile.close();
+
+//         // ===== 应用最优解并递归 =====
+//         if (!best_tile_overall.empty()) {
+//             comp->final_strategy = best_tile_overall;
+//             comp->current_strategy = best_tile_overall;
+//             comp->II = (best_ii_overall > 0) ? best_ii_overall : std::max(1, comp->minII);
+
+//             std::cout << "\n=== 找到最优解 (2D) ===" << std::endl;
+//             std::cout << "Tile: [" << best_tile_overall[0] << "," 
+//                       << best_tile_overall[1] << "]" << std::endl;
+//             std::cout << "II: " << comp->II << std::endl;
+//             std::cout << "Latency: " << best_latency_overall << std::endl;
+
+//             // 应用最优策略
+//             comp->apply_opt_strategy(comp->final_strategy);
+//             this->evaluate_func();
+
+//             // 检查是否需要切换到下一个计算
+//             if (this->leader_computations.size() != 1) {
+//                 auto new_comp = this->update_latency();
+//                 if (std::find(finish_list.begin(), finish_list.end(), comp->get_name()) 
+//                     == finish_list.end()) {
+//                     auto_DSE_tile_size(new_comp, 1, path);
+//                 }
+//             }
+//         } else if (!current_design.empty()) {
+//             comp->current_strategy = current_design;
+//             comp->final_strategy = current_design;
+//             comp->II = (best_ii_current > 0) ? best_ii_current : std::max(1, comp->minII);
+
+//             auto_DSE_tile_size(comp, 1, path);
+//         } else {
+//             comp->opt_finished = true;
+//             auto_DSE_tile_size(comp, 1, path);
+//         }
+
+//         return;
+//     }
+//     myfile.close();
+// }
+
+// void polyfp::function::auto_DSE_tile_size(polyfp::compute *comp, int factor, std::string path)
+// {
+//     std::cout << "=== Minimal auto_DSE_tile_size ===" << std::endl;
+//     std::cout << "Compute: " << comp->get_name() << std::endl;
+    
+//     // ===== 1. 确保路径正确 =====
+//     if (!path.empty() && path.back() != '/') {
+//         path += "/";
+//     }
+//     std::filesystem::create_directories(path);
+    
+//     // ===== 2. 构造 CSV 文件路径 =====
+//     std::string func_name = this->get_name();
+//     std::string csv_path = path + func_name + ".csv";
+    
+//     std::cout << "CSV path: " << csv_path << std::endl;
+    
+//     // ===== 3. 获取循环维度 =====
+//     auto iterators = comp->get_iteration_variables();
+//     int size = iterators.size();
+    
+//     // 只取最内层 3 个循环
+//     if (size > 3) {
+//         size = 3;
+//     }
+    
+//     std::cout << "Loop dimensions: " << size << std::endl;
+    
+//     // ===== 4. 打开 CSV 文件 =====
+//     std::ofstream csv_file;
+//     csv_file.open(csv_path, std::ios::out);  // 覆盖模式
+    
+//     if (!csv_file.is_open()) {
+//         std::cerr << "❌ Failed to open CSV: " << csv_path << std::endl;
+//         return;
+//     }
+    
+//     // ===== 5. 写入表头 =====
+//     for (int i = 0; i < size; ++i) {
+//         csv_file << "l" << i << ",";
+//     }
+//     csv_file << "ii,cycle,dsp,minii\n";  // ← 4 个性能指标
+//     csv_file.flush();
+    
+//     std::cout << "✓ CSV file opened and header written" << std::endl;
+    
+//     // ===== 6. 生成测试数据 =====
+//     std::vector<std::vector<int>> test_tiles;
+    
+//     if (size == 3) {
+//         // 3D 测试数据
+//         test_tiles = {
+//             {1, 4, 32},   // 乘积 = 128
+//             {2, 4, 16},   // 乘积 = 128
+//             {4, 4, 8},    // 乘积 = 128
+//             {1, 8, 16},   // 乘积 = 128
+//             {2, 8, 8},    // 乘积 = 128
+//         };
+//     } else if (size == 2) {
+//         // 2D 测试数据
+//         test_tiles = {
+//             {1, 128},     // 乘积 = 128
+//             {2, 64},      // 乘积 = 128
+//             {4, 32},      // 乘积 = 128
+//             {8, 16},      // 乘积 = 128
+//             {16, 8},      // 乘积 = 128
+//         };
+//     }
+    
+//     // ===== 7. 枚举 tile 和 II，写入 CSV =====
+//     int record_count = 0;
+    
+//     for (auto &tile : test_tiles) {
+//         int minII = 1;
+//         int maxII = 5;
+        
+//         std::cout << "Processing tile: [";
+//         for (size_t i = 0; i < tile.size(); ++i) {
+//             if (i > 0) std::cout << ",";
+//             std::cout << tile[i];
+//         }
+//         std::cout << "]" << std::endl;
+        
+//         for (int ii = minII; ii <= maxII; ++ii) {
+//             // 模拟性能数据
+//             long cycle = 500000 + (ii - 1) * 10000 + rand() % 1000;
+//             int dsp = 100 + ii * 10;
+            
+//             // 写入记录
+//             write_dse_record(csv_file, tile, ii, cycle, dsp, minII);
+//             record_count++;
+            
+//             std::cout << "  II=" << ii << ": cycle=" << cycle 
+//                       << ", dsp=" << dsp << std::endl;
+//         }
+//     }
+    
+//     // ===== 8. 关闭文件 =====
+//     csv_file.close();
+    
+//     std::cout << "\n=== Summary ===" << std::endl;
+//     std::cout << "Total records: " << record_count << std::endl;
+//     std::cout << "CSV saved: " << csv_path << std::endl;
+//     std::cout << "===============" << std::endl;
+// }
+// void polyfp::function::auto_DSE_tile_size(polyfp::compute *comp, int factor, std::string path)
+// {
+//     std::cout << "=== Auto DSE Tile Size (Full Version) ===" << std::endl;
+//     std::cout << "Currently optimized compute: " << comp->get_name() << std::endl;
+    
+//     // ===== 1. 路径处理 =====
+//     if (!path.empty() && path.back() != '/') {
+//         path += "/";
+//     }
+//     std::filesystem::create_directories(path);
+    
+//     // ===== 2. 初始化状态 =====
+//     int scale;
+//     comp->set_schedule(comp->original_schedule);
+//     comp->set_loop_level_names(comp->original_loop_level_name);
+//     comp->directive_map.clear();
+//     comp->is_unrolled = false;
+//     comp->unroll_factor.clear();
+//     comp->unroll_dimension.clear();
+//     comp->tile_map.clear();
+//     comp->tile_size_map.clear();
+//     comp->access_map.clear();
+    
+//     // ===== 3. 获取迭代器（只取最内层 3 个）=====
+//     auto iterators = comp->get_iteration_variables();
+//     std::vector<polyfp::var> temp_iterators;
+//     int temp_size = iterators.size();
+    
+//     if (temp_size > 3) {
+//         int border = temp_size - 3;
+//         for (auto &iter : iterators) {
+//             int loc = comp->get_loop_level_number_from_dimension_name(iter.get_name());
+//             if (loc >= border) {
+//                 temp_iterators.push_back(iter);
+//             }
+//         }
+//         iterators.clear();
+//         iterators = temp_iterators;
+//     }
+    
+//     // ===== 4. 计算维度范围 =====
+//     std::vector<int> dim_ranges;
+//     std::map<int, std::vector<int>> dim_tile_sizes;
+//     bool not_2_pow = false;
+//     int count = 0;
+    
+//     for (auto &iter : iterators) {
+//         int lower = stoi(iter.get_lower().to_str());
+//         int upper = stoi(iter.get_upper().to_str());
+//         int range = upper - lower;
+//         dim_ranges.push_back(range);
+        
+//         std::vector<int> temp;
+//         if (range % 256 != 0) {  // 检查是否是 256 的倍数
+//             not_2_pow = true;
+//             for (int i = 2; i < range; i++) {
+//                 if (range % i == 0) {
+//                     if (i == 2 || i == 3 || i == 5 || i == 7) {
+//                         temp.push_back(i);
+//                     }
+//                 }
+//             }
+//             if (temp.empty()) {
+//                 temp.push_back(1);
+//             }
+//         } else {
+//             temp.push_back(1);
+//         }
+//         dim_tile_sizes.insert(std::make_pair(count, temp));
+//         count++;
+//     }
+    
+//     // ===== 5. 构建迭代器映射 =====
+//     std::map<int, polyfp::var> iterator_map;
+//     int size = iterators.size();
+    
+//     for (auto &iter : iterators) {
+//         int loc = comp->get_loop_level_number_from_dimension_name(iter.get_name());
+//         iterator_map[loc] = iter;
+//     }
+    
+//     // ===== 6. 处理 factor 和递归逻辑 =====
+//     scale = 8 * pow(2, factor - 1);
+    
+//     if (comp->is_optimized == true) {
+//         if (comp->current_factor < comp->largest_factor && comp->opt_finished == false) {
+//             comp->current_factor += 1;
+//             factor = comp->current_factor;
+//             scale = 16 * pow(2, comp->current_factor - 1);
+//         } else {
+//             // 优化完成，切换到下一个计算
+//             this->finish_list.push_back(comp->get_name());
+//             if (comp->current_strategy.size() != 0) {
+//                 comp->final_strategy = comp->current_strategy;
+//             }
+            
+//             if (this->leader_computations.size() != 1) {
+//                 int path_index = this->get_longest_path();
+//                 std::vector<long> current_longest_path = paths[path_index];
+//                 int num = current_longest_path.size();
+                
+//                 for (int i = 0; i < num; i++) {
+//                     int node_index = current_longest_path[i];
+//                     int final_index = this->path_map[path_index][node_index];
+                    
+//                     std::map<polyfp::compute *, int>::iterator it;
+//                     polyfp::compute *next_comp;
+//                     for (it = this->leader_computation_index.begin(); 
+//                          it != this->leader_computation_index.end(); it++) {
+//                         if (it->second == final_index) {
+//                             next_comp = it->first;
+//                             std::string name = next_comp->get_name();
+//                             if (std::find(finish_list.begin(), finish_list.end(), name) 
+//                                 == finish_list.end()) {
+//                                 auto_DSE_tile_size(next_comp, 1, path);
+//                                 return;
+//                             }
+//                         }
+//                     }
+//                 }
+//             }
+//             return;
+//         }
+//     } else {
+//         comp->is_optimized = true;
+//         comp->current_factor = factor;
+//     }
+    
+//     // ===== 7. 打开 CSV 文件 =====
+//     std::string func_name = this->get_name();
+//     std::string csv_path = path + func_name + ".csv";
+    
+//     std::ifstream ifs(csv_path, std::ios::in);
+//     char ch;
+//     ifs >> ch;
+//     std::ofstream myfile;
+//     myfile.open(csv_path, std::ios::app);
+    
+//     if (ifs.eof()) {
+//         // 写入表头
+//         for (unsigned i = 0; i < (unsigned)size; ++i) {
+//             myfile << "l" << i << ",";
+//         }
+//         myfile << "ii,cycle,dsp,minii\n";
+//         myfile.flush();
+//     }
+//     ifs.close();
+    
+//     std::cout << "CSV path: " << csv_path << std::endl;
+    
+//     // ===== 8. 生成 tile 候选列表 =====
+//     std::vector<std::vector<int>> tilesize_list;
+//     std::vector<int> current_design;
+//     std::vector<int> final_design;
+//     int best_ii_current = -1;
+//     int best_ii_final = -1;
+    
+//     if (size >= 3) {
+//         // ===== 3D 情况 =====
+//         if (not_2_pow == false) {
+//             // 循环范围是 2 的幂，使用动态生成
+//             tilesize_list.clear();
+//             generate3DTileCandidates(dim_ranges, tilesize_list, 128, 128);
+//             std::cout << "[DSE] 3D 候选数量(约束:prod<=128,≠1,1,1): "
+//                       << tilesize_list.size() << std::endl;
+//         } else {
+//             // 循环范围不是 2 的幂，使用因子组合
+//             std::vector<int> dim0 = dim_tile_sizes[0];
+//             std::vector<int> dim1 = dim_tile_sizes[1];
+//             std::vector<int> dim2 = dim_tile_sizes[2];
+            
+//             if (dim0.empty()) dim0.push_back(1);
+//             if (dim1.empty()) dim1.push_back(1);
+//             if (dim2.empty()) dim2.push_back(1);
+            
+//             for (auto &size0 : dim0) {
+//                 for (auto &size1 : dim1) {
+//                     for (auto &size2 : dim2) {
+//                         tilesize_list.push_back({size0, size1, size2});
+//                     }
+//                 }
+//             }
+//             comp->current_factor = 3;
+//         }
+        
+//         // ===== 全局最优解跟踪 =====
+//         std::vector<int> best_tile_overall;
+//         int best_ii_overall = -1;
+//         long best_latency_overall = LONG_MAX;
+        
+//         // ===== 遍历所有 tile 候选 =====
+//         for (auto &tile_size : tilesize_list) {
+//             // a) Reset 状态
+//             comp->set_schedule(comp->original_schedule);
+//             comp->set_loop_level_names(comp->original_loop_level_name);
+//             comp->directive_map.clear();
+//             comp->is_unrolled = false;
+//             comp->unroll_factor.clear();
+//             comp->unroll_dimension.clear();
+//             comp->tile_map.clear();
+//             comp->tile_size_map.clear();
+//             comp->access_map.clear();
+//             comp->opt_finished = false;
+            
+//             // b) 定义 tile 变量
+//             var i0("i0"), j0("j0"), k0("k0"), i1("i1"), j1("j1"), k1("k1");
+//             int temp_index = comp->get_iteration_variables().size() - 3;
+            
+//             // c) 检查 tile 合法性
+//             int r0 = stoi(iterator_map[temp_index + 0].get_upper().to_str()) - 
+//                      stoi(iterator_map[temp_index + 0].get_lower().to_str());
+//             int r1 = stoi(iterator_map[temp_index + 1].get_upper().to_str()) - 
+//                      stoi(iterator_map[temp_index + 1].get_lower().to_str());
+//             int r2 = stoi(iterator_map[temp_index + 2].get_upper().to_str()) - 
+//                      stoi(iterator_map[temp_index + 2].get_lower().to_str());
+            
+//             if (tile_size[0] > 256 || tile_size[1] > 256 || tile_size[2] > 256 ||
+//                 tile_size[0] > r0 || tile_size[1] > r1 || tile_size[2] > r2) {
+//                 continue;  // 跳过不合法的 tile
+//             }
+            
+//             // d) 应用 tile
+//             if (!(tile_size[2] == 1 && tile_size[1] == 1 && tile_size[0] == 1)) {
+//                 comp->tile(iterator_map[temp_index], iterator_map[temp_index + 1], 
+//                           iterator_map[temp_index + 2], tile_size[0], tile_size[1], 
+//                           tile_size[2], i0, j0, k0, i1, j1, k1);
+//             }
+            
+//             // e) 第一次评估：获取 minII
+//             if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+//                 comp->pipeline(k0, 1);
+//                 comp->unroll(k1, -1);
+//                 comp->unroll(j1, -1);
+//                 comp->unroll(i1, -1);
+//             } else if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] == 1) {
+//                 comp->pipeline(k0, 1);
+//                 comp->unroll(k1, -1);
+//                 comp->unroll(j1, -1);
+//             } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] != 1) {
+//                 comp->pipeline(k0, 1);
+//                 comp->unroll(k1, -1);
+//                 comp->unroll(i1, -1);
+//             } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] == 1) {
+//                 comp->pipeline(k0, 1);
+//                 comp->unroll(k1, -1);
+//             } else if (tile_size[2] == 1 && tile_size[1] == 1 && tile_size[0] == 1) {
+//                 int lower = stoi(iterator_map[temp_index + 2].get_lower().to_str());
+//                 int upper = stoi(iterator_map[temp_index + 2].get_upper().to_str());
+//                 int range = upper - lower;
+//                 if (range <= 7) {
+//                     comp->pipeline(iterator_map[temp_index + 1], 1);
+//                     comp->unroll(iterator_map[temp_index + 2], -1);
+//                 }
+//             } else if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+//                 int lower = stoi(iterator_map[temp_index + 2].get_lower().to_str());
+//                 int upper = stoi(iterator_map[temp_index + 2].get_upper().to_str());
+//                 int range = upper - lower;
+//                 if (range <= 6) {
+//                     comp->pipeline(j0, 1);
+//                     comp->unroll(j1, -1);
+//                     comp->unroll(i1, -1);
+//                     comp->unroll(iterator_map[temp_index + 2], -1);
+//                 } else {
+//                     comp->pipeline(iterator_map[temp_index + 2], 1);
+//                     comp->unroll(j1, -1);
+//                     comp->unroll(i1, -1);
+//                 }
+//             }
+            
+//             // f) 应用到子组件
+//             for (auto &part : comp->components) {
+//                 part.first->set_schedule(part.first->original_schedule);
+//                 part.first->set_loop_level_names(part.first->original_loop_level_name);
+//                 part.first->tile(iterator_map[temp_index + 0], iterator_map[temp_index + 1], 
+//                                iterator_map[temp_index + 2], tile_size[0], tile_size[1], 
+//                                tile_size[2], i0, j0, k0, i1, j1, k1);
+                
+//                 if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+//                     if (part.first->after_level == 2) {
+//                         part.first->after(comp, j1);
+//                     } else if (part.first->after_level == 0) {
+//                         part.first->after(comp, i0);
+//                         part.first->pipeline(iterator_map[temp_index + 2], 1);
+//                     }
+//                 } else {
+//                     if (part.first->after_level == 2) {
+//                         part.first->after(comp, k1);
+//                     } else if (part.first->after_level == 0) {
+//                         part.first->after(comp, iterator_map[temp_index + 0]);
+//                         part.first->pipeline(iterator_map[temp_index + 2], 1);
+//                         part.first->unroll(k1, -1);
+//                         part.first->unroll(j1, -1);
+//                     }
+//                 }
+//             }
+            
+//             // g) 初始评估获取 minII
+//             this->current_opt_comp = comp;
+//             comp->temp_strategy = tile_size;
+//             comp->II = 1;
+//             this->evaluate_func();
+            
+//             int minII = std::max(1, comp->minII);
+//             int maxII = 12;  // 上界设为 12
+            
+//             std::cout << "Tile [" << tile_size[0] << "," << tile_size[1] << "," 
+//                       << tile_size[2] << "] minII=" << minII << std::endl;
+            
+//             // ===== II 全枚举 =====
+//             for (int ii = minII; ii <= maxII; ++ii) {
+//                 // i) Reset 状态
+//                 comp->set_schedule(comp->original_schedule);
+//                 comp->set_loop_level_names(comp->original_loop_level_name);
+//                 comp->directive_map.clear();
+//                 comp->is_unrolled = false;
+//                 comp->unroll_factor.clear();
+//                 comp->unroll_dimension.clear();
+//                 comp->tile_map.clear();
+//                 comp->tile_size_map.clear();
+//                 comp->access_map.clear();
+                
+//                 // j) 重新应用 tile
+//                 if (!(tile_size[2] == 1 && tile_size[1] == 1 && tile_size[0] == 1)) {
+//                     comp->tile(iterator_map[temp_index], iterator_map[temp_index + 1], 
+//                               iterator_map[temp_index + 2], tile_size[0], tile_size[1], 
+//                               tile_size[2], i0, j0, k0, i1, j1, k1);
+//                 }
+                
+//                 // k) 应用 pipeline/unroll（使用当前 II）
+//                 if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+//                     comp->pipeline(k0, ii);
+//                     comp->unroll(k1, -1);
+//                     comp->unroll(j1, -1);
+//                     comp->unroll(i1, -1);
+//                 } else if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] == 1) {
+//                     comp->pipeline(k0, ii);
+//                     comp->unroll(k1, -1);
+//                     comp->unroll(j1, -1);
+//                 } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] != 1) {
+//                     comp->pipeline(k0, ii);
+//                     comp->unroll(k1, -1);
+//                     comp->unroll(i1, -1);
+//                 } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] == 1) {
+//                     comp->pipeline(k0, ii);
+//                     comp->unroll(k1, -1);
+//                 } else if (tile_size[2] == 1 && tile_size[1] == 1 && tile_size[0] == 1) {
+//                     int lower = stoi(iterator_map[temp_index + 2].get_lower().to_str());
+//                     int upper = stoi(iterator_map[temp_index + 2].get_upper().to_str());
+//                     int range = upper - lower;
+//                     if (range <= 7) {
+//                         comp->pipeline(iterator_map[temp_index + 1], ii);
+//                         comp->unroll(iterator_map[temp_index + 2], -1);
+//                     }
+//                 } else if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+//                     int lower = stoi(iterator_map[temp_index + 2].get_lower().to_str());
+//                     int upper = stoi(iterator_map[temp_index + 2].get_upper().to_str());
+//                     int range = upper - lower;
+//                     if (range <= 6) {
+//                         comp->pipeline(j0, ii);
+//                         comp->unroll(j1, -1);
+//                         comp->unroll(i1, -1);
+//                         comp->unroll(iterator_map[temp_index + 2], -1);
+//                     } else {
+//                         comp->pipeline(iterator_map[temp_index + 2], ii);
+//                         comp->unroll(j1, -1);
+//                         comp->unroll(i1, -1);
+//                     }
+//                 }
+                
+//                 // l) 子组件应用相同策略
+//                 for (auto &part : comp->components) {
+//                     part.first->set_schedule(part.first->original_schedule);
+//                     part.first->set_loop_level_names(part.first->original_loop_level_name);
+//                     part.first->tile(iterator_map[temp_index + 0], iterator_map[temp_index + 1], 
+//                                    iterator_map[temp_index + 2], tile_size[0], tile_size[1], 
+//                                    tile_size[2], i0, j0, k0, i1, j1, k1);
+                    
+//                     if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+//                         if (part.first->after_level == 2) {
+//                             part.first->after(comp, j1);
+//                         } else if (part.first->after_level == 0) {
+//                             part.first->after(comp, i0);
+//                             part.first->pipeline(iterator_map[temp_index + 2], ii);
+//                         }
+//                     } else {
+//                         if (part.first->after_level == 2) {
+//                             part.first->after(comp, k1);
+//                         } else if (part.first->after_level == 0) {
+//                             part.first->after(comp, iterator_map[temp_index + 0]);
+//                             part.first->pipeline(iterator_map[temp_index + 2], ii);
+//                             part.first->unroll(k1, -1);
+//                             part.first->unroll(j1, -1);
+//                         }
+//                     }
+//                 }
+                
+//                 // m) 评估当前配置
+//                 this->current_opt_comp = comp;
+//                 comp->current_ii = ii;
+//                 comp->temp_strategy = tile_size;
+//                 comp->II = ii;
+//                 this->evaluate_func();
+                
+//                 long latency = comp->latency;
+//                 int dsp = this->dsp_usage;
+                
+//                 // n) 写入 CSV
+//                 write_dse_record(myfile, tile_size, ii, latency, dsp, comp->minII);
+                
+//                 std::cout << "  II=" << ii << ": latency=" << latency 
+//                           << ", dsp=" << dsp << std::endl;
+                
+//                 // o) 更新全局最优解
+//                 if (latency < best_latency_overall && dsp <= this->dsp_max) {
+//                     best_latency_overall = latency;
+//                     best_tile_overall = tile_size;
+//                     best_ii_overall = ii;
+                    
+//                     std::cout << "    ✓ New global best: tile=[" 
+//                               << tile_size[0] << "," << tile_size[1] << "," << tile_size[2] 
+//                               << "], II=" << ii << ", latency=" << latency << std::endl;
+//                 }
+                
+//                 // p) 更新 current/final design
+//                 if ((this->current_latency < this->best_latency || !this->consistent_flag) &&
+//                     dsp <= this->dsp_max) {
+//                     auto new_comp = this->update_latency();
+                    
+//                     if (new_comp->get_name() != comp->get_name()) {
+//                         this->best_latency = this->current_latency;
+//                         final_design = tile_size;
+//                         best_ii_final = ii;
+//                         break;  // 切换到新的计算
+//                     } else {
+//                         this->best_latency = this->current_latency;
+//                         this->best_dsp_usage = dsp;
+//                         current_design = tile_size;
+//                         best_ii_current = ii;
+//                     }
+//                 }
+//             }  // 结束 II 枚举
+            
+//             if (!final_design.empty()) {
+//                 break;  // 需要切换计算，跳出 tile 循环
+//             }
+//         }  // 结束 tile 枚举
+        
+//         myfile.close();
+        
+//         // ===== 应用最优解并递归 =====
+//         if (!final_design.empty()) {
+//             comp->final_strategy = final_design;
+//             comp->II = (best_ii_final > 0) ? best_ii_final : std::max(1, comp->minII);
+//             comp->apply_opt_strategy(comp->final_strategy);
+            
+//             auto new_comp = this->update_latency();
+//             if (std::find(finish_list.begin(), finish_list.end(), new_comp->get_name()) 
+//                 == finish_list.end()) {
+//                 auto_DSE_tile_size(new_comp, 1, path);
+//             }
+//         } else if (!current_design.empty()) {
+//             comp->current_strategy = current_design;
+//             comp->II = (best_ii_current > 0) ? best_ii_current : std::max(1, comp->minII);
+//             auto_DSE_tile_size(comp, 1, path);
+//         } else {
+//             comp->opt_finished = true;
+//             auto_DSE_tile_size(comp, 1, path);
+//         }
+        
+//     } else if (size == 2) {
+//         // ===== 2D 情况（逻辑与 3D 类似，省略详细注释）=====
+//         tilesize_list.clear();
+//         generate2DTileCandidates(dim_ranges, tilesize_list, 128, 128);
+//         std::cout << "[DSE] 2D 候选数量(约束:prod<=128,≠1,1): "
+//                   << tilesize_list.size() << std::endl;
+        
+//         std::vector<int> best_tile_overall;
+//         int best_ii_overall = -1;
+//         long best_latency_overall = LONG_MAX;
+        
+//         for (auto &tile_size : tilesize_list) {
+//             comp->set_schedule(comp->original_schedule);
+//             comp->set_loop_level_names(comp->original_loop_level_name);
+//             comp->directive_map.clear();
+//             comp->is_unrolled = false;
+//             comp->unroll_factor.clear();
+//             comp->unroll_dimension.clear();
+//             comp->tile_map.clear();
+//             comp->tile_size_map.clear();
+//             comp->access_map.clear();
+//             comp->opt_finished = false;
+            
+//             int lower1 = stoi(iterator_map[0].get_lower().to_str());
+//             int upper1 = stoi(iterator_map[0].get_upper().to_str());
+//             int range1 = upper1 - lower1;
+            
+//             int lower2 = stoi(iterator_map[1].get_lower().to_str());
+//             int upper2 = stoi(iterator_map[1].get_upper().to_str());
+//             int range2 = upper2 - lower2;
+            
+//             if (tile_size[0] > 128 || tile_size[1] > 128 ||
+//                 tile_size[0] > range1 || tile_size[1] > range2) {
+//                 continue;
+//             }
+            
+//             var i0("i0"), j0("j0"), i1("i1"), j1("j1");
+//             comp->tile(iterator_map[0], iterator_map[1], 
+//                       tile_size[0], tile_size[1], i0, j0, i1, j1);
+            
+//             if (tile_size[1] != 1 && tile_size[0] != 1) {
+//                 comp->pipeline(j0, 1);
+//                 comp->unroll(j1, -1);
+//                 comp->unroll(i1, -1);
+//             } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+//                 comp->pipeline(iterator_map[1], 1);
+//                 comp->unroll(i1, -1);
+//             } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+//                 comp->pipeline(j0, 1);
+//                 comp->unroll(j1, -1);
+//             }
+            
+//             this->current_opt_comp = comp;
+//             comp->temp_strategy = tile_size;
+//             comp->II = 1;
+//             this->evaluate_func();
+            
+//             int minII = std::max(1, comp->minII);
+//             int maxII = 12;
+            
+//             std::cout << "Tile [" << tile_size[0] << "," << tile_size[1] 
+//                       << "] minII=" << minII << std::endl;
+            
+//             for (int ii = minII; ii <= maxII; ++ii) {
+//                 comp->set_schedule(comp->original_schedule);
+//                 comp->set_loop_level_names(comp->original_loop_level_name);
+//                 comp->directive_map.clear();
+//                 comp->is_unrolled = false;
+//                 comp->unroll_factor.clear();
+//                 comp->unroll_dimension.clear();
+//                 comp->tile_map.clear();
+//                 comp->tile_size_map.clear();
+//                 comp->access_map.clear();
+                
+//                 comp->tile(iterator_map[0], iterator_map[1], 
+//                           tile_size[0], tile_size[1], i0, j0, i1, j1);
+                
+//                 if (tile_size[1] != 1 && tile_size[0] != 1) {
+//                     comp->pipeline(j0, ii);
+//                     comp->unroll(j1, -1);
+//                     comp->unroll(i1, -1);
+//                 } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+//                     comp->pipeline(iterator_map[1], ii);
+//                     comp->unroll(i1, -1);
+//                 } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+//                     comp->pipeline(j0, ii);
+//                     comp->unroll(j1, -1);
+//                 }
+                
+//                 for (auto &part : comp->components) {
+//                     part.first->set_schedule(part.first->original_schedule);
+//                     part.first->set_loop_level_names(part.first->original_loop_level_name);
+//                     part.first->tile(iterator_map[0], iterator_map[1], 
+//                                    tile_size[0], tile_size[1], i0, j0, i1, j1);
+                    
+//                     if (tile_size[1] != 1 && tile_size[0] != 1) {
+//                         if (part.first->after_level == 1) {
+//                             part.first->after(comp, j1);
+//                         } else if (part.first->after_level == 0) {
+//                             part.first->pipeline(j0, ii);
+//                             part.first->after(comp, i0);
+//                         }
+//                     } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+//                         if (part.first->after_level == 1) {
+//                             part.first->after(comp, i1);
+//                         } else if (part.first->after_level == 0) {
+//                             part.first->after(comp, i0);
+//                             part.first->pipeline(iterator_map[1], ii);
+//                         }
+//                     } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+//                         if (part.first->after_level == 1) {
+//                             part.first->after(comp, j1);
+//                         } else if (part.first->after_level == 0) {
+//                             part.first->after(comp, iterator_map[0]);
+//                             part.first->pipeline(j0, ii);
+//                             part.first->unroll(j1, -1);
+//                         }
+//                     }
+//                 }
+                
+//                 this->current_opt_comp = comp;
+//                 comp->current_ii = ii;
+//                 comp->temp_strategy = tile_size;
+//                 comp->II = ii;
+//                 this->evaluate_func();
+                
+//                 long latency = comp->latency;
+//                 int dsp = this->dsp_usage;
+                
+//                 write_dse_record(myfile, tile_size, ii, latency, dsp, comp->minII);
+                
+//                 std::cout << "  II=" << ii << ": latency=" << latency 
+//                           << ", dsp=" << dsp << std::endl;
+                
+//                 if (latency < best_latency_overall && dsp <= this->dsp_max) {
+//                     best_latency_overall = latency;
+//                     best_tile_overall = tile_size;
+//                     best_ii_overall = ii;
+                    
+//                     std::cout << "    ✓ New global best: tile=[" 
+//                               << tile_size[0] << "," << tile_size[1] 
+//                               << "], II=" << ii << ", latency=" << latency << std::endl;
+//                 }
+                
+//                 if ((this->current_latency < this->best_latency || !this->consistent_flag) &&
+//                     dsp <= this->dsp_max) {
+//                     this->best_latency = this->current_latency;
+//                     this->best_dsp_usage = dsp;
+//                     current_design = tile_size;
+//                     best_ii_current = ii;
+//                 }
+//             }
+//         }
+        
+//         myfile.close();
+        
+//         if (!best_tile_overall.empty()) {
+//             comp->final_strategy = best_tile_overall;
+//             comp->current_strategy = best_tile_overall;
+//             comp->II = (best_ii_overall > 0) ? best_ii_overall : std::max(1, comp->minII);
+            
+//             std::cout << "\n=== 找到最优解 (2D) ===" << std::endl;
+//             std::cout << "Tile: [" << best_tile_overall[0] << "," 
+//                       << best_tile_overall[1] << "]" << std::endl;
+//             std::cout << "II: " << comp->II << std::endl;
+//             std::cout << "Latency: " << best_latency_overall << std::endl;
+            
+//             comp->apply_opt_strategy(comp->final_strategy);
+//             this->evaluate_func();
+            
+//             if (this->leader_computations.size() != 1) {
+//                 auto new_comp = this->update_latency();
+//                 if (std::find(finish_list.begin(), finish_list.end(), comp->get_name()) 
+//                     == finish_list.end()) {
+//                     auto_DSE_tile_size(new_comp, 1, path);
+//                 }
+//             }
+//         } else if (!current_design.empty()) {
+//             comp->current_strategy = current_design;
+//             comp->final_strategy = current_design;
+//             comp->II = (best_ii_current > 0) ? best_ii_current : std::max(1, comp->minII);
+//             auto_DSE_tile_size(comp, 1, path);
+//         } else {
+//             comp->opt_finished = true;
+//             auto_DSE_tile_size(comp, 1, path);
+//         }
+//     }
+    
+//     myfile.close();
+// }
 void polyfp::function::auto_DSE_tile_size(polyfp::compute *comp, int factor, std::string path)
 {
-    // std::cout<<"Currently optimized compute: "<<comp->get_name()<<std::endl;
+    if (comp->opt_finished == true) {
+        std::cout << "⏭️  Comp " << comp->get_name() << " already finished, skipping" << std::endl;
+        
+        // 切换到下一个未完成的计算
+        if (this->leader_computations.size() != 1) {
+            int path_index = this->get_longest_path();
+            std::vector<long> current_longest_path = paths[path_index];
+            int num = current_longest_path.size();
+            
+            for (int i = 0; i < num; i++) {
+                int node_index = current_longest_path[i];
+                int final_index = this->path_map[path_index][node_index];
+                
+                std::map<polyfp::compute *, int>::iterator it;
+                polyfp::compute *next_comp;
+                for (it = this->leader_computation_index.begin(); 
+                     it != this->leader_computation_index.end(); it++) {
+                    if (it->second == final_index) {
+                        next_comp = it->first;
+                        std::string name = next_comp->get_name();
+                        if (std::find(finish_list.begin(), finish_list.end(), name) 
+                            == finish_list.end()) {
+                            auto_DSE_tile_size(next_comp, 1, path);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        
+        std::cout << "✅ All computations finished" << std::endl;
+        return;
+    }
+    std::cout << "=== Auto DSE Tile Size (Test Mode with Fixed Tiles) ===" << std::endl;
+    std::cout << "Currently optimized compute: " << comp->get_name() << std::endl;
+    
+    // ===== 1. 路径处理 =====
+    if (!path.empty() && path.back() != '/') {
+        path += "/";
+    }
+    std::filesystem::create_directories(path);
+    
+    // ===== 2. 初始化状态 =====
     int scale;
-    //TODO components'domain is different from the leader's
     comp->set_schedule(comp->original_schedule);
     comp->set_loop_level_names(comp->original_loop_level_name);
     comp->directive_map.clear();
@@ -1733,237 +3498,322 @@ void polyfp::function::auto_DSE_tile_size(polyfp::compute *comp, int factor, std
     comp->tile_map.clear();
     comp->tile_size_map.clear();
     comp->access_map.clear();
-    auto iterators = comp->get_iteration_variables();
-    std::vector<polyfp::var> temp_iterators;
-    int temp_size = iterators.size();
     
-    if(temp_size>3)
-    {
-        int border = temp_size-3;
-        for(auto &iter: iterators)
-        {
-            int loc = comp->get_loop_level_number_from_dimension_name(iter.get_name());
-            if(loc>=border)
-            {
-                temp_iterators.push_back(iter);
-            }
-        }
-        iterators.clear();
-        iterators=temp_iterators;
-    }
+    // ===== 3. 获取迭代器（只取最内层 3 个）=====
+    auto iterators = comp->get_iteration_variables();
+    if ((int)iterators.size() > 3)
+        iterators.erase(iterators.begin(), iterators.end() - 3);
 
+    std::vector<std::pair<int, polyfp::var>> loc_iters;
+    for (auto &v : iterators) {
+        int loc = comp->get_loop_level_number_from_dimension_name(v.get_name());
+        loc_iters.push_back({loc, v});
+    }
+    std::sort(loc_iters.begin(), loc_iters.end(),
+              [](auto &a, auto &b){ return a.first < b.first; });
+
+    if (loc_iters.size() < 3) { /* 报错返回 */ }
+
+    auto X = loc_iters[0].second;  // i-like
+    auto Y = loc_iters[1].second;  // j-like
+    auto Z = loc_iters[2].second;  // k-like
+    
+    // ===== 4. 计算维度范围 =====
     std::vector<int> dim_ranges;
-    std::map<int, std::vector<int>> dim_tile_sizes;
-    bool not_2_pow = false;
-    int count = 0;
-    for(auto &iter: iterators)
-    {
+    for (auto &iter : iterators) {
         int lower = stoi(iter.get_lower().to_str());
         int upper = stoi(iter.get_upper().to_str());
-        int range = upper-lower;
+        int range = upper - lower;
         dim_ranges.push_back(range);
-        std::vector<int> temp;
-        if(range%32 != 0)
-        {
-            not_2_pow = true;
-            for(int i=2; i<range; i++)
-            {
-                if(range % i == 0)
-                {
-                    if(i == 2)
-                    {
-                        temp.push_back(i);   
-                    }
-                    else if(i == 3||i==5 ||i==7)
-                    {
-                        temp.push_back(i);   
-                    }
-                }
-
-            }
-            if(temp.size()==0)
-            {
-                temp.push_back(1);  
-            }
-        }
-        else
-        {
-            temp.push_back(1);   
-        }
-        dim_tile_sizes.insert(std::make_pair(count,temp));
-        count++;
     }
-    //TODO: SKEW MAP
-    std::map<int,polyfp::var> iterator_map;
+    
+    // ===== 5. 构建迭代器映射 =====
+    std::map<int, polyfp::var> iterator_map;
     int size = iterators.size();
-
-    scale = 16*pow(2,factor-1);
-
-    for(auto &iter: iterators)
-    {
+    
+    for (auto &iter : iterators) {
         int loc = comp->get_loop_level_number_from_dimension_name(iter.get_name());
         iterator_map[loc] = iter;
     }
-
-    if(comp->is_optimized == true )
-    {
-        if(comp->current_factor < comp->largest_factor && comp->opt_finished == false)
-        {
-            comp->current_factor+=1;
+    
+    // ===== 6. 处理 factor 和递归逻辑（简化版）=====
+    scale = 8 * pow(2, factor - 1);
+    
+    if (comp->is_optimized == true) {
+        if (comp->current_factor < comp->largest_factor && comp->opt_finished == false) {
+            comp->current_factor += 1;
             factor = comp->current_factor;
-            scale = 16*pow(2,comp->current_factor-1);
-        }
-        else{
+            scale = 16 * pow(2, comp->current_factor - 1);
+        } else {
             this->finish_list.push_back(comp->get_name());
-            if(comp->current_strategy.size()!=0)
-            {
+            if (comp->current_strategy.size() != 0) {
                 comp->final_strategy = comp->current_strategy;
-            }else{
-                // TODO
-                // std::cout<<"no final strategy"<<std::endl;       
             }
-            if(this->leader_computations.size()!=1)
-            {
+            
+            if (this->leader_computations.size() != 1) {
                 int path_index = this->get_longest_path();
                 std::vector<long> current_longest_path = paths[path_index];
-                std::vector<long> current_longest_path_latency;
-                std::map<long, int> current_longest_map;
                 int num = current_longest_path.size();
                 
-                for(int i=0; i<num; i++)
-                {
-                    long temp_latency = this->latency_map[current_longest_path[i]];
-                    current_longest_path_latency.push_back(temp_latency);
-                    current_longest_map.insert(std::make_pair(temp_latency,current_longest_path[i]));
-                }
-                std::sort(current_longest_path_latency.begin(),current_longest_path_latency.end(),std::greater<long>());
-                
-                
-                for(int i=0; i<num; i++)
-                {
-                    int node_index = current_longest_path[i]; 
+                for (int i = 0; i < num; i++) {
+                    int node_index = current_longest_path[i];
                     int final_index = this->path_map[path_index][node_index];
-                    std::map<polyfp::compute *,int>::iterator it;
-                    polyfp::compute *comp;
-                    for( it= this->leader_computation_index.begin();it!=this->leader_computation_index.end();it++) 
-                    {
-                        if(it->second==final_index)
-                        {
-                            comp = it->first;
-                            std::string name = comp->get_name();
-                            if (std::find(finish_list.begin(), finish_list.end(), name) == finish_list.end())
-                            {
-                                auto_DSE_tile_size(comp, 1,path);
+                    
+                    std::map<polyfp::compute *, int>::iterator it;
+                    polyfp::compute *next_comp;
+                    for (it = this->leader_computation_index.begin(); 
+                         it != this->leader_computation_index.end(); it++) {
+                        if (it->second == final_index) {
+                            next_comp = it->first;
+                            std::string name = next_comp->get_name();
+                            if (std::find(finish_list.begin(), finish_list.end(), name) 
+                                == finish_list.end()) {
+                                auto_DSE_tile_size(next_comp, 1, path);
                                 return;
-                            }   
+                            }
                         }
-                            
-                    } 
-                } 
-            }
-            return;
-        }
-
-    }
-
-    else
-    {
-        comp->is_optimized = true;
-        comp->current_factor = factor;
-    }
-
-    int factor1=1;
-    int factor2=1;
-    int factor3=1;
-
-    std::vector<std::vector<int>> tilesize_list;
-    std::vector<int> current_design;
-    std::vector<int> final_design;
-
-    // std::vector<int> final_strategy;
-    // std::vector<int> current_strategy;
-
-    // Print header row.
-    std::string s = this->get_name();
-    std::string path1 = path+s+".csv";
-    std::ifstream ifs(path1,std::ios::in);
-    char ch;
-    ifs>>ch;
-    std::ofstream myfile;
-    myfile.open(path1,std::ios::app);
-    if(ifs.eof())
-    {
-        for (unsigned i = 0; i < size; ++i)
-        {
-            myfile << "l" << i << ",";
-
-
-        }
-        myfile << "cycle,dsp,ii\n";     
-    }
- 
-    if(size >= 3)
-    {
-        // TODO, here 4 is desided by the scale
-
-        if(not_2_pow == false)
-        {
-            //config: 5,3
-            for(int i = 0; i<5+factor; i++)
-            {
-                factor1 = pow(2,i);
-                for(int j = 0; j<3+factor-i; j++)
-                {
-                    factor2 = pow(2,j);
-                    factor3 = scale/factor2/factor1;
-                    tilesize_list.push_back({factor1,factor2,factor3});
-                    // std::cout<<"tile factor: ";
-                    // std::cout<<factor1;
-                    // std::cout<<"; ";
-                    // std::cout<<factor2;
-                    // std::cout<<"; ";
-                    // std::cout<<factor3<<std::endl;
-                }
-            }
-        }else
-        {
-            std::vector<int> dim0 = dim_tile_sizes[0];
-            std::vector<int> dim1 = dim_tile_sizes[1];
-            std::vector<int> dim2 = dim_tile_sizes[2];
-            if(dim0.size()==0)
-            {
-                dim0.push_back(1);
-            }
-            if(dim1.size()==0)
-            {
-                dim1.push_back(1);
-            }
-            for(auto &size0: dim0)
-            {
-                for(auto &size1: dim1)
-                {
-                    for(auto &size2: dim2)
-                    {
-                        tilesize_list.push_back({size0,size1,size2});
-                        std::cout<<"tile factor: ";
-                        std::cout<<size0;
-                        std::cout<<"; ";
-                        std::cout<<size1;
-                        std::cout<<"; ";
-                        std::cout<<size2<<std::endl;
                     }
                 }
             }
-            comp->current_factor=3;
+            return;
+        }
+    } else {
+        comp->is_optimized = true;
+        comp->current_factor = factor;
+    }
+    
+    // ===== 7. 打开 CSV 文件 =====
+    std::string func_name = this->get_name();
+    std::string csv_path = path + func_name + ".csv";
+    
+    std::ofstream myfile;
+    myfile.open(csv_path, std::ios::out);  // 覆盖模式，确保每次都是新文件
+    
+    if (!myfile.is_open()) {
+        std::cerr << "❌ Failed to open CSV: " << csv_path << std::endl;
+        return;
+    }
+    
+    // 写入表头
+    for (unsigned i = 0; i < (unsigned)size; ++i) {
+        myfile << "l" << i << ",";
+    }
+    myfile << "ii,cycle,dsp,minii\n";
+    myfile.flush();
+    
+    std::cout << "✓ CSV path: " << csv_path << std::endl;
+    std::cout << "✓ Loop dimensions: " << size << std::endl;
+     
+    auto tile_fits = [](const std::vector<int>& tile, const std::vector<int>& ranges) -> bool {
+        size_t n = std::min(tile.size(), ranges.size());
+        for (size_t i = 0; i < n; ++i) {
+            if (tile[i] > ranges[i]) return false;
+        }
+        return true;
+    };
 
+    
+    auto explain_skip = [&](const std::vector<int>& tile){
+        std::ostringstream oss; oss << "  ⚠️  Skip tile [";
+        for (size_t i=0;i<tile.size();++i){ if(i) oss<<","; oss<<tile[i]; }
+        oss << "] because: ";
+        bool first=true;
+        for (size_t i=0;i<tile.size() && i<dim_ranges.size();++i){
+            if (tile[i] > dim_ranges[i]){
+                if(!first) oss << "; ";
+                oss << "tile["<<i<<"]="<<tile[i]<<" > range["<<i<<"]="<<dim_ranges[i];
+                first=false;
+            }
+        }
+        std::cout << oss.str() << std::endl;
+    };
+    // ===== 8. 使用固定的测试 tile 集合（手动指定）=====
+    std::vector<std::vector<int>> tilesize_list;
+    std::vector<int> current_design;
+    std::vector<int> final_design;
+    int best_ii_current = -1;
+    int best_ii_final = -1;
+    const int product_limit = 128;
+    const int max_per_dim   = 128;
+    
+    tilesize_list.clear();
+    // ===== 根据维度选择测试 tile =====
+    if (size >= 3) {
+        std::vector<std::vector<int>> pairs2d;
+        {
+            std::vector<int> dim2 = { dim_ranges[1], dim_ranges[2] };
+            generate2DTileCandidates(dim2, pairs2d, product_limit /*注意：这里是b*c的限制*/, max_per_dim);
+        }
+        // a 固定为 1（若不固定，枚举base也行）
+        std::vector<int> cand_a;
+        if (1 <= dim_ranges[0] && 1 <= max_per_dim) cand_a.push_back(1);
+        // 若想不固定 a，则用 base 生成：
+        // std::vector<int> base = {1,2,4,8,16,32,64,128};
+        // for (int v: base) if (v <= dim_ranges[0] && v <= max_per_dim) cand_a.push_back(v);
+
+        for (auto &bc : pairs2d) {
+            int b = bc[0], c = bc[1];
+            if (b <= 0 || c <= 0) continue;
+            if (b > dim_ranges[1] || c > dim_ranges[2]) continue;  // 安全过滤
+            for (int a : cand_a) {
+                if (a==1 && b==1 && c==1) continue;
+                long prod = 1L * a * b * c;
+                if (prod <= product_limit) tilesize_list.push_back({a,b,c});
+            }
         }
 
-        bool larger_factor = true;
-        if(larger_factor == true)
-        {
-            for(auto &tile_size: tilesize_list)
-            {
+        std::sort(tilesize_list.begin(), tilesize_list.end());
+        tilesize_list.erase(std::unique(tilesize_list.begin(), tilesize_list.end()), tilesize_list.end());
 
+        std::cout << "[AUTO] 3D 候选数量: " << tilesize_list.size() << std::endl;
+
+    } else if (size == 2) {
+        generate2DTileCandidates(dim_ranges, tilesize_list, product_limit, max_per_dim);
+        std::cout << "[AUTO] 2D 候选数量: " << tilesize_list.size() << std::endl;
+    } else {
+        std::cout << "[WARNING] 不支持的维度数: " << size << std::endl;
+        myfile.close();
+        return;
+    }
+    
+    // ===== 9. 全局最优解跟踪 =====
+    std::vector<int> best_tile_overall;
+    int best_ii_overall = -1;
+    long best_latency_overall = LONG_MAX;
+    int total_records = 0;
+    
+    // ===== 10. 遍历所有 tile 候选 =====
+    for (auto &tile_size : tilesize_list) {
+        std::cout << "\n=== Processing tile: [";
+        for (size_t i = 0; i < tile_size.size(); ++i) {
+            if (i > 0) std::cout << ",";
+            std::cout << tile_size[i];
+        }
+        std::cout << "] ===" << std::endl;
+        if (!tile_fits(tile_size, dim_ranges)) {
+            explain_skip(tile_size);  // 可删
+            continue;
+        }
+        // a) Reset 状态
+        comp->set_schedule(comp->original_schedule);
+        comp->set_loop_level_names(comp->original_loop_level_name);
+        comp->directive_map.clear();
+        comp->is_unrolled = false;
+        comp->unroll_factor.clear();
+        comp->unroll_dimension.clear();
+        comp->tile_map.clear();
+        comp->tile_size_map.clear();
+        comp->access_map.clear();
+        comp->opt_finished = false;
+        
+        // b) 检查 tile 合法性
+        bool valid_tile = true;
+        for (size_t i = 0; i < tile_size.size() && i < dim_ranges.size(); ++i) {
+            if (tile_size[i] <= 0 ||tile_size[i] > dim_ranges[i] ) {
+                std::cout << "  ⚠️  Tile[" << i << "]=" << tile_size[i] 
+                          << " > range=" << dim_ranges[i] << ", 跳过" << std::endl;
+                valid_tile = false;
+                break;
+            }
+        }
+        
+        if (!valid_tile) {
+            continue;
+        }
+        
+        // ===== 根据维度应用 tile =====
+        if (size >= 3) {
+            // ===== 3D 情况 =====
+            var i0("i0"), j0("j0"), k0("k0"), i1("i1"), j1("j1"), k1("k1");
+            int temp_index = comp->get_iteration_variables().size() - 3;
+            
+            // 应用 tile
+            if (!(tile_size[0] == 1 && tile_size[1] == 1 && tile_size[2] == 1)) {
+                comp->tile(X, Y, Z, tile_size[0], tile_size[1], 
+                          tile_size[2], i0, j0, k0, i1, j1, k1);
+            }
+            
+            // 第一次评估（II=1）获取 minII
+            if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+                comp->pipeline(k0, 1);
+                comp->unroll(k1, -1);
+                comp->unroll(j1, -1);
+                comp->unroll(i1, -1);
+            } else if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] == 1) {
+                comp->pipeline(k0, 1);
+                comp->unroll(k1, -1);
+                comp->unroll(j1, -1);
+            } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] != 1) {
+                comp->pipeline(k0, 1);
+                comp->unroll(k1, -1);
+                comp->unroll(i1, -1);
+            } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] == 1) {
+                comp->pipeline(k0, 1);
+                comp->unroll(k1, -1);
+            } else if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+                int lower = stoi(Z.get_lower().to_str());
+                int upper = stoi(Z.get_upper().to_str());
+                int range = upper - lower;
+                if (range <= 6) {
+                    comp->pipeline(j0, 1);
+                    comp->unroll(j1, -1);
+                    comp->unroll(i1, -1);
+                    comp->unroll(Z, -1);
+                } else {
+                    comp->pipeline(Z, 1);
+                    comp->unroll(j1, -1);
+                    comp->unroll(i1, -1);
+                }
+            }
+            
+            // 应用到子组件
+            for (auto &part : comp->components) {
+                part.first->set_schedule(part.first->original_schedule);
+                part.first->set_loop_level_names(part.first->original_loop_level_name);
+                part.first->tile(X, Y, 
+                               Z, tile_size[0], tile_size[1], 
+                               tile_size[2], i0, j0, k0, i1, j1, k1);
+                
+                if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+                    if (part.first->after_level == 2) {
+                        part.first->after(comp, j1);
+                    } else if (part.first->after_level == 0) {
+                        part.first->after(comp, i0);
+                        part.first->pipeline(Z, 1);
+                    }
+                } else {
+                    if (part.first->after_level == 2) {
+                        part.first->after(comp, k1);
+                    } else if (part.first->after_level == 0) {
+                        part.first->after(comp, X);
+                        part.first->pipeline(Z, 1);
+                        part.first->unroll(k1, -1);
+                        part.first->unroll(j1, -1);
+                    }
+                }
+            }
+            
+            // 初始评估
+            this->current_opt_comp = comp;
+            comp->temp_strategy = tile_size;
+            comp->II = 1;
+            this->evaluate_func();
+            
+            int minII = std::max(1, comp->minII);
+            int maxII ;
+            if (minII == 1) {
+                maxII = 3;  // minII=1 时 II 不敏感，只测 1~3
+            } else if (minII <= 4) {
+                maxII = minII + 2;  // minII 较小时测几个点
+            } else {
+                maxII = minII + 1;  // minII 较大时只测 minII 和 minII+1
+            }
+            std::cout << "  minII=" << minII << ", maxII=" << maxII 
+                      << " (将枚举 " << (maxII - minII + 1) << " 个 II 值)" << std::endl;
+            
+            // ===== II 全枚举 =====
+            for (int ii = minII; ii <= maxII; ++ii) {
+                // Reset 状态
                 comp->set_schedule(comp->original_schedule);
                 comp->set_loop_level_names(comp->original_loop_level_name);
                 comp->directive_map.clear();
@@ -1973,509 +3823,308 @@ void polyfp::function::auto_DSE_tile_size(polyfp::compute *comp, int factor, std
                 comp->tile_map.clear();
                 comp->tile_size_map.clear();
                 comp->access_map.clear();
-                comp->opt_finished = false;
-
-                var i0("i0"), j0("j0"),k0("k0"), i1("i1"), j1("j1"),k1("k1");
-                if(tile_size[0]<=3 && tile_size[1]<=16 && tile_size[2]<=16)
-                {
-                // if(tile_size[0]<=16 && tile_size[1]<32 && tile_size[2]<32){
-                // if(tile_size[0]<2 && tile_size[1]<4 && tile_size[2]<4){
-                    int temp_index = comp->get_iteration_variables().size()-3;
-                    // std::cout<<iterator_map[0].get_name()<<std::endl;
-                    // std::cout<<iterator_map[1].get_name()<<std::endl;
-                    // std::cout<<iterator_map[2].get_name()<<std::endl;
-                    if(tile_size[2]==1 && tile_size[1]==1 && tile_size[0]==1)
-                    {
-                        
-                    }else{
-                        comp->tile(iterator_map[temp_index],iterator_map[temp_index+1],iterator_map[temp_index+2],tile_size[0],tile_size[1],tile_size[2],i0, j0, k0, i1, j1, k1);
-                    }
-                    
-                    if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]!=1){
-                        comp->pipeline(k0,1);
-                        comp->unroll(k1,-1);
-                        comp->unroll(j1,-1);
-                        comp->unroll(i1,-1);
-                    }
-                    if(tile_size[2]!=1 && tile_size[1]!=1 && tile_size[0]==1){
-                        comp->pipeline(k0,1);
-                        comp->unroll(k1,-1);
-                        comp->unroll(j1,-1);
-                    }
-                    if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]!=1){
-                        comp->pipeline(k0,1);
-                        comp->unroll(k1,-1);
-                        comp->unroll(i1,-1);
-                    }
-                    if(tile_size[2]!=1 && tile_size[1]==1 && tile_size[0]==1){
-                        comp->pipeline(k0,1);
-                        comp->unroll(k1,-1);
-                        // comp->unroll(i1,-1);
-                    }
-                    if(tile_size[2]==1 && tile_size[1]==1 && tile_size[0]==1){
-                        int lower = stoi(iterator_map[temp_index+2].get_lower().to_str());
-                        int upper = stoi(iterator_map[temp_index+2].get_upper().to_str());
-                        int range = upper-lower;
-                        if(range<=7){
-                            comp->pipeline(iterator_map[temp_index+1],1);
-                            comp->unroll(iterator_map[temp_index+2],-1);
-                        }
-                    }
-                    if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1){
-                        int lower = stoi(iterator_map[temp_index+2].get_lower().to_str());
-                        int upper = stoi(iterator_map[temp_index+2].get_upper().to_str());
-                        int range = upper-lower;
-                        if(range<=6){
-                            comp->pipeline(j0,1);
-                            comp->unroll(j1,-1);
-                            comp->unroll(i1,-1);
-                            comp->unroll(iterator_map[temp_index+2],-1);
-                        }else{
-                            comp->pipeline(iterator_map[temp_index+2],1);
-                            comp->unroll(j1,-1);
-                            comp->unroll(i1,-1);
-                        }
-                        
-                    }
-                    for(auto &part:comp->components){
-                        part.first->set_schedule(part.first->original_schedule);
-                        part.first->set_loop_level_names(part.first->original_loop_level_name);
-                        part.first->tile(iterator_map[temp_index+0],iterator_map[temp_index+1],iterator_map[temp_index+2],tile_size[0],tile_size[1],tile_size[2],i0, j0, k0, i1, j1, k1);
-                        if(tile_size[2]==1 && tile_size[1]!=1 && tile_size[0]!=1){
-                            if(part.first->after_level == 2){
-                                part.first->after(comp,j1);
-                            }else if(part.first->after_level == 0){
-                                part.first->after(comp,i0);
-                                part.first->pipeline(iterator_map[temp_index+2],1);   
-                            }
-                            // part.first->after(comp,j1);
-                        }else{
-                            if(part.first->after_level == 2){
-                                part.first->after(comp,k1);
-                            }else if(part.first->after_level == 0){
-                                part.first->after(comp,iterator_map[temp_index+0]);
-                                part.first->pipeline(iterator_map[temp_index+2],1);   
-                                //TODO
-                                part.first->unroll(k1,-1);
-                                part.first->unroll(j1,-1);
-                            }
-                            // part.first->after(comp,k1);
-                        }
-                    }
-                    int II = 1;
-                    this->current_opt_comp = comp;
-                    //TODO
-                    if(this->leader_computations.size() == -1){                          
-                        this->evaluate_func();
-                        if(this->current_latency < this->best_latency && this->dsp_max>= this->dsp_usage){
-                            this->best_latency = this->current_latency;
-                            this->best_dsp_usage = this->dsp_usage;
-                            // std::cout<<"best_latency:  ";
-                            // std::cout<<best_latency<<std::endl;
-                            this->dump_schedule(path);
-                        }
-
-                    }else
-                    {  
-                        comp->temp_strategy = tile_size;
-                        this->evaluate_func();
-                        auto latency = comp->latency;
-                        int dsp = comp->dsp;
-                        // std::cout<<"schedule: "+std::to_string(tile_size[0])+", "+std::to_string(tile_size[1])+", "+std::to_string(tile_size[2])+": "+std::to_string(latency)+": "+std::to_string(dsp)<<std::endl;
-                        // this->update_latency();
-                        // std::cout<<"after evaluation"<<std::endl;
-                        // auto new_comp = this->update_latency();
-                        polyfp::compute * new_comp = NULL;
-                        if((this->current_latency < this->best_latency || this->consistent_flag == false) && this->dsp_max>=this->dsp_usage){
-                            auto comp = this->update_latency();
-                            int path_index = this->get_longest_path();
-                            std::vector<long> current_longest_path = paths[path_index];
-                            std::vector<long> current_longest_path_latency;
-                            std::map<long, int> current_longest_map;
-                            int num = current_longest_path.size();
-                            
-                            for(int i=0; i<num; i++){
-                                long temp_latency = this->latency_map[current_longest_path[i]];
-                                current_longest_path_latency.push_back(temp_latency);
-                                current_longest_map.insert(std::make_pair(temp_latency,current_longest_path[i]));
-                            }
-                            std::sort(current_longest_path_latency.begin(),current_longest_path_latency.end(),std::greater<long>());
-                            bool comp_flag = false;
-                            for(int i=0; i<num; i++)
-                            {
-                                int node_index = current_longest_path[i]; 
-                                int final_index = this->path_map[path_index][node_index];
-                                // int final_index = current_longest_map[current_longest_path_latency[i]];
-                                // std::cout<<"the final_index"+std::to_string(final_index);
-                                std::map<polyfp::compute *,int>::iterator it;
-                                polyfp::compute *comp1;
-                                for( it= this->leader_computation_index.begin();it!=this->leader_computation_index.end();it++) 
-                                {
-                                    if(it->second==final_index)
-                                    {
-                                        comp1 = it->first;
-                                        std::string name = comp1->get_name();
-                                        if (std::find(finish_list.begin(), finish_list.end(), name) == finish_list.end())
-                                        {
-                                            new_comp = comp1;
-                                            comp_flag = true;
-                                            
-                                            break;
-                                        }   
-                                    }
-                                        
-                                } 
-                                if(comp_flag == true)
-                                {
-                                    break;
-                                }
-                            }        
-                            if(new_comp == NULL)
-                            {
-                                return;
-                            }
-                            if(new_comp->get_name() != comp->get_name() && this->dsp_max>=this->dsp_usage)
-                            {
-                                this->best_latency = this->current_latency;
-                                final_design = tile_size;
-                                break;
-                            }else if(new_comp->get_name() == comp->get_name() &&this->current_latency < this->best_latency && this->dsp_max>= this->dsp_usage)
-                            {
-                                this->best_latency = this->current_latency;
-                                this->best_dsp_usage = this->dsp_usage;               
-                                current_design = tile_size;                             
-                                long latency = comp->latency;
-                                int dsp = comp->dsp;
-                               
-                            }else{
-                                // TODO
-                            }
-                            auto latency = comp->latency;
-                                int dsp = comp->dsp;                       
-                        }
-                      
-                    }
-                    
-                    auto latency = comp->latency;
-                        int dsp = comp->dsp;
-                 
-                    myfile << tile_size[0] << ",";
-                    myfile << tile_size[1] << ",";
-                    myfile << tile_size[2] << ",";
-                    myfile << latency<< ",";
-                    myfile << this->dsp_usage << ",";
-                    myfile << comp->minII << "\n";
-
+                
+                // 重新应用 tile
+                if (!(tile_size[0] == 1 && tile_size[1] == 1 && tile_size[2] == 1)) {
+                    comp->tile(X, Y, 
+                              Z, tile_size[0], tile_size[1], 
+                              tile_size[2], i0, j0, k0, i1, j1, k1);
                 }
                 
-            }
-            if(final_design.size()!=0)
-            {
-                comp->final_strategy = final_design;
-                comp->current_strategy = final_design;
-                comp->apply_opt_strategy(comp->final_strategy);
-                this->evaluate_func();
-                auto new_comp = this->update_latency();
-                auto_DSE_tile_size(new_comp, 1,path);
-            }
-            else if(current_design.size()!=0)
-            {
-                comp->current_strategy = current_design;
-                comp->final_strategy = current_design;
-                auto_DSE_tile_size(comp, 1,path);
-            }else if(current_design.size()==0)
-            {
-                comp->opt_finished = true;
-                auto_DSE_tile_size(comp, 1,path);
-
-            }
-
-        }
-        myfile.close();
-    }
-    else if(size == 2)
-    {
-        if(not_2_pow == false)
-        {
-            for(int j = 0; j<2+factor; j++)
-            {
-                factor1 = pow(2,j);
-                factor2 = scale/factor1;
-                tilesize_list.push_back({factor1,factor2});     
-            }
-        }else{
-            std::vector<int> dim0 = dim_tile_sizes[0];
-            std::vector<int> dim1 = dim_tile_sizes[1];
-            if(dim0.size()==0){
-                dim0.push_back(1);
-            }
-            for(auto &size0: dim0)
-            {
-                for(auto &size1: dim1)
-                {
-                    tilesize_list.push_back({size0,size1});
+                // 应用 pipeline/unroll（使用当前 II）
+                if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+                    comp->pipeline(k0, ii);
+                    comp->unroll(k1, -1);
+                    comp->unroll(j1, -1);
+                    comp->unroll(i1, -1);
+                } else if (tile_size[2] != 1 && tile_size[1] != 1 && tile_size[0] == 1) {
+                    comp->pipeline(k0, ii);
+                    comp->unroll(k1, -1);
+                    comp->unroll(j1, -1);
+                } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] != 1) {
+                    comp->pipeline(k0, ii);
+                    comp->unroll(k1, -1);
+                    comp->unroll(i1, -1);
+                } else if (tile_size[2] != 1 && tile_size[1] == 1 && tile_size[0] == 1) {
+                    comp->pipeline(k0, ii);
+                    comp->unroll(k1, -1);
+                } else if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+                    int lower = stoi(Z.get_lower().to_str());
+                    int upper = stoi(Z.get_upper().to_str());
+                    int range = upper - lower;
+                    if (range <= 6) {
+                        comp->pipeline(j0, ii);
+                        comp->unroll(j1, -1);
+                        comp->unroll(i1, -1);
+                        comp->unroll(Z, -1);
+                    } else {
+                        comp->pipeline(Z, ii);
+                        comp->unroll(j1, -1);
+                        comp->unroll(i1, -1);
+                    }
                 }
-            }
-            comp->current_factor=3;
-
-        }
-        
-        bool larger_factor = true;
-        for(auto &tile_size: tilesize_list)
-        {
-            comp->set_schedule(comp->original_schedule);
-            comp->set_loop_level_names(comp->original_loop_level_name);
-            comp->directive_map.clear();
-            comp->is_unrolled = false;
-            comp->unroll_factor.clear();
-            comp->unroll_dimension.clear();
-            comp->tile_map.clear();
-            comp->tile_size_map.clear();
-            comp->access_map.clear();
-            comp->opt_finished = false;
-            var i0("i0"), j0("j0"), i1("i1"), j1("j1");
-            int lower1 = stoi(iterator_map[0].get_lower().to_str());
-            int upper1 = stoi(iterator_map[0].get_upper().to_str());
-            int range1 = upper1-lower1;
-            int lower2 = stoi(iterator_map[1].get_lower().to_str());
-            int upper2 = stoi(iterator_map[1].get_upper().to_str());
-            int range2 = upper2-lower2;
-            // if(tile_size[0]<=16 && tile_size[1]<=16){
-            if(tile_size[0]<32 && tile_size[1]<=32 && range1>tile_size[0] && range2>tile_size[1])
-            {
-            // if(tile_size[0]<2 && tile_size[1]<4){
-                // for(auto &iter: comp)
-                // std::cout<<"size1"<<std::endl;
-                // if(iterator_map[0].)
-                comp->tile(iterator_map[0],iterator_map[1],tile_size[0],tile_size[1],i0, j0, i1, j1);
-                if(tile_size[1]!=1&&tile_size[0]!=1)
-                {
-                    comp->pipeline(j0,1);
-                    comp->unroll(j1,-1);
-                    comp->unroll(i1,-1);
-                }else if(tile_size[1]==1&&tile_size[0]!=1)
-                {
-                    comp->pipeline(iterator_map[1],1);
-                    comp->unroll(i1,-1);
-                }else if(tile_size[0]==1&&tile_size[1]!=1)
-                {
-                    comp->pipeline(j0,1);
-                    comp->unroll(j1,-1);
-                }
-                for(auto &part:comp->components)
-                {
+                
+                // 子组件应用相同策略
+                for (auto &part : comp->components) {
                     part.first->set_schedule(part.first->original_schedule);
                     part.first->set_loop_level_names(part.first->original_loop_level_name);
-                    part.first->directive_map.clear();
-                    part.first->is_unrolled = false;
-                    part.first->unroll_factor.clear();
-                    part.first->unroll_dimension.clear();
-                    part.first->tile_map.clear();
-                    part.first->tile_size_map.clear();
-                    part.first->access_map.clear();
-                    part.first->tile(iterator_map[0],iterator_map[1],tile_size[0],tile_size[1],i0, j0, i1, j1);
-
-                    if(tile_size[1]!=1&&tile_size[0]!=1)
-                    {
-                        if(part.first->after_level == 1)
-                        {
-                            
-                            part.first->after(comp,j1);
-                        }else if(part.first->after_level == 0)
-                        {
-                            part.first->pipeline(j0,1);
-                            part.first->after(comp,i0);
-                            // part.first->unroll(j1,-1);
-                            // part.first->unroll(i1,-1);
-                        }
-                        
-                    }else if(tile_size[1]==1&&tile_size[0]!=1)
-                    {
-                        if(part.first->after_level == 1)
-                        {
-                            part.first->after(comp,i1);
-                        }else if(part.first->after_level == 0)
-                        {
-                            part.first->after(comp,i0);
-                            part.first->pipeline(iterator_map[1],1);
-                            
-                        }
-                        // part.first->after(comp,i1);
-                    }else if(tile_size[0]==1&&tile_size[1]!=1)
-                    {
-                        if(part.first->after_level == 1)
-                        {
-                            // part.first->unroll(j1,-1);
-                            // std::cout<<"part.first->after(comp,j1);  "<<std::endl;
-                            part.first->after(comp,j1);
-                            
-                        }else if(part.first->after_level == 0)
-                        {
-                            part.first->pipeline(j0,1);
-                            part.first->after(comp,iterator_map[0]);
-                            // std::cout<<"unroll dimension 2"<<std::endl;
-                            part.first->unroll(j1,-1);
-                        }
-                    }
-                
-                }
-                this->current_opt_comp = comp;
-                if(this->leader_computations.size() == -1)
-                {               
-                    this->evaluate_func();
-                    if(this->current_latency <= this->best_latency && this->dsp_max>= this->dsp_usage)
-                    {
-                        this->best_latency = this->current_latency;
-                        this->best_dsp_usage = this->dsp_usage;
-                        this->dump_schedule(path);
-                    }
+                    part.first->tile(X, Y, 
+                                   Z, tile_size[0], tile_size[1], 
+                                   tile_size[2], i0, j0, k0, i1, j1, k1);
                     
-                    if(this->dsp_max>this->dsp_usage)
-                    {
-                        larger_factor = true;
-                        // auto_DSE_tile_size(new_comp, factor);
-                    }
-
-                }else
-                {  
-                        comp->temp_strategy = tile_size;
-                        this->evaluate_func();
-                        long latency = comp->latency;
-                        int dsp = comp->dsp;
-                        
-                        polyfp::compute * new_comp = NULL;
-                        if(this->current_latency < this->best_latency  && this->dsp_max>=this->dsp_usage)
-                        {
-                            auto comp = this->update_latency();
-                            if(this->leader_computations.size()!=1)
-                            {
-                                int path_index = this->get_longest_path();
-                                std::vector<long> current_longest_path = paths[path_index];
-                                std::vector<long> current_longest_path_latency;
-                                std::map<long, int> current_longest_map;
-                                int num = current_longest_path.size();
-                                
-                                for(int i=0; i<num; i++)
-                                {
-                                    long temp_latency = this->latency_map[current_longest_path[i]];
-                                    current_longest_path_latency.push_back(temp_latency);
-                                    current_longest_map.insert(std::make_pair(temp_latency,current_longest_path[i]));
-                                }
-                                std::sort(current_longest_path_latency.begin(),current_longest_path_latency.end(),std::greater<long>());
-                                bool comp_flag = false;
-                                for(int i=0; i<num; i++)
-                                {
-                                    int node_index = current_longest_path[i]; 
-                                    int final_index = this->path_map[path_index][node_index];
-                                  
-                                    std::map<polyfp::compute *,int>::iterator it;
-                                    polyfp::compute *comp1;
-                                    for( it= this->leader_computation_index.begin();it!=this->leader_computation_index.end();it++) 
-                                    {
-                                        if(it->second==final_index)
-                                        {
-                                            comp1 = it->first;
-                                            std::string name = comp1->get_name();
-                             
-                                            if (std::find(finish_list.begin(), finish_list.end(), name) == finish_list.end()){
-           
-                                                new_comp = comp1;
-                                                comp_flag = true;
-                                                
-                                                break;
-                                            }   
-                                        }
-                                            
-                                    } 
-                                    if(comp_flag == true)
-                                    {
-                                        break;
-                                    }
-                                }        
-                                if(new_comp == NULL)
-                                {
-                                    return;
-                                }
-                                if(new_comp->get_name() != comp->get_name() && this->dsp_max>=this->dsp_usage)
-                                {
-                                   
-                                    this->best_latency = this->current_latency;
-                                    final_design = tile_size;
-                                    break;
-                                }else if(new_comp->get_name() == comp->get_name() &&this->current_latency < this->best_latency && this->dsp_max>= this->dsp_usage)
-                                {
-                                    this->best_latency = this->current_latency;
-                                    this->best_dsp_usage = this->dsp_usage;
-                                    current_design = tile_size;
-                                    auto latency = comp->latency;
-                                    int dsp = comp->dsp;
-                                }else{
-                                   // TODO
-                                }
-                                auto latency = comp->latency;
-                                    int dsp = comp->dsp;
-                            }else{
-                                new_comp = comp;
-                                if(new_comp->get_name() == comp->get_name() &&this->current_latency < this->best_latency && this->dsp_max>= this->dsp_usage)
-                                {
-                                    this->best_latency = this->current_latency;
-                                    this->best_dsp_usage = this->dsp_usage;
-                                    current_design = tile_size;
-                                    auto latency = comp->latency;
-                                    int dsp = comp->dsp;
-                                   
-                                }else
-                                {
-                                    // TODO
-                                }
-                                auto latency = comp->latency;
-                                    int dsp = comp->dsp;
-                            }
-                            
-                               
+                    if (tile_size[2] == 1 && tile_size[1] != 1 && tile_size[0] != 1) {
+                        if (part.first->after_level == 2) {
+                            part.first->after(comp, j1);
+                        } else if (part.first->after_level == 0) {
+                            part.first->after(comp, i0);
+                            part.first->pipeline(Z, ii);
                         }
-                     
+                    } else {
+                        if (part.first->after_level == 2) {
+                            part.first->after(comp, k1);
+                        } else if (part.first->after_level == 0) {
+                            part.first->after(comp, X);
+                            part.first->pipeline(Z, ii);
+                            part.first->unroll(k1, -1);
+                            part.first->unroll(j1, -1);
+                        }
                     }
+                }
                 
-               
-                auto latency = comp->latency;
-                int dsp = comp->dsp;
+                // 评估当前配置
+                this->current_opt_comp = comp;
+                comp->current_ii = ii;
+                comp->temp_strategy = tile_size;
+                comp->II = ii;
+                this->evaluate_func();
                 
-               // TODO
-                myfile << tile_size[0] << ",";
-                myfile << tile_size[1] << ",";
-                myfile << latency<< ",";
-                myfile << this->dsp_usage << "\n";
-
+                long latency = comp->latency;
+                int dsp = this->dsp_usage;
+                
+                // 写入 CSV
+                write_dse_record(myfile, tile_size, ii, latency, dsp, comp->minII);
+                total_records++;
+                
+                std::cout << "    II=" << ii << ": latency=" << latency 
+                          << ", dsp=" << dsp << " [" << total_records << "]" << std::endl;
+                
+                // 更新全局最优解
+                if (latency < best_latency_overall && dsp <= this->dsp_max) {
+                    best_latency_overall = latency;
+                    best_tile_overall = tile_size;
+                    best_ii_overall = ii;
+                    
+                    std::cout << "      ✓✓✓ NEW GLOBAL BEST ✓✓✓" << std::endl;
+                }
+                
+                // 更新 current design
+                if ((this->current_latency < this->best_latency || !this->consistent_flag) &&
+                    dsp <= this->dsp_max) {
+                    auto new_comp = this->update_latency();
+                    
+                    if (new_comp->get_name() != comp->get_name()) {
+                        this->best_latency = this->current_latency;
+                        final_design = tile_size;
+                        best_ii_final = ii;
+                        std::cout << "      → 需要切换到新计算: " << new_comp->get_name() << std::endl;
+                        break;
+                    } else {
+                        this->best_latency = this->current_latency;
+                        this->best_dsp_usage = dsp;
+                        current_design = tile_size;
+                        best_ii_current = ii;
+                    }
+                }
+            }  // 结束 II 枚举
+            
+            if (!final_design.empty()) {
+                break;  // 需要切换计算
             }
             
-
+        } else if (size == 2) {
+            // ===== 2D 情况（逻辑类似）=====
+            var i0("i0"), j0("j0"), i1("i1"), j1("j1");
             
-        }
-        
-        if(final_design.size()!=0)
-        {               
-            comp->final_strategy = final_design;
-            comp->current_strategy = final_design;
-            comp->apply_opt_strategy(comp->final_strategy);
+            comp->tile(iterator_map[0], iterator_map[1], 
+                      tile_size[0], tile_size[1], i0, j0, i1, j1);
+            
+            if (tile_size[1] != 1 && tile_size[0] != 1) {
+                comp->pipeline(j0, 1);
+                comp->unroll(j1, -1);
+                comp->unroll(i1, -1);
+            } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+                comp->pipeline(iterator_map[1], 1);
+                comp->unroll(i1, -1);
+            } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+                comp->pipeline(j0, 1);
+                comp->unroll(j1, -1);
+            }
+            
+            this->current_opt_comp = comp;
+            comp->temp_strategy = tile_size;
+            comp->II = 1;
             this->evaluate_func();
-            auto new_comp = this->update_latency();
-            auto_DSE_tile_size(new_comp, 1,path);
-        }else if(current_design.size()!=0)
-        {
-            comp->current_strategy = current_design;
-            auto_DSE_tile_size(comp, 1,path);
-        }else if(current_design.size()==0||comp->current_factor == comp->largest_factor)
-        {
-            comp->opt_finished = true;
-            auto_DSE_tile_size(comp, 1,path);
-
+            
+            int minII = std::max(1, comp->minII);
+            int maxII = 5;
+            
+            std::cout << "  minII=" << minII << ", maxII=" << maxII 
+                      << " (将枚举 " << (maxII - minII + 1) << " 个 II 值)" << std::endl;
+            
+            for (int ii = minII; ii <= maxII; ++ii) {
+                comp->set_schedule(comp->original_schedule);
+                comp->set_loop_level_names(comp->original_loop_level_name);
+                comp->directive_map.clear();
+                comp->is_unrolled = false;
+                comp->unroll_factor.clear();
+                comp->unroll_dimension.clear();
+                comp->tile_map.clear();
+                comp->tile_size_map.clear();
+                comp->access_map.clear();
+                
+                comp->tile(iterator_map[0], iterator_map[1], 
+                          tile_size[0], tile_size[1], i0, j0, i1, j1);
+                
+                if (tile_size[1] != 1 && tile_size[0] != 1) {
+                    comp->pipeline(j0, ii);
+                    comp->unroll(j1, -1);
+                    comp->unroll(i1, -1);
+                } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+                    comp->pipeline(iterator_map[1], ii);
+                    comp->unroll(i1, -1);
+                } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+                    comp->pipeline(j0, ii);
+                    comp->unroll(j1, -1);
+                }
+                
+                for (auto &part : comp->components) {
+                    part.first->set_schedule(part.first->original_schedule);
+                    part.first->set_loop_level_names(part.first->original_loop_level_name);
+                    part.first->tile(iterator_map[0], iterator_map[1], 
+                                   tile_size[0], tile_size[1], i0, j0, i1, j1);
+                    
+                    if (tile_size[1] != 1 && tile_size[0] != 1) {
+                        if (part.first->after_level == 1) {
+                            part.first->after(comp, j1);
+                        } else if (part.first->after_level == 0) {
+                            part.first->pipeline(j0, ii);
+                            part.first->after(comp, i0);
+                        }
+                    } else if (tile_size[1] == 1 && tile_size[0] != 1) {
+                        if (part.first->after_level == 1) {
+                            part.first->after(comp, i1);
+                        } else if (part.first->after_level == 0) {
+                            part.first->after(comp, i0);
+                            part.first->pipeline(iterator_map[1], ii);
+                        }
+                    } else if (tile_size[0] == 1 && tile_size[1] != 1) {
+                        if (part.first->after_level == 1) {
+                            part.first->after(comp, j1);
+                        } else if (part.first->after_level == 0) {
+                            part.first->after(comp, iterator_map[0]);
+                            part.first->pipeline(j0, ii);
+                            part.first->unroll(j1, -1);
+                        }
+                    }
+                }
+                
+                this->current_opt_comp = comp;
+                comp->current_ii = ii;
+                comp->temp_strategy = tile_size;
+                comp->II = ii;
+                this->evaluate_func();
+                
+                long latency = comp->latency;
+                int dsp = this->dsp_usage;
+                
+                write_dse_record(myfile, tile_size, ii, latency, dsp, comp->minII);
+                total_records++;
+                
+                std::cout << "    II=" << ii << ": latency=" << latency 
+                          << ", dsp=" << dsp << " [" << total_records << "]" << std::endl;
+                
+                if (latency < best_latency_overall && dsp <= this->dsp_max) {
+                    best_latency_overall = latency;
+                    best_tile_overall = tile_size;
+                    best_ii_overall = ii;
+                    
+                    std::cout << "      ✓✓✓ NEW GLOBAL BEST ✓✓✓" << std::endl;
+                }
+                
+                if ((this->current_latency < this->best_latency || !this->consistent_flag) &&
+                    dsp <= this->dsp_max) {
+                    this->best_latency = this->current_latency;
+                    this->best_dsp_usage = dsp;
+                    current_design = tile_size;
+                    best_ii_current = ii;
+                }
+            }
         }
-        myfile.close();
+    }  // 结束 tile 枚举
+    
+    // ===== 11. 打印测试总结 =====
+    myfile.close();
+
+    std::cout << "\n=== DSE Test Summary ===" << std::endl;
+    std::cout << "Total tiles tested: " << tilesize_list.size() << std::endl;
+    std::cout << "Total records written: " << total_records << std::endl;
+    std::cout << "CSV file: " << csv_path << std::endl;
+
+    if (!best_tile_overall.empty()) {
+        std::cout << "\n=== Global Best Solution ===" << std::endl;
+        std::cout << "Tile: [";
+        for (size_t i = 0; i < best_tile_overall.size(); ++i) {
+            if (i > 0) std::cout << ",";
+            std::cout << best_tile_overall[i];
+        }
+        std::cout << "]" << std::endl;
+        std::cout << "II: " << best_ii_overall << std::endl;
+        std::cout << "Latency: " << best_latency_overall << std::endl;
+        std::cout << "==========================" << std::endl;
+
+        // ===== 修改：先标记完成 =====
+        comp->opt_finished = true;
+        this->finish_list.push_back(comp->get_name());
+
+        // 应用最优解
+        comp->final_strategy = best_tile_overall;
+        comp->current_strategy = best_tile_overall;
+        comp->II = (best_ii_overall > 0) ? best_ii_overall : std::max(1, comp->minII);
+        comp->apply_opt_strategy(comp->final_strategy);
+        this->evaluate_func();
+
+        // ===== 切换到下一个计算（会被入口检查拦截）=====
+        if (this->leader_computations.size() != 1) {
+            auto new_comp = this->update_latency();
+            if (std::find(finish_list.begin(), finish_list.end(), new_comp->get_name()) 
+                == finish_list.end()) {
+                std::cout << "🔄 Switching to next compute: " << new_comp->get_name() << std::endl;
+                auto_DSE_tile_size(new_comp, 1, path);
+            } else {
+                std::cout << "✅ All computations finished" << std::endl;
+            }
+        }
+    } else if (!current_design.empty()) {
+        std::cout << "\n=== Using Current Design ===" << std::endl;
+
+        // ===== 修改：先标记完成 =====
+        comp->opt_finished = true;
+        this->finish_list.push_back(comp->get_name());
+
+        comp->current_strategy = current_design;
+        comp->final_strategy = current_design;
+        comp->II = (best_ii_current > 0) ? best_ii_current : std::max(1, comp->minII);
+        auto_DSE_tile_size(comp, 1, path);
+    } else {
+        std::cout << "\n=== No Valid Design Found ===" << std::endl;
+
+        // ===== 修改：先标记完成 =====
+        comp->opt_finished = true;
+        this->finish_list.push_back(comp->get_name());
+
+        auto_DSE_tile_size(comp, 1, path);
     }
 }
-
-
 bool cmp_value(const std::pair<int, long> left, const std::pair<int,long> right)
 {
 	return left.second < right.second;
@@ -2498,7 +4147,7 @@ int polyfp::function::get_longest_node(std::vector<long> path)
             index = j;
         }
     }
-    // std::cout<<"longest node: "+std::to_string(max_latency)+";"+std::to_string(index)<<std::endl;
+    std::cout<<"longest node: "+std::to_string(max_latency)+";"+std::to_string(index)<<std::endl;
     return index;
 }
 polyfp::compute * polyfp::function::update_latency(){
@@ -2520,14 +4169,14 @@ polyfp::compute * polyfp::function::update_latency(){
         result+=std::to_string(sum);
         this->all_latency_map[i] = sum;
     }
-    // std::cout<<"this->all_latency_map.size()"<<std::endl;
-    // std::cout<<this->all_latency_map.size()<<std::endl;
-    // for(auto &pair:this->all_latency_map ){
-    //     std::cout<<pair.first;
-    //     std::cout<<", ";
-    //     std::cout<<pair.second<<std::endl;
+    std::cout<<"this->all_latency_map.size()"<<std::endl;
+    std::cout<<this->all_latency_map.size()<<std::endl;
+    for(auto &pair:this->all_latency_map ){
+        std::cout<<pair.first;
+        std::cout<<", ";
+        std::cout<<pair.second<<std::endl;
 
-    // }
+    }
     polyfp::compute *comp;
     if(this->all_latency_map.size()!=0)
     {
@@ -2536,10 +4185,10 @@ polyfp::compute * polyfp::function::update_latency(){
         int final_index = this->path_map[path_index][node_index];
         this->longest_path = path_index;
         this->longest_node = node_index;
-        // std::cout<<"path: ";
-        // std::cout<<path_index<<std::endl;
-        // std::cout<<"node: ";
-        // std::cout<<node_index<<std::endl;
+        std::cout<<"path: ";
+        std::cout<<path_index<<std::endl;
+        std::cout<<"node: ";
+        std::cout<<node_index<<std::endl;
         std::map<polyfp::compute *,int>::iterator it;
         
         for( it= this->leader_computation_index.begin();it!=this->leader_computation_index.end();it++) 
@@ -2602,7 +4251,6 @@ void polyfp::function::gen_c_code() const
 
        
 }
-
 
 
 

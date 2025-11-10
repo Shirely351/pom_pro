@@ -1,0 +1,26 @@
+<pragmas>
+<pragma file="test_gaussian_4096.cpp" line="263" pragmaType="pipeline" parentfunction="test_gaussian_4096" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_gaussian_4096.cpp" line="120" pragmaType="pipeline" parentfunction="test_gaussian_4096" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_gaussian_4096.cpp" line="60" pragmaType="pipeline" parentfunction="test_gaussian_4096" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_gaussian_4096.cpp" line="31" pragmaType="interface" parentfunction="test_gaussian_4096" mode="s_axilite" port="" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_gaussian_4096.cpp" line="32" pragmaType="interface" parentfunction="test_gaussian_4096" mode="s_axilite" port="v0" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_gaussian_4096.cpp" line="33" pragmaType="interface" parentfunction="test_gaussian_4096" mode="ap_memory" port="v1" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gaussian_4096.cpp" line="34" pragmaType="interface" parentfunction="test_gaussian_4096" mode="ap_memory" port="v2" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gaussian_4096.cpp" line="35" pragmaType="interface" parentfunction="test_gaussian_4096" mode="ap_memory" port="v3" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gaussian_4096.cpp" line="36" pragmaType="interface" parentfunction="test_gaussian_4096" mode="ap_memory" port="v4" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gaussian_4096.cpp" line="37" pragmaType="interface" parentfunction="test_gaussian_4096" mode="ap_memory" port="v5" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gaussian_4096.cpp" line="39" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="1" factor="3" mode="cyclic" dynamic="0" variable="v1"/>
+<pragma file="test_gaussian_4096.cpp" line="40" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="2" factor="3" mode="cyclic" dynamic="0" variable="v1"/>
+<pragma file="test_gaussian_4096.cpp" line="41" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="3" factor="3" mode="cyclic" dynamic="0" variable="v1"/>
+<pragma file="test_gaussian_4096.cpp" line="42" pragmaType="bind_storage" parentfunction="test_gaussian_4096" op="666" impl="25" latency="-1" variable="v1"/>
+<pragma file="test_gaussian_4096.cpp" line="44" pragmaType="bind_storage" parentfunction="test_gaussian_4096" op="666" impl="25" latency="-1" variable="v2"/>
+<pragma file="test_gaussian_4096.cpp" line="46" pragmaType="bind_storage" parentfunction="test_gaussian_4096" op="666" impl="25" latency="-1" variable="v3"/>
+<pragma file="test_gaussian_4096.cpp" line="48" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="1" factor="3" mode="cyclic" dynamic="0" variable="v4"/>
+<pragma file="test_gaussian_4096.cpp" line="49" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="2" factor="3" mode="cyclic" dynamic="0" variable="v4"/>
+<pragma file="test_gaussian_4096.cpp" line="50" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="3" factor="3" mode="cyclic" dynamic="0" variable="v4"/>
+<pragma file="test_gaussian_4096.cpp" line="51" pragmaType="bind_storage" parentfunction="test_gaussian_4096" op="666" impl="25" latency="-1" variable="v4"/>
+<pragma file="test_gaussian_4096.cpp" line="53" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="1" factor="3" mode="cyclic" dynamic="0" variable="v5"/>
+<pragma file="test_gaussian_4096.cpp" line="54" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="2" factor="3" mode="cyclic" dynamic="0" variable="v5"/>
+<pragma file="test_gaussian_4096.cpp" line="55" pragmaType="array_partition" parentfunction="test_gaussian_4096" dim="3" factor="3" mode="cyclic" dynamic="0" variable="v5"/>
+<pragma file="test_gaussian_4096.cpp" line="56" pragmaType="bind_storage" parentfunction="test_gaussian_4096" op="666" impl="25" latency="-1" variable="v5"/>
+</pragmas>

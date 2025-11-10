@@ -1,0 +1,621 @@
+
+
+================================================================
+== Synthesis Summary Report of 'test_3mm_32'
+================================================================
++ General Information: 
+    * Date:           Thu Nov  6 22:06:26 2025
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        test_3mm_32
+    * Solution:       test_3mm_32 (Vivado IP Flow Target)
+    * Product family: artix7
+    * Target device:  xc7a100t-csg324-1
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +-------------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+-----------+-------------+-------------+-----+
+    |                                    Modules                                    | Issue|      | Latency |  Latency  | Iteration|         | Trip |          |      |           |             |             |     |
+    |                                    & Loops                                    | Type | Slack| (cycles)|    (ns)   |  Latency | Interval| Count| Pipelined| BRAM |    DSP    |      FF     |     LUT     | URAM|
+    +-------------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+-----------+-------------+-------------+-----+
+    |+ test_3mm_32                                                                  |     -|  0.22|     6245|  6.245e+04|         -|     6246|     -|        no|     -|  110 (45%)|  26330 (20%)|  25942 (40%)|    -|
+    | + test_3mm_32_Pipeline_VITIS_LOOP_67_1_VITIS_LOOP_68_2                        |     -|  1.84|       66|    660.000|         -|       66|     -|        no|     -|          -|     21 (~0%)|    441 (~0%)|    -|
+    |  o VITIS_LOOP_67_1_VITIS_LOOP_68_2                                            |     -|  7.30|       64|    640.000|         2|        2|    32|       yes|     -|          -|            -|            -|    -|
+    | + test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7                      |     -|  1.84|       66|    660.000|         -|       66|     -|        no|     -|          -|     21 (~0%)|    441 (~0%)|    -|
+    |  o VITIS_LOOP_251_6_VITIS_LOOP_252_7                                          |     -|  7.30|       64|    640.000|         2|        2|    32|       yes|     -|          -|            -|            -|    -|
+    | + test_3mm_32_Pipeline_VITIS_LOOP_435_11_VITIS_LOOP_436_12                    |     -|  1.84|       66|    660.000|         -|       66|     -|        no|     -|          -|     21 (~0%)|    441 (~0%)|    -|
+    |  o VITIS_LOOP_435_11_VITIS_LOOP_436_12                                        |     -|  7.30|       64|    640.000|         2|        2|    32|       yes|     -|          -|            -|            -|    -|
+    | + test_3mm_32_Pipeline_VITIS_LOOP_104_3_VITIS_LOOP_105_4_VITIS_LOOP_106_5     |     -|  0.22|     3087|  3.087e+04|         -|     3087|     -|        no|     -|          -|    5450 (4%)|    2753 (4%)|    -|
+    |  o VITIS_LOOP_104_3_VITIS_LOOP_105_4_VITIS_LOOP_106_5                         |     -|  7.30|     3085|  3.085e+04|        17|        3|  1024|       yes|     -|          -|            -|            -|    -|
+    | + test_3mm_32_Pipeline_VITIS_LOOP_288_8_VITIS_LOOP_289_9_VITIS_LOOP_290_10    |     -|  0.22|     3087|  3.087e+04|         -|     3087|     -|        no|     -|   55 (22%)|   10389 (8%)|   6834 (10%)|    -|
+    |  o VITIS_LOOP_288_8_VITIS_LOOP_289_9_VITIS_LOOP_290_10                        |     -|  7.30|     3085|  3.085e+04|        17|        3|  1024|       yes|     -|          -|            -|            -|    -|
+    | + test_3mm_32_Pipeline_VITIS_LOOP_472_13_VITIS_LOOP_473_14_VITIS_LOOP_474_15  |     -|  0.47|     3087|  3.087e+04|         -|     3087|     -|        no|     -|          -|    5371 (4%)|    3950 (6%)|    -|
+    |  o VITIS_LOOP_472_13_VITIS_LOOP_473_14_VITIS_LOOP_474_15                      |     -|  7.30|     3085|  3.085e+04|        17|        3|  1024|       yes|     -|          -|            -|            -|    -|
+    +-------------------------------------------------------------------------------+------+------+---------+-----------+----------+---------+------+----------+------+-----------+-------------+-------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++------------+------------+---------------+--------+----------+
+| Interface  | Data Width | Address Width | Offset | Register |
++------------+------------+---------------+--------+----------+
+| s_axi_ctrl | 32         | 5             | 16     | 0        |
++------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| Interface  | Register | Offset | Width | Access | Description                      | Bit Fields                                                           |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| s_axi_ctrl | CTRL     | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_ctrl | GIER     | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                             |
+| s_axi_ctrl | IP_IER   | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_ctrl | IP_ISR   | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_ctrl | v0       | 0x10   | 32    | W      | Data signal of v0                |                                                                      |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+
+* BRAM
++--------------+------------+---------------+
+| Interface    | Data Width | Address Width |
++--------------+------------+---------------+
+| v1_0_PORTA   | 32         | 32            |
+| v1_1_PORTA   | 32         | 32            |
+| v1_2_PORTA   | 32         | 32            |
+| v1_3_PORTA   | 32         | 32            |
+| v2_0_PORTA   | 32         | 32            |
+| v2_1_PORTA   | 32         | 32            |
+| v2_2_PORTA   | 32         | 32            |
+| v2_3_PORTA   | 32         | 32            |
+| v2_4_PORTA   | 32         | 32            |
+| v2_5_PORTA   | 32         | 32            |
+| v2_6_PORTA   | 32         | 32            |
+| v2_7_PORTA   | 32         | 32            |
+| v3_0_PORTA   | 32         | 32            |
+| v3_1_PORTA   | 32         | 32            |
+| v3_2_PORTA   | 32         | 32            |
+| v3_3_PORTA   | 32         | 32            |
+| v4_0_PORTA   | 32         | 32            |
+| v4_1_PORTA   | 32         | 32            |
+| v4_2_PORTA   | 32         | 32            |
+| v4_3_PORTA   | 32         | 32            |
+| v4_4_PORTA   | 32         | 32            |
+| v4_5_PORTA   | 32         | 32            |
+| v4_6_PORTA   | 32         | 32            |
+| v4_7_PORTA   | 32         | 32            |
+| v5_0_0_PORTA | 32         | 32            |
+| v5_0_0_PORTB | 32         | 32            |
+| v5_0_1_PORTA | 32         | 32            |
+| v5_0_1_PORTB | 32         | 32            |
+| v5_0_2_PORTA | 32         | 32            |
+| v5_0_2_PORTB | 32         | 32            |
+| v5_0_3_PORTA | 32         | 32            |
+| v5_0_3_PORTB | 32         | 32            |
+| v5_0_4_PORTA | 32         | 32            |
+| v5_0_4_PORTB | 32         | 32            |
+| v5_0_5_PORTA | 32         | 32            |
+| v5_0_5_PORTB | 32         | 32            |
+| v5_0_6_PORTA | 32         | 32            |
+| v5_0_6_PORTB | 32         | 32            |
+| v5_0_7_PORTA | 32         | 32            |
+| v5_0_7_PORTB | 32         | 32            |
+| v5_1_0_PORTA | 32         | 32            |
+| v5_1_0_PORTB | 32         | 32            |
+| v5_1_1_PORTA | 32         | 32            |
+| v5_1_1_PORTB | 32         | 32            |
+| v5_1_2_PORTA | 32         | 32            |
+| v5_1_2_PORTB | 32         | 32            |
+| v5_1_3_PORTA | 32         | 32            |
+| v5_1_3_PORTB | 32         | 32            |
+| v5_1_4_PORTA | 32         | 32            |
+| v5_1_4_PORTB | 32         | 32            |
+| v5_1_5_PORTA | 32         | 32            |
+| v5_1_5_PORTB | 32         | 32            |
+| v5_1_6_PORTA | 32         | 32            |
+| v5_1_6_PORTB | 32         | 32            |
+| v5_1_7_PORTA | 32         | 32            |
+| v5_1_7_PORTB | 32         | 32            |
+| v5_2_0_PORTA | 32         | 32            |
+| v5_2_0_PORTB | 32         | 32            |
+| v5_2_1_PORTA | 32         | 32            |
+| v5_2_1_PORTB | 32         | 32            |
+| v5_2_2_PORTA | 32         | 32            |
+| v5_2_2_PORTB | 32         | 32            |
+| v5_2_3_PORTA | 32         | 32            |
+| v5_2_3_PORTB | 32         | 32            |
+| v5_2_4_PORTA | 32         | 32            |
+| v5_2_4_PORTB | 32         | 32            |
+| v5_2_5_PORTA | 32         | 32            |
+| v5_2_5_PORTB | 32         | 32            |
+| v5_2_6_PORTA | 32         | 32            |
+| v5_2_6_PORTB | 32         | 32            |
+| v5_2_7_PORTA | 32         | 32            |
+| v5_2_7_PORTB | 32         | 32            |
+| v5_3_0_PORTA | 32         | 32            |
+| v5_3_0_PORTB | 32         | 32            |
+| v5_3_1_PORTA | 32         | 32            |
+| v5_3_1_PORTB | 32         | 32            |
+| v5_3_2_PORTA | 32         | 32            |
+| v5_3_2_PORTB | 32         | 32            |
+| v5_3_3_PORTA | 32         | 32            |
+| v5_3_3_PORTB | 32         | 32            |
+| v5_3_4_PORTA | 32         | 32            |
+| v5_3_4_PORTB | 32         | 32            |
+| v5_3_5_PORTA | 32         | 32            |
+| v5_3_5_PORTB | 32         | 32            |
+| v5_3_6_PORTA | 32         | 32            |
+| v5_3_6_PORTB | 32         | 32            |
+| v5_3_7_PORTA | 32         | 32            |
+| v5_3_7_PORTB | 32         | 32            |
+| v6_0_0_PORTA | 32         | 32            |
+| v6_0_1_PORTA | 32         | 32            |
+| v6_0_2_PORTA | 32         | 32            |
+| v6_0_3_PORTA | 32         | 32            |
+| v6_0_4_PORTA | 32         | 32            |
+| v6_0_5_PORTA | 32         | 32            |
+| v6_0_6_PORTA | 32         | 32            |
+| v6_0_7_PORTA | 32         | 32            |
+| v6_1_0_PORTA | 32         | 32            |
+| v6_1_1_PORTA | 32         | 32            |
+| v6_1_2_PORTA | 32         | 32            |
+| v6_1_3_PORTA | 32         | 32            |
+| v6_1_4_PORTA | 32         | 32            |
+| v6_1_5_PORTA | 32         | 32            |
+| v6_1_6_PORTA | 32         | 32            |
+| v6_1_7_PORTA | 32         | 32            |
+| v6_2_0_PORTA | 32         | 32            |
+| v6_2_1_PORTA | 32         | 32            |
+| v6_2_2_PORTA | 32         | 32            |
+| v6_2_3_PORTA | 32         | 32            |
+| v6_2_4_PORTA | 32         | 32            |
+| v6_2_5_PORTA | 32         | 32            |
+| v6_2_6_PORTA | 32         | 32            |
+| v6_2_6_PORTB | 32         | 32            |
+| v6_2_7_PORTA | 32         | 32            |
+| v6_2_7_PORTB | 32         | 32            |
+| v6_3_0_PORTA | 32         | 32            |
+| v6_3_0_PORTB | 32         | 32            |
+| v6_3_1_PORTA | 32         | 32            |
+| v6_3_1_PORTB | 32         | 32            |
+| v6_3_2_PORTA | 32         | 32            |
+| v6_3_2_PORTB | 32         | 32            |
+| v6_3_3_PORTA | 32         | 32            |
+| v6_3_3_PORTB | 32         | 32            |
+| v6_3_4_PORTA | 32         | 32            |
+| v6_3_4_PORTB | 32         | 32            |
+| v6_3_5_PORTA | 32         | 32            |
+| v6_3_5_PORTB | 32         | 32            |
+| v6_3_6_PORTA | 32         | 32            |
+| v6_3_6_PORTB | 32         | 32            |
+| v6_3_7_PORTA | 32         | 32            |
+| v6_3_7_PORTB | 32         | 32            |
+| v7_0_0_PORTA | 32         | 32            |
+| v7_0_1_PORTA | 32         | 32            |
+| v7_0_2_PORTA | 32         | 32            |
+| v7_0_3_PORTA | 32         | 32            |
+| v7_0_4_PORTA | 32         | 32            |
+| v7_0_5_PORTA | 32         | 32            |
+| v7_0_6_PORTA | 32         | 32            |
+| v7_0_7_PORTA | 32         | 32            |
+| v7_1_0_PORTA | 32         | 32            |
+| v7_1_1_PORTA | 32         | 32            |
+| v7_1_2_PORTA | 32         | 32            |
+| v7_1_3_PORTA | 32         | 32            |
+| v7_1_4_PORTA | 32         | 32            |
+| v7_1_5_PORTA | 32         | 32            |
+| v7_1_6_PORTA | 32         | 32            |
+| v7_1_7_PORTA | 32         | 32            |
+| v7_2_0_PORTA | 32         | 32            |
+| v7_2_1_PORTA | 32         | 32            |
+| v7_2_2_PORTA | 32         | 32            |
+| v7_2_3_PORTA | 32         | 32            |
+| v7_2_4_PORTA | 32         | 32            |
+| v7_2_5_PORTA | 32         | 32            |
+| v7_2_6_PORTA | 32         | 32            |
+| v7_2_6_PORTB | 32         | 32            |
+| v7_2_7_PORTA | 32         | 32            |
+| v7_2_7_PORTB | 32         | 32            |
+| v7_3_0_PORTA | 32         | 32            |
+| v7_3_0_PORTB | 32         | 32            |
+| v7_3_1_PORTA | 32         | 32            |
+| v7_3_1_PORTB | 32         | 32            |
+| v7_3_2_PORTA | 32         | 32            |
+| v7_3_2_PORTB | 32         | 32            |
+| v7_3_3_PORTA | 32         | 32            |
+| v7_3_3_PORTB | 32         | 32            |
+| v7_3_4_PORTA | 32         | 32            |
+| v7_3_4_PORTB | 32         | 32            |
+| v7_3_5_PORTA | 32         | 32            |
+| v7_3_5_PORTB | 32         | 32            |
+| v7_3_6_PORTA | 32         | 32            |
+| v7_3_6_PORTB | 32         | 32            |
+| v7_3_7_PORTA | 32         | 32            |
+| v7_3_7_PORTB | 32         | 32            |
++--------------+------------+---------------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+----------+
+| Argument | Direction | Datatype |
++----------+-----------+----------+
+| v0       | in        | float    |
+| v1       | in        | float*   |
+| v2       | in        | float*   |
+| v3       | in        | float*   |
+| v4       | in        | float*   |
+| v5       | inout     | float*   |
+| v6       | inout     | float*   |
+| v7       | inout     | float*   |
++----------+-----------+----------+
+
+* SW-to-HW Mapping
++----------+--------------+-----------+------------------------------+
+| Argument | HW Interface | HW Type   | HW Info                      |
++----------+--------------+-----------+------------------------------+
+| v0       | s_axi_ctrl   | register  | name=v0 offset=0x10 range=32 |
+| v1       | v1_0_PORTA   | interface |                              |
+| v1       | v1_1_PORTA   | interface |                              |
+| v1       | v1_2_PORTA   | interface |                              |
+| v1       | v1_3_PORTA   | interface |                              |
+| v2       | v2_0_PORTA   | interface |                              |
+| v2       | v2_1_PORTA   | interface |                              |
+| v2       | v2_2_PORTA   | interface |                              |
+| v2       | v2_3_PORTA   | interface |                              |
+| v2       | v2_4_PORTA   | interface |                              |
+| v2       | v2_5_PORTA   | interface |                              |
+| v2       | v2_6_PORTA   | interface |                              |
+| v2       | v2_7_PORTA   | interface |                              |
+| v3       | v3_0_PORTA   | interface |                              |
+| v3       | v3_1_PORTA   | interface |                              |
+| v3       | v3_2_PORTA   | interface |                              |
+| v3       | v3_3_PORTA   | interface |                              |
+| v4       | v4_0_PORTA   | interface |                              |
+| v4       | v4_1_PORTA   | interface |                              |
+| v4       | v4_2_PORTA   | interface |                              |
+| v4       | v4_3_PORTA   | interface |                              |
+| v4       | v4_4_PORTA   | interface |                              |
+| v4       | v4_5_PORTA   | interface |                              |
+| v4       | v4_6_PORTA   | interface |                              |
+| v4       | v4_7_PORTA   | interface |                              |
+| v5       | v5_0_0_PORTA | interface |                              |
+| v5       | v5_0_0_PORTB | interface |                              |
+| v5       | v5_0_1_PORTA | interface |                              |
+| v5       | v5_0_1_PORTB | interface |                              |
+| v5       | v5_0_2_PORTA | interface |                              |
+| v5       | v5_0_2_PORTB | interface |                              |
+| v5       | v5_0_3_PORTA | interface |                              |
+| v5       | v5_0_3_PORTB | interface |                              |
+| v5       | v5_0_4_PORTA | interface |                              |
+| v5       | v5_0_4_PORTB | interface |                              |
+| v5       | v5_0_5_PORTA | interface |                              |
+| v5       | v5_0_5_PORTB | interface |                              |
+| v5       | v5_0_6_PORTA | interface |                              |
+| v5       | v5_0_6_PORTB | interface |                              |
+| v5       | v5_0_7_PORTA | interface |                              |
+| v5       | v5_0_7_PORTB | interface |                              |
+| v5       | v5_1_0_PORTA | interface |                              |
+| v5       | v5_1_0_PORTB | interface |                              |
+| v5       | v5_1_1_PORTA | interface |                              |
+| v5       | v5_1_1_PORTB | interface |                              |
+| v5       | v5_1_2_PORTA | interface |                              |
+| v5       | v5_1_2_PORTB | interface |                              |
+| v5       | v5_1_3_PORTA | interface |                              |
+| v5       | v5_1_3_PORTB | interface |                              |
+| v5       | v5_1_4_PORTA | interface |                              |
+| v5       | v5_1_4_PORTB | interface |                              |
+| v5       | v5_1_5_PORTA | interface |                              |
+| v5       | v5_1_5_PORTB | interface |                              |
+| v5       | v5_1_6_PORTA | interface |                              |
+| v5       | v5_1_6_PORTB | interface |                              |
+| v5       | v5_1_7_PORTA | interface |                              |
+| v5       | v5_1_7_PORTB | interface |                              |
+| v5       | v5_2_0_PORTA | interface |                              |
+| v5       | v5_2_0_PORTB | interface |                              |
+| v5       | v5_2_1_PORTA | interface |                              |
+| v5       | v5_2_1_PORTB | interface |                              |
+| v5       | v5_2_2_PORTA | interface |                              |
+| v5       | v5_2_2_PORTB | interface |                              |
+| v5       | v5_2_3_PORTA | interface |                              |
+| v5       | v5_2_3_PORTB | interface |                              |
+| v5       | v5_2_4_PORTA | interface |                              |
+| v5       | v5_2_4_PORTB | interface |                              |
+| v5       | v5_2_5_PORTA | interface |                              |
+| v5       | v5_2_5_PORTB | interface |                              |
+| v5       | v5_2_6_PORTA | interface |                              |
+| v5       | v5_2_6_PORTB | interface |                              |
+| v5       | v5_2_7_PORTA | interface |                              |
+| v5       | v5_2_7_PORTB | interface |                              |
+| v5       | v5_3_0_PORTA | interface |                              |
+| v5       | v5_3_0_PORTB | interface |                              |
+| v5       | v5_3_1_PORTA | interface |                              |
+| v5       | v5_3_1_PORTB | interface |                              |
+| v5       | v5_3_2_PORTA | interface |                              |
+| v5       | v5_3_2_PORTB | interface |                              |
+| v5       | v5_3_3_PORTA | interface |                              |
+| v5       | v5_3_3_PORTB | interface |                              |
+| v5       | v5_3_4_PORTA | interface |                              |
+| v5       | v5_3_4_PORTB | interface |                              |
+| v5       | v5_3_5_PORTA | interface |                              |
+| v5       | v5_3_5_PORTB | interface |                              |
+| v5       | v5_3_6_PORTA | interface |                              |
+| v5       | v5_3_6_PORTB | interface |                              |
+| v5       | v5_3_7_PORTA | interface |                              |
+| v5       | v5_3_7_PORTB | interface |                              |
+| v6       | v6_0_0_PORTA | interface |                              |
+| v6       | v6_0_1_PORTA | interface |                              |
+| v6       | v6_0_2_PORTA | interface |                              |
+| v6       | v6_0_3_PORTA | interface |                              |
+| v6       | v6_0_4_PORTA | interface |                              |
+| v6       | v6_0_5_PORTA | interface |                              |
+| v6       | v6_0_6_PORTA | interface |                              |
+| v6       | v6_0_7_PORTA | interface |                              |
+| v6       | v6_1_0_PORTA | interface |                              |
+| v6       | v6_1_1_PORTA | interface |                              |
+| v6       | v6_1_2_PORTA | interface |                              |
+| v6       | v6_1_3_PORTA | interface |                              |
+| v6       | v6_1_4_PORTA | interface |                              |
+| v6       | v6_1_5_PORTA | interface |                              |
+| v6       | v6_1_6_PORTA | interface |                              |
+| v6       | v6_1_7_PORTA | interface |                              |
+| v6       | v6_2_0_PORTA | interface |                              |
+| v6       | v6_2_1_PORTA | interface |                              |
+| v6       | v6_2_2_PORTA | interface |                              |
+| v6       | v6_2_3_PORTA | interface |                              |
+| v6       | v6_2_4_PORTA | interface |                              |
+| v6       | v6_2_5_PORTA | interface |                              |
+| v6       | v6_2_6_PORTA | interface |                              |
+| v6       | v6_2_6_PORTB | interface |                              |
+| v6       | v6_2_7_PORTA | interface |                              |
+| v6       | v6_2_7_PORTB | interface |                              |
+| v6       | v6_3_0_PORTA | interface |                              |
+| v6       | v6_3_0_PORTB | interface |                              |
+| v6       | v6_3_1_PORTA | interface |                              |
+| v6       | v6_3_1_PORTB | interface |                              |
+| v6       | v6_3_2_PORTA | interface |                              |
+| v6       | v6_3_2_PORTB | interface |                              |
+| v6       | v6_3_3_PORTA | interface |                              |
+| v6       | v6_3_3_PORTB | interface |                              |
+| v6       | v6_3_4_PORTA | interface |                              |
+| v6       | v6_3_4_PORTB | interface |                              |
+| v6       | v6_3_5_PORTA | interface |                              |
+| v6       | v6_3_5_PORTB | interface |                              |
+| v6       | v6_3_6_PORTA | interface |                              |
+| v6       | v6_3_6_PORTB | interface |                              |
+| v6       | v6_3_7_PORTA | interface |                              |
+| v6       | v6_3_7_PORTB | interface |                              |
+| v7       | v7_0_0_PORTA | interface |                              |
+| v7       | v7_0_1_PORTA | interface |                              |
+| v7       | v7_0_2_PORTA | interface |                              |
+| v7       | v7_0_3_PORTA | interface |                              |
+| v7       | v7_0_4_PORTA | interface |                              |
+| v7       | v7_0_5_PORTA | interface |                              |
+| v7       | v7_0_6_PORTA | interface |                              |
+| v7       | v7_0_7_PORTA | interface |                              |
+| v7       | v7_1_0_PORTA | interface |                              |
+| v7       | v7_1_1_PORTA | interface |                              |
+| v7       | v7_1_2_PORTA | interface |                              |
+| v7       | v7_1_3_PORTA | interface |                              |
+| v7       | v7_1_4_PORTA | interface |                              |
+| v7       | v7_1_5_PORTA | interface |                              |
+| v7       | v7_1_6_PORTA | interface |                              |
+| v7       | v7_1_7_PORTA | interface |                              |
+| v7       | v7_2_0_PORTA | interface |                              |
+| v7       | v7_2_1_PORTA | interface |                              |
+| v7       | v7_2_2_PORTA | interface |                              |
+| v7       | v7_2_3_PORTA | interface |                              |
+| v7       | v7_2_4_PORTA | interface |                              |
+| v7       | v7_2_5_PORTA | interface |                              |
+| v7       | v7_2_6_PORTA | interface |                              |
+| v7       | v7_2_6_PORTB | interface |                              |
+| v7       | v7_2_7_PORTA | interface |                              |
+| v7       | v7_2_7_PORTB | interface |                              |
+| v7       | v7_3_0_PORTA | interface |                              |
+| v7       | v7_3_0_PORTB | interface |                              |
+| v7       | v7_3_1_PORTA | interface |                              |
+| v7       | v7_3_1_PORTB | interface |                              |
+| v7       | v7_3_2_PORTA | interface |                              |
+| v7       | v7_3_2_PORTB | interface |                              |
+| v7       | v7_3_3_PORTA | interface |                              |
+| v7       | v7_3_3_PORTB | interface |                              |
+| v7       | v7_3_4_PORTA | interface |                              |
+| v7       | v7_3_4_PORTB | interface |                              |
+| v7       | v7_3_5_PORTA | interface |                              |
+| v7       | v7_3_5_PORTB | interface |                              |
+| v7       | v7_3_6_PORTA | interface |                              |
+| v7       | v7_3_6_PORTB | interface |                              |
+| v7       | v7_3_7_PORTA | interface |                              |
+| v7       | v7_3_7_PORTB | interface |                              |
++----------+--------------+-----------+------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++-------------------------------------------------------------------------------+-----+--------+-------------+------+---------+---------+
+| Name                                                                          | DSP | Pragma | Variable    | Op   | Impl    | Latency |
++-------------------------------------------------------------------------------+-----+--------+-------------+------+---------+---------+
+| + test_3mm_32                                                                 | 110 |        |             |      |         |         |
+|  + test_3mm_32_Pipeline_VITIS_LOOP_67_1_VITIS_LOOP_68_2                       | 0   |        |             |      |         |         |
+|    add_ln67_1_fu_574_p2                                                       | -   |        | add_ln67_1  | add  | fabric  | 0       |
+|    add_ln67_fu_586_p2                                                         | -   |        | add_ln67    | add  | fabric  | 0       |
+|    add_ln70_fu_630_p2                                                         | -   |        | add_ln70    | add  | fabric  | 0       |
+|    add_ln68_fu_636_p2                                                         | -   |        | add_ln68    | add  | fabric  | 0       |
+|  + test_3mm_32_Pipeline_VITIS_LOOP_251_6_VITIS_LOOP_252_7                     | 0   |        |             |      |         |         |
+|    add_ln251_1_fu_574_p2                                                      | -   |        | add_ln251_1 | add  | fabric  | 0       |
+|    add_ln251_fu_586_p2                                                        | -   |        | add_ln251   | add  | fabric  | 0       |
+|    add_ln254_fu_630_p2                                                        | -   |        | add_ln254   | add  | fabric  | 0       |
+|    add_ln252_fu_636_p2                                                        | -   |        | add_ln252   | add  | fabric  | 0       |
+|  + test_3mm_32_Pipeline_VITIS_LOOP_435_11_VITIS_LOOP_436_12                   | 0   |        |             |      |         |         |
+|    add_ln435_1_fu_574_p2                                                      | -   |        | add_ln435_1 | add  | fabric  | 0       |
+|    add_ln435_fu_586_p2                                                        | -   |        | add_ln435   | add  | fabric  | 0       |
+|    add_ln438_fu_630_p2                                                        | -   |        | add_ln438   | add  | fabric  | 0       |
+|    add_ln436_fu_636_p2                                                        | -   |        | add_ln436   | add  | fabric  | 0       |
+|  + test_3mm_32_Pipeline_VITIS_LOOP_104_3_VITIS_LOOP_105_4_VITIS_LOOP_106_5    | 0   |        |             |      |         |         |
+|    empty_fu_1061_p2                                                           | -   |        | empty       | add  | fabric  | 0       |
+|    add_ln104_1_fu_954_p2                                                      | -   |        | add_ln104_1 | add  | fabric  | 0       |
+|    add_ln104_fu_966_p2                                                        | -   |        | add_ln104   | add  | fabric  | 0       |
+|    add_ln105_fu_1004_p2                                                       | -   |        | add_ln105   | add  | fabric  | 0       |
+|    empty_57_fu_1116_p2                                                        | -   |        | empty_57    | add  | fabric  | 0       |
+|    add_ln109_fu_1165_p2                                                       | -   |        | add_ln109   | add  | fabric  | 0       |
+|    add_ln111_fu_1183_p2                                                       | -   |        | add_ln111   | add  | fabric  | 0       |
+|    add_ln106_fu_1189_p2                                                       | -   |        | add_ln106   | add  | fabric  | 0       |
+|    add_ln105_1_fu_1022_p2                                                     | -   |        | add_ln105_1 | add  | fabric  | 0       |
+|  + test_3mm_32_Pipeline_VITIS_LOOP_288_8_VITIS_LOOP_289_9_VITIS_LOOP_290_10   | 55  |        |             |      |         |         |
+|    empty_fu_1061_p2                                                           | -   |        | empty       | add  | fabric  | 0       |
+|    add_ln288_1_fu_954_p2                                                      | -   |        | add_ln288_1 | add  | fabric  | 0       |
+|    add_ln288_fu_966_p2                                                        | -   |        | add_ln288   | add  | fabric  | 0       |
+|    add_ln289_fu_1004_p2                                                       | -   |        | add_ln289   | add  | fabric  | 0       |
+|    empty_54_fu_1116_p2                                                        | -   |        | empty_54    | add  | fabric  | 0       |
+|    add_ln293_fu_1165_p2                                                       | -   |        | add_ln293   | add  | fabric  | 0       |
+|    add_ln295_fu_1183_p2                                                       | -   |        | add_ln295   | add  | fabric  | 0       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U36                                          | 3   |        | v128        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U25                                         | 2   |        | v130        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U37                                          | 3   |        | v132        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U26                                         | 2   |        | v134        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U38                                          | 3   |        | v136        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U27                                         | 2   |        | v138        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U39                                          | 3   |        | v140        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U28                                         | 2   |        | v142        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U40                                          | 3   |        | v144        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U29                                         | 2   |        | v146        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U41                                          | 3   |        | v148        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U30                                         | 2   |        | v150        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U42                                          | 3   |        | v152        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U31                                         | 2   |        | v154        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U43                                          | 3   |        | v156        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U32                                         | 2   |        | v158        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U44                                          | 3   |        | v160        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U33                                         | 2   |        | v162        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U45                                          | 3   |        | v163        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U34                                         | 2   |        | v165        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U46                                          | 3   |        | v166        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U35                                         | 2   |        | v168        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U36                                          | 3   |        | v169        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U25                                         | 2   |        | v171        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U37                                          | 3   |        | v172        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U26                                         | 2   |        | v174        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U38                                          | 3   |        | v175        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U27                                         | 2   |        | v177        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U39                                          | 3   |        | v178        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U28                                         | 2   |        | v180        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U40                                          | 3   |        | v181        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U29                                         | 2   |        | v183        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U41                                          | 3   |        | v185        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U30                                         | 2   |        | v187        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U42                                          | 3   |        | v188        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U31                                         | 2   |        | v190        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U43                                          | 3   |        | v191        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U32                                         | 2   |        | v193        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U44                                          | 3   |        | v194        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U33                                         | 2   |        | v196        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U45                                          | 3   |        | v197        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U34                                         | 2   |        | v199        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U46                                          | 3   |        | v200        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U35                                         | 2   |        | v202        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U36                                          | 3   |        | v203        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U25                                         | 2   |        | v205        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U37                                          | 3   |        | v206        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U26                                         | 2   |        | v208        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U38                                          | 3   |        | v210        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U27                                         | 2   |        | v212        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U39                                          | 3   |        | v213        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U28                                         | 2   |        | v215        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U40                                          | 3   |        | v216        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U29                                         | 2   |        | v218        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U41                                          | 3   |        | v219        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U30                                         | 2   |        | v221        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U42                                          | 3   |        | v222        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U31                                         | 2   |        | v224        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U43                                          | 3   |        | v225        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U32                                         | 2   |        | v227        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U44                                          | 3   |        | v228        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U33                                         | 2   |        | v230        | fadd | fulldsp | 6       |
+|    fmul_32ns_32ns_32_4_max_dsp_1_U45                                          | 3   |        | v231        | fmul | maxdsp  | 3       |
+|    fadd_32ns_32ns_32_7_full_dsp_1_U34                                         | 2   |        | v233        | fadd | fulldsp | 6       |
+|    add_ln290_fu_1189_p2                                                       | -   |        | add_ln290   | add  | fabric  | 0       |
+|    add_ln289_1_fu_1022_p2                                                     | -   |        | add_ln289_1 | add  | fabric  | 0       |
+|  + test_3mm_32_Pipeline_VITIS_LOOP_472_13_VITIS_LOOP_473_14_VITIS_LOOP_474_15 | 0   |        |             |      |         |         |
+|    add_ln472_1_fu_2398_p2                                                     | -   |        | add_ln472_1 | add  | fabric  | 0       |
+|    add_ln472_fu_2410_p2                                                       | -   |        | add_ln472   | add  | fabric  | 0       |
+|    add_ln473_fu_2538_p2                                                       | -   |        | add_ln473   | add  | fabric  | 0       |
+|    add_ln477_fu_2606_p2                                                       | -   |        | add_ln477   | add  | fabric  | 0       |
+|    add_ln479_fu_2612_p2                                                       | -   |        | add_ln479   | add  | fabric  | 0       |
+|    add_ln474_fu_2618_p2                                                       | -   |        | add_ln474   | add  | fabric  | 0       |
+|    add_ln473_1_fu_2624_p2                                                     | -   |        | add_ln473_1 | add  | fabric  | 0       |
++-------------------------------------------------------------------------------+-----+--------+-------------+------+---------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Pragmas with Warnings
++----------+-------------------------------+---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Type     | Options                       | Location                              | Messages                                                                                                                         |
++----------+-------------------------------+---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| resource | variable=v1 core=ram_s2p_bram | test_3mm_32.cpp:44 in test_3mm_32, v1 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v2 core=ram_s2p_bram | test_3mm_32.cpp:47 in test_3mm_32, v2 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v3 core=ram_s2p_bram | test_3mm_32.cpp:50 in test_3mm_32, v3 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v4 core=ram_s2p_bram | test_3mm_32.cpp:53 in test_3mm_32, v4 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v5 core=ram_s2p_bram | test_3mm_32.cpp:57 in test_3mm_32, v5 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v6 core=ram_s2p_bram | test_3mm_32.cpp:61 in test_3mm_32, v6 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v7 core=ram_s2p_bram | test_3mm_32.cpp:65 in test_3mm_32, v7 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                       | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
++----------+-------------------------------+---------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+* Valid Pragma Syntax
++-----------------+-----------------------------------+-------------------------------------------+
+| Type            | Options                           | Location                                  |
++-----------------+-----------------------------------+-------------------------------------------+
+| interface       | s_axilite port=return bundle=ctrl | test_3mm_32.cpp:33 in test_3mm_32, return |
+| interface       | s_axilite port=v0 bundle=ctrl     | test_3mm_32.cpp:34 in test_3mm_32, v0     |
+| interface       | bram port=v1                      | test_3mm_32.cpp:35 in test_3mm_32, v1     |
+| interface       | bram port=v2                      | test_3mm_32.cpp:36 in test_3mm_32, v2     |
+| interface       | bram port=v3                      | test_3mm_32.cpp:37 in test_3mm_32, v3     |
+| interface       | bram port=v4                      | test_3mm_32.cpp:38 in test_3mm_32, v4     |
+| interface       | bram port=v5                      | test_3mm_32.cpp:39 in test_3mm_32, v5     |
+| interface       | bram port=v6                      | test_3mm_32.cpp:40 in test_3mm_32, v6     |
+| interface       | bram port=v7                      | test_3mm_32.cpp:41 in test_3mm_32, v7     |
+| array_partition | variable=v1 cyclic factor=4 dim=1 | test_3mm_32.cpp:43 in test_3mm_32, v1     |
+| array_partition | variable=v2 cyclic factor=8 dim=2 | test_3mm_32.cpp:46 in test_3mm_32, v2     |
+| array_partition | variable=v3 cyclic factor=4 dim=1 | test_3mm_32.cpp:49 in test_3mm_32, v3     |
+| array_partition | variable=v4 cyclic factor=8 dim=2 | test_3mm_32.cpp:52 in test_3mm_32, v4     |
+| array_partition | variable=v5 cyclic factor=4 dim=1 | test_3mm_32.cpp:55 in test_3mm_32, v5     |
+| array_partition | variable=v5 cyclic factor=8 dim=2 | test_3mm_32.cpp:56 in test_3mm_32, v5     |
+| array_partition | variable=v6 cyclic factor=4 dim=1 | test_3mm_32.cpp:59 in test_3mm_32, v6     |
+| array_partition | variable=v6 cyclic factor=8 dim=2 | test_3mm_32.cpp:60 in test_3mm_32, v6     |
+| array_partition | variable=v7 cyclic factor=4 dim=1 | test_3mm_32.cpp:63 in test_3mm_32, v7     |
+| array_partition | variable=v7 cyclic factor=8 dim=2 | test_3mm_32.cpp:64 in test_3mm_32, v7     |
+| pipeline        | II=3                              | test_3mm_32.cpp:69 in test_3mm_32         |
+| pipeline        | II=3                              | test_3mm_32.cpp:107 in test_3mm_32        |
+| pipeline        | II=3                              | test_3mm_32.cpp:253 in test_3mm_32        |
+| pipeline        | II=3                              | test_3mm_32.cpp:291 in test_3mm_32        |
+| pipeline        | II=3                              | test_3mm_32.cpp:437 in test_3mm_32        |
+| pipeline        | II=3                              | test_3mm_32.cpp:475 in test_3mm_32        |
++-----------------+-----------------------------------+-------------------------------------------+
+
+

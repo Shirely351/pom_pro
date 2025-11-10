@@ -1,0 +1,35 @@
+{"sourceFile": [{
+      "name": "",
+      "directive": [
+        {
+          "functionName": "test_vgg16",
+          "label": "",
+          "functionLabel": "",
+          "id": "1",
+          "sourceFile": "\/home\/yuyes\/workdir\/pom\/samples\/vgg16\/script_512.tcl",
+          "sourceLine": "7",
+          "pragma": {
+            "name": "PIPELINE",
+            "option": [{
+                "name": "off",
+                "value": ""
+              }]
+          }
+        },
+        {
+          "functionName": "test_vgg16",
+          "label": "",
+          "functionLabel": "",
+          "id": "2",
+          "sourceFile": "\/home\/yuyes\/workdir\/pom\/samples\/vgg16\/script_512.tcl",
+          "sourceLine": "8",
+          "pragma": {
+            "name": "TOP",
+            "option": [{
+                "name": "name",
+                "value": "test_vgg16"
+              }]
+          }
+        }
+      ]
+    }]}

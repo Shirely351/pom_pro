@@ -16,7 +16,7 @@
 #include <sstream>
 #include <iostream>
 #include <string>
-
+#include <chrono>
 #include "expr.h"
 #include "compute.h"
 #include "function.h"
@@ -62,9 +62,33 @@ int main(){
     // C.partition({16,2},"cyclic");
     // codegen();
     
-    std::string pwd = std::filesystem::current_path().parent_path();
+#ifdef DEBUG
+std::string pwd = std::filesystem::current_path();
+#else
+std::string pwd = std::filesystem::current_path().parent_path();
+#endif
+    // std::string pwd = std::filesystem::current_path().parent_path();
     std::string path = pwd+"/samples/gemm/";
+    // test_start
+    // fct->auto_DSE_loop_transformation();
+    // int count=0;
+    // for(auto &comp: fct->leader_computations){
+    //     auto iterators = comp->get_iteration_variables();
+    //     int size = iterators.size();
+    //     if(size==2){
+    //       comp->apply_opt_strategy({4,4});
+    //     }
+    //     if(size==3){
+    //         comp->apply_opt_strategy({1,4,16});
+    //     }
+          
+    // }
+    // fct->dump_schedule(path);
+    // auto start = std::chrono::high_resolution_clock::now();
     fct->auto_DSE(path);
+    // auto end = std::chrono::high_resolution_clock::now();
+    // std::chrono::duration<double> duration = end - start;
+    // std::cout << "Auto DSE took " << duration.count() << " seconds." << std::endl;
 
 }   
 

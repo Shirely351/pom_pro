@@ -1,0 +1,17 @@
+<pragmas>
+<pragma file="test_gemm_32.cpp" line="151" pragmaType="pipeline" parentfunction="test_gemm_32" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_gemm_32.cpp" line="49" pragmaType="pipeline" parentfunction="test_gemm_32" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_gemm_32.cpp" line="30" pragmaType="interface" parentfunction="test_gemm_32" mode="s_axilite" port="" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_gemm_32.cpp" line="31" pragmaType="interface" parentfunction="test_gemm_32" mode="s_axilite" port="v0" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_gemm_32.cpp" line="32" pragmaType="interface" parentfunction="test_gemm_32" mode="s_axilite" port="v1" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_gemm_32.cpp" line="33" pragmaType="interface" parentfunction="test_gemm_32" mode="ap_memory" port="v2" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gemm_32.cpp" line="34" pragmaType="interface" parentfunction="test_gemm_32" mode="ap_memory" port="v3" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gemm_32.cpp" line="35" pragmaType="interface" parentfunction="test_gemm_32" mode="ap_memory" port="v4" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_gemm_32.cpp" line="37" pragmaType="array_partition" parentfunction="test_gemm_32" dim="1" factor="2" mode="cyclic" dynamic="0" variable="v2"/>
+<pragma file="test_gemm_32.cpp" line="38" pragmaType="bind_storage" parentfunction="test_gemm_32" op="666" impl="25" latency="-1" variable="v2"/>
+<pragma file="test_gemm_32.cpp" line="40" pragmaType="array_partition" parentfunction="test_gemm_32" dim="2" factor="16" mode="cyclic" dynamic="0" variable="v3"/>
+<pragma file="test_gemm_32.cpp" line="41" pragmaType="bind_storage" parentfunction="test_gemm_32" op="666" impl="25" latency="-1" variable="v3"/>
+<pragma file="test_gemm_32.cpp" line="43" pragmaType="array_partition" parentfunction="test_gemm_32" dim="1" factor="2" mode="cyclic" dynamic="0" variable="v4"/>
+<pragma file="test_gemm_32.cpp" line="44" pragmaType="array_partition" parentfunction="test_gemm_32" dim="2" factor="16" mode="cyclic" dynamic="0" variable="v4"/>
+<pragma file="test_gemm_32.cpp" line="45" pragmaType="bind_storage" parentfunction="test_gemm_32" op="666" impl="25" latency="-1" variable="v4"/>
+</pragmas>

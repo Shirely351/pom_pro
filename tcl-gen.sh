@@ -4,7 +4,7 @@ echo ""
 echo ">>> Step 3. Generating scripts for running Vitis_HLS..."
 echo ""
 
-examples=("vgg16" "resnet")
+examples=("vgg16" "resnet18")
 sizes=(512)
 for example in "${examples[@]}"
 do  
@@ -17,7 +17,7 @@ open_project -reset "test_${example}_${size}"
 set_top test_${example}
 add_files test_${example}.cpp
 open_solution "test_${example}_${size}"
-set_part {xc7z020clg400-1}
+set_part {xc7a100t-csg324-1}
 create_clock -period 10 -name default
 set_directive_pipeline -off "test_${example}"
 csynth_design
@@ -31,7 +31,7 @@ done
 
 examples=("2mm" "3mm" "gemm" "bicg" "gesummv")
 sizes=(32 64 128 256 512 1024 2048 4096 8192)
-
+# sizes=(32 64 256 1024 2048)
 # for example in "${examples[@]}"
 # do  
 #     for size in "${sizes[@]}"
@@ -67,7 +67,7 @@ open_project -reset "test_${example}_${size}"
 set_top test_${example}_${size}
 add_files test_${example}_${size}.cpp
 open_solution "test_${example}_${size}"
-set_part {xc7z020clg400-1}
+set_part {xc7a100t-csg324-1}
 create_clock -period 10 -name default
 csynth_design
 close_project
@@ -76,33 +76,33 @@ EOL
     done
 done
 
-examples=("2mm" "3mm" "gemm" "bicg" "gesummv")
-sizes=(4096)
+# examples=("2mm" "3mm" "gemm" "bicg" "gesummv")
+# sizes=(4096)
 
-for example in "${examples[@]}"
-do  
-    for size in "${sizes[@]}"
-    do
-        script_name="script_power.tcl"
+# for example in "${examples[@]}"
+# do  
+#     for size in "${sizes[@]}"
+#     do
+#         script_name="script_power.tcl"
         
-        cat > "samples/${example}/${script_name}" <<EOL
-open_project -reset "test_${example}_power"
-set_top test_${example}_${size}
-add_files test_${example}_${size}.cpp
-open_solution "test_${example}_power"
-set_part {xc7z020clg400-1}
-create_clock -period 10 -name default
-csynth_design
-EOL
+#         cat > "samples/${example}/${script_name}" <<EOL
+# open_project -reset "test_${example}_power"
+# set_top test_${example}_${size}
+# add_files test_${example}_${size}.cpp
+# open_solution "test_${example}_power"
+# set_part {xc7a100t-csg324-1}
+# create_clock -period 10 -name default
+# csynth_design
+# EOL
 
-        if [ "$size" -eq 4096 ]; then
-            echo "export_design -evaluate verilog -format ip_catalog -version 2.0.1" >> "samples/${example}/${script_name}"
-        fi
+#         if [ "$size" -eq 4096 ]; then
+#             echo "export_design -evaluate verilog -format ip_catalog -version 2.0.1" >> "samples/${example}/${script_name}"
+#         fi
 
-        echo "close_project" >> "samples/${example}/${script_name}"
-        echo "exit" >> "samples/${example}/${script_name}"
-    done
-done
+#         echo "close_project" >> "samples/${example}/${script_name}"
+#         echo "exit" >> "samples/${example}/${script_name}"
+#     done
+# done
 
 
 
@@ -119,7 +119,7 @@ open_project -reset "test_${example}_${size}"
 set_top test_${example}_${size}
 add_files test_${example}_${size}.cpp
 open_solution "test_${example}_${size}"
-set_part {xc7z020clg400-1}
+set_part {xc7a100t-csg324-1}
 create_clock -period 10 -name default
 csynth_design
 close_project

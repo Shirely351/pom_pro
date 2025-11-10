@@ -1,0 +1,369 @@
+
+
+================================================================
+== Synthesis Summary Report of 'test_blur_4096'
+================================================================
++ General Information: 
+    * Date:           Wed Nov  5 20:47:31 2025
+    * Version:        2022.2 (Build 3670227 on Oct 13 2022)
+    * Project:        test_blur_4096
+    * Solution:       test_blur_4096 (Vivado IP Flow Target)
+    * Product family: artix7
+    * Target device:  xc7a100t-csg324-1
+    
+
++ Performance & Resource Estimates: 
+    
+    PS: '+' for module; 'o' for loop; '*' for dataflow
+    +--------------------------------------------------------------+------+------+---------+-----------+----------+---------+---------+----------+------+----------+-------------+-------------+-----+
+    |                            Modules                           | Issue|      | Latency |  Latency  | Iteration|         |   Trip  |          |      |          |             |             |     |
+    |                            & Loops                           | Type | Slack| (cycles)|    (ns)   |  Latency | Interval|  Count  | Pipelined| BRAM |    DSP   |      FF     |     LUT     | URAM|
+    +--------------------------------------------------------------+------+------+---------+-----------+----------+---------+---------+----------+------+----------+-------------+-------------+-----+
+    |+ test_blur_4096                                              |     -|  0.84|  8380489|  8.380e+07|         -|  8380490|        -|        no|     -|  48 (20%)|  13976 (11%)|  10495 (16%)|    -|
+    | + test_blur_4096_Pipeline_VITIS_LOOP_50_1_VITIS_LOOP_51_2    |     -|  0.84|  4190243|  4.190e+07|         -|  4190243|        -|        no|     -|         -|    3409 (2%)|    1324 (2%)|    -|
+    |  o VITIS_LOOP_50_1_VITIS_LOOP_51_2                           |     -|  7.30|  4190241|  4.190e+07|        34|        1|  4190209|       yes|     -|         -|            -|            -|    -|
+    | + test_blur_4096_Pipeline_VITIS_LOOP_127_3_VITIS_LOOP_128_4  |     -|  0.84|  4190243|  4.190e+07|         -|  4190243|        -|        no|     -|         -|    3111 (2%)|    1042 (1%)|    -|
+    |  o VITIS_LOOP_127_3_VITIS_LOOP_128_4                         |     -|  7.30|  4190241|  4.190e+07|        34|        1|  4190209|       yes|     -|         -|            -|            -|    -|
+    +--------------------------------------------------------------+------+------+---------+-----------+----------+---------+---------+----------+------+----------+-------------+-------------+-----+
+
+
+================================================================
+== HW Interfaces
+================================================================
+* S_AXILITE Interfaces
++------------+------------+---------------+--------+----------+
+| Interface  | Data Width | Address Width | Offset | Register |
++------------+------------+---------------+--------+----------+
+| s_axi_ctrl | 32         | 5             | 16     | 0        |
++------------+------------+---------------+--------+----------+
+
+* S_AXILITE Registers
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| Interface  | Register | Offset | Width | Access | Description                      | Bit Fields                                                           |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+| s_axi_ctrl | CTRL     | 0x00   | 32    | RW     | Control signals                  | 0=AP_START 1=AP_DONE 2=AP_IDLE 3=AP_READY 7=AUTO_RESTART 9=INTERRUPT |
+| s_axi_ctrl | GIER     | 0x04   | 32    | RW     | Global Interrupt Enable Register | 0=Enable                                                             |
+| s_axi_ctrl | IP_IER   | 0x08   | 32    | RW     | IP Interrupt Enable Register     | 0=CHAN0_INT_EN 1=CHAN1_INT_EN                                        |
+| s_axi_ctrl | IP_ISR   | 0x0c   | 32    | RW     | IP Interrupt Status Register     | 0=CHAN0_INT_ST 1=CHAN1_INT_ST                                        |
+| s_axi_ctrl | v0       | 0x10   | 32    | W      | Data signal of v0                |                                                                      |
++------------+----------+--------+-------+--------+----------------------------------+----------------------------------------------------------------------+
+
+* BRAM
++----------------+------------+---------------+
+| Interface      | Data Width | Address Width |
++----------------+------------+---------------+
+| v1_0_0_0_PORTA | 32         | 32            |
+| v1_0_0_0_PORTB | 32         | 32            |
+| v1_0_0_1_PORTA | 32         | 32            |
+| v1_0_0_1_PORTB | 32         | 32            |
+| v1_0_0_2_PORTA | 32         | 32            |
+| v1_0_0_2_PORTB | 32         | 32            |
+| v1_0_1_0_PORTA | 32         | 32            |
+| v1_0_1_0_PORTB | 32         | 32            |
+| v1_0_1_1_PORTA | 32         | 32            |
+| v1_0_1_1_PORTB | 32         | 32            |
+| v1_0_1_2_PORTA | 32         | 32            |
+| v1_0_1_2_PORTB | 32         | 32            |
+| v1_1_0_0_PORTA | 32         | 32            |
+| v1_1_0_0_PORTB | 32         | 32            |
+| v1_1_0_1_PORTA | 32         | 32            |
+| v1_1_0_1_PORTB | 32         | 32            |
+| v1_1_0_2_PORTA | 32         | 32            |
+| v1_1_0_2_PORTB | 32         | 32            |
+| v1_1_1_0_PORTA | 32         | 32            |
+| v1_1_1_0_PORTB | 32         | 32            |
+| v1_1_1_1_PORTA | 32         | 32            |
+| v1_1_1_1_PORTB | 32         | 32            |
+| v1_1_1_2_PORTA | 32         | 32            |
+| v1_1_1_2_PORTB | 32         | 32            |
+| v1_2_0_0_PORTA | 32         | 32            |
+| v1_2_0_0_PORTB | 32         | 32            |
+| v1_2_0_1_PORTA | 32         | 32            |
+| v1_2_0_1_PORTB | 32         | 32            |
+| v1_2_0_2_PORTA | 32         | 32            |
+| v1_2_0_2_PORTB | 32         | 32            |
+| v1_2_1_0_PORTA | 32         | 32            |
+| v1_2_1_0_PORTB | 32         | 32            |
+| v1_2_1_1_PORTA | 32         | 32            |
+| v1_2_1_1_PORTB | 32         | 32            |
+| v1_2_1_2_PORTA | 32         | 32            |
+| v1_2_1_2_PORTB | 32         | 32            |
+| v1_3_0_0_PORTA | 32         | 32            |
+| v1_3_0_0_PORTB | 32         | 32            |
+| v1_3_0_1_PORTA | 32         | 32            |
+| v1_3_0_1_PORTB | 32         | 32            |
+| v1_3_0_2_PORTA | 32         | 32            |
+| v1_3_0_2_PORTB | 32         | 32            |
+| v1_3_1_0_PORTA | 32         | 32            |
+| v1_3_1_0_PORTB | 32         | 32            |
+| v1_3_1_1_PORTA | 32         | 32            |
+| v1_3_1_1_PORTB | 32         | 32            |
+| v1_3_1_2_PORTA | 32         | 32            |
+| v1_3_1_2_PORTB | 32         | 32            |
+| v2_0_0_0_PORTA | 32         | 32            |
+| v2_0_0_1_PORTA | 32         | 32            |
+| v2_0_0_2_PORTA | 32         | 32            |
+| v2_0_1_0_PORTA | 32         | 32            |
+| v2_0_1_1_PORTA | 32         | 32            |
+| v2_0_1_2_PORTA | 32         | 32            |
+| v2_1_0_0_PORTA | 32         | 32            |
+| v2_1_0_1_PORTA | 32         | 32            |
+| v2_1_0_2_PORTA | 32         | 32            |
+| v2_1_1_0_PORTA | 32         | 32            |
+| v2_1_1_1_PORTA | 32         | 32            |
+| v2_1_1_2_PORTA | 32         | 32            |
+| v3_0_0_0_PORTA | 32         | 32            |
+| v3_0_0_0_PORTB | 32         | 32            |
+| v3_0_0_1_PORTA | 32         | 32            |
+| v3_0_0_1_PORTB | 32         | 32            |
+| v3_0_0_2_PORTA | 32         | 32            |
+| v3_0_0_2_PORTB | 32         | 32            |
+| v3_0_1_0_PORTA | 32         | 32            |
+| v3_0_1_0_PORTB | 32         | 32            |
+| v3_0_1_1_PORTA | 32         | 32            |
+| v3_0_1_1_PORTB | 32         | 32            |
+| v3_0_1_2_PORTA | 32         | 32            |
+| v3_0_1_2_PORTB | 32         | 32            |
+| v3_0_2_0_PORTA | 32         | 32            |
+| v3_0_2_0_PORTB | 32         | 32            |
+| v3_0_2_1_PORTA | 32         | 32            |
+| v3_0_2_1_PORTB | 32         | 32            |
+| v3_0_2_2_PORTA | 32         | 32            |
+| v3_0_2_2_PORTB | 32         | 32            |
+| v3_0_3_0_PORTA | 32         | 32            |
+| v3_0_3_0_PORTB | 32         | 32            |
+| v3_0_3_1_PORTA | 32         | 32            |
+| v3_0_3_1_PORTB | 32         | 32            |
+| v3_0_3_2_PORTA | 32         | 32            |
+| v3_0_3_2_PORTB | 32         | 32            |
+| v3_1_0_0_PORTA | 32         | 32            |
+| v3_1_0_0_PORTB | 32         | 32            |
+| v3_1_0_1_PORTA | 32         | 32            |
+| v3_1_0_1_PORTB | 32         | 32            |
+| v3_1_0_2_PORTA | 32         | 32            |
+| v3_1_0_2_PORTB | 32         | 32            |
+| v3_1_1_0_PORTA | 32         | 32            |
+| v3_1_1_0_PORTB | 32         | 32            |
+| v3_1_1_1_PORTA | 32         | 32            |
+| v3_1_1_1_PORTB | 32         | 32            |
+| v3_1_1_2_PORTA | 32         | 32            |
+| v3_1_1_2_PORTB | 32         | 32            |
+| v3_1_2_0_PORTA | 32         | 32            |
+| v3_1_2_0_PORTB | 32         | 32            |
+| v3_1_2_1_PORTA | 32         | 32            |
+| v3_1_2_1_PORTB | 32         | 32            |
+| v3_1_2_2_PORTA | 32         | 32            |
+| v3_1_2_2_PORTB | 32         | 32            |
+| v3_1_3_0_PORTA | 32         | 32            |
+| v3_1_3_0_PORTB | 32         | 32            |
+| v3_1_3_1_PORTA | 32         | 32            |
+| v3_1_3_1_PORTB | 32         | 32            |
+| v3_1_3_2_PORTA | 32         | 32            |
+| v3_1_3_2_PORTB | 32         | 32            |
++----------------+------------+---------------+
+
+* TOP LEVEL CONTROL
++-----------+------------+-----------+
+| Interface | Type       | Ports     |
++-----------+------------+-----------+
+| ap_clk    | clock      | ap_clk    |
+| ap_rst_n  | reset      | ap_rst_n  |
+| interrupt | interrupt  | interrupt |
+| ap_ctrl   | ap_ctrl_hs |           |
++-----------+------------+-----------+
+
+
+================================================================
+== SW I/O Information
+================================================================
+* Top Function Arguments
++----------+-----------+----------+
+| Argument | Direction | Datatype |
++----------+-----------+----------+
+| v0       | in        | float    |
+| v1       | inout     | float*   |
+| v2       | out       | float*   |
+| v3       | in        | float*   |
++----------+-----------+----------+
+
+* SW-to-HW Mapping
++----------+----------------+-----------+------------------------------+
+| Argument | HW Interface   | HW Type   | HW Info                      |
++----------+----------------+-----------+------------------------------+
+| v0       | s_axi_ctrl     | register  | name=v0 offset=0x10 range=32 |
+| v1       | v1_0_0_0_PORTA | interface |                              |
+| v1       | v1_0_0_0_PORTB | interface |                              |
+| v1       | v1_0_0_1_PORTA | interface |                              |
+| v1       | v1_0_0_1_PORTB | interface |                              |
+| v1       | v1_0_0_2_PORTA | interface |                              |
+| v1       | v1_0_0_2_PORTB | interface |                              |
+| v1       | v1_0_1_0_PORTA | interface |                              |
+| v1       | v1_0_1_0_PORTB | interface |                              |
+| v1       | v1_0_1_1_PORTA | interface |                              |
+| v1       | v1_0_1_1_PORTB | interface |                              |
+| v1       | v1_0_1_2_PORTA | interface |                              |
+| v1       | v1_0_1_2_PORTB | interface |                              |
+| v1       | v1_1_0_0_PORTA | interface |                              |
+| v1       | v1_1_0_0_PORTB | interface |                              |
+| v1       | v1_1_0_1_PORTA | interface |                              |
+| v1       | v1_1_0_1_PORTB | interface |                              |
+| v1       | v1_1_0_2_PORTA | interface |                              |
+| v1       | v1_1_0_2_PORTB | interface |                              |
+| v1       | v1_1_1_0_PORTA | interface |                              |
+| v1       | v1_1_1_0_PORTB | interface |                              |
+| v1       | v1_1_1_1_PORTA | interface |                              |
+| v1       | v1_1_1_1_PORTB | interface |                              |
+| v1       | v1_1_1_2_PORTA | interface |                              |
+| v1       | v1_1_1_2_PORTB | interface |                              |
+| v1       | v1_2_0_0_PORTA | interface |                              |
+| v1       | v1_2_0_0_PORTB | interface |                              |
+| v1       | v1_2_0_1_PORTA | interface |                              |
+| v1       | v1_2_0_1_PORTB | interface |                              |
+| v1       | v1_2_0_2_PORTA | interface |                              |
+| v1       | v1_2_0_2_PORTB | interface |                              |
+| v1       | v1_2_1_0_PORTA | interface |                              |
+| v1       | v1_2_1_0_PORTB | interface |                              |
+| v1       | v1_2_1_1_PORTA | interface |                              |
+| v1       | v1_2_1_1_PORTB | interface |                              |
+| v1       | v1_2_1_2_PORTA | interface |                              |
+| v1       | v1_2_1_2_PORTB | interface |                              |
+| v1       | v1_3_0_0_PORTA | interface |                              |
+| v1       | v1_3_0_0_PORTB | interface |                              |
+| v1       | v1_3_0_1_PORTA | interface |                              |
+| v1       | v1_3_0_1_PORTB | interface |                              |
+| v1       | v1_3_0_2_PORTA | interface |                              |
+| v1       | v1_3_0_2_PORTB | interface |                              |
+| v1       | v1_3_1_0_PORTA | interface |                              |
+| v1       | v1_3_1_0_PORTB | interface |                              |
+| v1       | v1_3_1_1_PORTA | interface |                              |
+| v1       | v1_3_1_1_PORTB | interface |                              |
+| v1       | v1_3_1_2_PORTA | interface |                              |
+| v1       | v1_3_1_2_PORTB | interface |                              |
+| v2       | v2_0_0_0_PORTA | interface |                              |
+| v2       | v2_0_0_1_PORTA | interface |                              |
+| v2       | v2_0_0_2_PORTA | interface |                              |
+| v2       | v2_0_1_0_PORTA | interface |                              |
+| v2       | v2_0_1_1_PORTA | interface |                              |
+| v2       | v2_0_1_2_PORTA | interface |                              |
+| v2       | v2_1_0_0_PORTA | interface |                              |
+| v2       | v2_1_0_1_PORTA | interface |                              |
+| v2       | v2_1_0_2_PORTA | interface |                              |
+| v2       | v2_1_1_0_PORTA | interface |                              |
+| v2       | v2_1_1_1_PORTA | interface |                              |
+| v2       | v2_1_1_2_PORTA | interface |                              |
+| v3       | v3_0_0_0_PORTA | interface |                              |
+| v3       | v3_0_0_0_PORTB | interface |                              |
+| v3       | v3_0_0_1_PORTA | interface |                              |
+| v3       | v3_0_0_1_PORTB | interface |                              |
+| v3       | v3_0_0_2_PORTA | interface |                              |
+| v3       | v3_0_0_2_PORTB | interface |                              |
+| v3       | v3_0_1_0_PORTA | interface |                              |
+| v3       | v3_0_1_0_PORTB | interface |                              |
+| v3       | v3_0_1_1_PORTA | interface |                              |
+| v3       | v3_0_1_1_PORTB | interface |                              |
+| v3       | v3_0_1_2_PORTA | interface |                              |
+| v3       | v3_0_1_2_PORTB | interface |                              |
+| v3       | v3_0_2_0_PORTA | interface |                              |
+| v3       | v3_0_2_0_PORTB | interface |                              |
+| v3       | v3_0_2_1_PORTA | interface |                              |
+| v3       | v3_0_2_1_PORTB | interface |                              |
+| v3       | v3_0_2_2_PORTA | interface |                              |
+| v3       | v3_0_2_2_PORTB | interface |                              |
+| v3       | v3_0_3_0_PORTA | interface |                              |
+| v3       | v3_0_3_0_PORTB | interface |                              |
+| v3       | v3_0_3_1_PORTA | interface |                              |
+| v3       | v3_0_3_1_PORTB | interface |                              |
+| v3       | v3_0_3_2_PORTA | interface |                              |
+| v3       | v3_0_3_2_PORTB | interface |                              |
+| v3       | v3_1_0_0_PORTA | interface |                              |
+| v3       | v3_1_0_0_PORTB | interface |                              |
+| v3       | v3_1_0_1_PORTA | interface |                              |
+| v3       | v3_1_0_1_PORTB | interface |                              |
+| v3       | v3_1_0_2_PORTA | interface |                              |
+| v3       | v3_1_0_2_PORTB | interface |                              |
+| v3       | v3_1_1_0_PORTA | interface |                              |
+| v3       | v3_1_1_0_PORTB | interface |                              |
+| v3       | v3_1_1_1_PORTA | interface |                              |
+| v3       | v3_1_1_1_PORTB | interface |                              |
+| v3       | v3_1_1_2_PORTA | interface |                              |
+| v3       | v3_1_1_2_PORTB | interface |                              |
+| v3       | v3_1_2_0_PORTA | interface |                              |
+| v3       | v3_1_2_0_PORTB | interface |                              |
+| v3       | v3_1_2_1_PORTA | interface |                              |
+| v3       | v3_1_2_1_PORTB | interface |                              |
+| v3       | v3_1_2_2_PORTA | interface |                              |
+| v3       | v3_1_2_2_PORTB | interface |                              |
+| v3       | v3_1_3_0_PORTA | interface |                              |
+| v3       | v3_1_3_0_PORTB | interface |                              |
+| v3       | v3_1_3_1_PORTA | interface |                              |
+| v3       | v3_1_3_1_PORTB | interface |                              |
+| v3       | v3_1_3_2_PORTA | interface |                              |
+| v3       | v3_1_3_2_PORTB | interface |                              |
++----------+----------------+-----------+------------------------------+
+
+
+================================================================
+== Bind Op Report
+================================================================
++--------------------------------------------------------------+-----+--------+-------------+-----+--------+---------+
+| Name                                                         | DSP | Pragma | Variable    | Op  | Impl   | Latency |
++--------------------------------------------------------------+-----+--------+-------------+-----+--------+---------+
+| + test_blur_4096                                             | 48  |        |             |     |        |         |
+|  + test_blur_4096_Pipeline_VITIS_LOOP_50_1_VITIS_LOOP_51_2   | 0   |        |             |     |        |         |
+|    add_ln50_1_fu_1305_p2                                     | -   |        | add_ln50_1  | add | fabric | 0       |
+|    add_ln50_fu_1317_p2                                       | -   |        | add_ln50    | add | fabric | 0       |
+|    add_ln56_fu_1471_p2                                       | -   |        | add_ln56    | add | fabric | 0       |
+|    add_ln61_fu_1510_p2                                       | -   |        | add_ln61    | add | fabric | 0       |
+|    add_ln51_fu_1409_p2                                       | -   |        | add_ln51    | add | fabric | 0       |
+|  + test_blur_4096_Pipeline_VITIS_LOOP_127_3_VITIS_LOOP_128_4 | 0   |        |             |     |        |         |
+|    add_ln127_3_fu_1080_p2                                    | -   |        | add_ln127_3 | add | fabric | 0       |
+|    add_ln127_fu_1092_p2                                      | -   |        | add_ln127   | add | fabric | 0       |
+|    add_ln127_1_fu_1198_p2                                    | -   |        | add_ln127_1 | add | fabric | 0       |
+|    add_ln127_2_fu_1214_p2                                    | -   |        | add_ln127_2 | add | fabric | 0       |
+|    add_ln128_fu_1170_p2                                      | -   |        | add_ln128   | add | fabric | 0       |
++--------------------------------------------------------------+-----+--------+-------------+-----+--------+---------+
+
+
+================================================================
+== Bind Storage Report
+================================================================
+  No bind storage info in design
+
+================================================================
+== Pragma Report
+================================================================
+* Pragmas with Warnings
++----------+-------------------------------+---------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| Type     | Options                       | Location                                    | Messages                                                                                                                         |
++----------+-------------------------------+---------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+| resource | variable=v1 core=ram_s2p_bram | test_blur_4096.cpp:38 in test_blur_4096, v1 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                             | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v2 core=ram_s2p_bram | test_blur_4096.cpp:43 in test_blur_4096, v2 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                             | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
+| resource | variable=v3 core=ram_s2p_bram | test_blur_4096.cpp:48 in test_blur_4096, v3 | 'Resource pragma' is deprecated, use 'bind_op/bind_storage pragma' instead                                                       |
+|          |                               |                                             | The resource pragma (bind_storage) on top-level function argument, in 'call' is unsupported, please use INTERFACE pragma instead |
++----------+-------------------------------+---------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------+
+
+* Valid Pragma Syntax
++-----------------+-----------------------------------+-------------------------------------------------+
+| Type            | Options                           | Location                                        |
++-----------------+-----------------------------------+-------------------------------------------------+
+| interface       | s_axilite port=return bundle=ctrl | test_blur_4096.cpp:29 in test_blur_4096, return |
+| interface       | s_axilite port=v0 bundle=ctrl     | test_blur_4096.cpp:30 in test_blur_4096, v0     |
+| interface       | bram port=v1                      | test_blur_4096.cpp:31 in test_blur_4096, v1     |
+| interface       | bram port=v2                      | test_blur_4096.cpp:32 in test_blur_4096, v2     |
+| interface       | bram port=v3                      | test_blur_4096.cpp:33 in test_blur_4096, v3     |
+| array_partition | variable=v1 cyclic factor=4 dim=1 | test_blur_4096.cpp:35 in test_blur_4096, v1     |
+| array_partition | variable=v1 cyclic factor=2 dim=2 | test_blur_4096.cpp:36 in test_blur_4096, v1     |
+| array_partition | variable=v1 cyclic factor=3 dim=3 | test_blur_4096.cpp:37 in test_blur_4096, v1     |
+| array_partition | variable=v2 cyclic factor=2 dim=1 | test_blur_4096.cpp:40 in test_blur_4096, v2     |
+| array_partition | variable=v2 cyclic factor=2 dim=2 | test_blur_4096.cpp:41 in test_blur_4096, v2     |
+| array_partition | variable=v2 cyclic factor=3 dim=3 | test_blur_4096.cpp:42 in test_blur_4096, v2     |
+| array_partition | variable=v3 cyclic factor=2 dim=1 | test_blur_4096.cpp:45 in test_blur_4096, v3     |
+| array_partition | variable=v3 cyclic factor=4 dim=2 | test_blur_4096.cpp:46 in test_blur_4096, v3     |
+| array_partition | variable=v3 cyclic factor=3 dim=3 | test_blur_4096.cpp:47 in test_blur_4096, v3     |
+| pipeline        | II=1                              | test_blur_4096.cpp:52 in test_blur_4096         |
+| pipeline        | II=1                              | test_blur_4096.cpp:129 in test_blur_4096        |
++-----------------+-----------------------------------+-------------------------------------------------+
+
+

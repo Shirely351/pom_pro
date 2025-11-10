@@ -1,0 +1,96 @@
+<pragmas>
+<pragma file="test_vgg16.cpp" line="7" pragmaType="pipeline" parentfunction="test_vgg16" off="1" ii="0" style=""/>
+<pragma file="test_vgg16.cpp" line="1056" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="986" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="922" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="833" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="769" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="705" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="616" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="546" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="482" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="393" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="329" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="240" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="176" pragmaType="pipeline" parentfunction="test_vgg16" off="0" ii="1" rewind="0" style=""/>
+<pragma file="test_vgg16.cpp" line="54" pragmaType="interface" parentfunction="test_vgg16" mode="s_axilite" port="" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_vgg16.cpp" line="55" pragmaType="interface" parentfunction="test_vgg16" mode="s_axilite" port="v0" bundle="ctrl" offset="-1" name="" clock="" impl="" register="0"/>
+<pragma file="test_vgg16.cpp" line="56" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v1" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="57" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v2" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="58" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v3" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="59" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v4" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="60" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v5" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="61" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v6" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="62" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v7" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="63" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v8" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="64" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v9" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="65" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v10" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="66" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v11" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="67" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v12" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="68" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v13" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="69" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v14" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="70" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v15" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="71" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v16" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="72" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v17" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="73" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v18" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="74" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v19" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="75" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v20" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="76" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v21" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="77" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v22" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="78" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v23" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="79" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v24" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="80" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v25" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="81" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v26" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="82" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v27" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="83" pragmaType="interface" parentfunction="test_vgg16" mode="ap_memory" port="v28" storage_type="-1" impl="-1" latency="-1" name="" depth="-1"/>
+<pragma file="test_vgg16.cpp" line="85" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v1"/>
+<pragma file="test_vgg16.cpp" line="86" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v1"/>
+<pragma file="test_vgg16.cpp" line="88" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v2"/>
+<pragma file="test_vgg16.cpp" line="89" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v2"/>
+<pragma file="test_vgg16.cpp" line="91" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v3"/>
+<pragma file="test_vgg16.cpp" line="92" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v3"/>
+<pragma file="test_vgg16.cpp" line="94" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v4"/>
+<pragma file="test_vgg16.cpp" line="95" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v4"/>
+<pragma file="test_vgg16.cpp" line="97" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v5"/>
+<pragma file="test_vgg16.cpp" line="98" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v5"/>
+<pragma file="test_vgg16.cpp" line="100" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v6"/>
+<pragma file="test_vgg16.cpp" line="101" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v6"/>
+<pragma file="test_vgg16.cpp" line="103" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v7"/>
+<pragma file="test_vgg16.cpp" line="104" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v7"/>
+<pragma file="test_vgg16.cpp" line="106" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v8"/>
+<pragma file="test_vgg16.cpp" line="107" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v8"/>
+<pragma file="test_vgg16.cpp" line="109" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v9"/>
+<pragma file="test_vgg16.cpp" line="110" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v9"/>
+<pragma file="test_vgg16.cpp" line="112" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v10"/>
+<pragma file="test_vgg16.cpp" line="113" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v10"/>
+<pragma file="test_vgg16.cpp" line="115" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v11"/>
+<pragma file="test_vgg16.cpp" line="117" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v12"/>
+<pragma file="test_vgg16.cpp" line="118" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v12"/>
+<pragma file="test_vgg16.cpp" line="120" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v13"/>
+<pragma file="test_vgg16.cpp" line="121" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v13"/>
+<pragma file="test_vgg16.cpp" line="123" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v14"/>
+<pragma file="test_vgg16.cpp" line="124" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v14"/>
+<pragma file="test_vgg16.cpp" line="126" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v15"/>
+<pragma file="test_vgg16.cpp" line="128" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v16"/>
+<pragma file="test_vgg16.cpp" line="129" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v16"/>
+<pragma file="test_vgg16.cpp" line="131" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v17"/>
+<pragma file="test_vgg16.cpp" line="132" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v17"/>
+<pragma file="test_vgg16.cpp" line="134" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v18"/>
+<pragma file="test_vgg16.cpp" line="135" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v18"/>
+<pragma file="test_vgg16.cpp" line="137" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v19"/>
+<pragma file="test_vgg16.cpp" line="139" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v20"/>
+<pragma file="test_vgg16.cpp" line="140" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v20"/>
+<pragma file="test_vgg16.cpp" line="142" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v21"/>
+<pragma file="test_vgg16.cpp" line="144" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v22"/>
+<pragma file="test_vgg16.cpp" line="145" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v22"/>
+<pragma file="test_vgg16.cpp" line="147" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v23"/>
+<pragma file="test_vgg16.cpp" line="148" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v23"/>
+<pragma file="test_vgg16.cpp" line="150" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v24"/>
+<pragma file="test_vgg16.cpp" line="152" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v25"/>
+<pragma file="test_vgg16.cpp" line="153" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v25"/>
+<pragma file="test_vgg16.cpp" line="155" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v26"/>
+<pragma file="test_vgg16.cpp" line="156" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v26"/>
+<pragma file="test_vgg16.cpp" line="158" pragmaType="array_partition" parentfunction="test_vgg16" dim="1" factor="8" mode="cyclic" dynamic="0" variable="v27"/>
+<pragma file="test_vgg16.cpp" line="159" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v27"/>
+<pragma file="test_vgg16.cpp" line="161" pragmaType="bind_storage" parentfunction="test_vgg16" op="666" impl="25" latency="-1" variable="v28"/>
+</pragmas>

@@ -1,0 +1,18 @@
+{"sourceFile": [{
+      "name": "",
+      "directive": [{
+          "functionName": "test_bicg_256",
+          "label": "",
+          "functionLabel": "",
+          "id": "1",
+          "sourceFile": "\/home\/yuyes\/workdir\/pom\/samples\/bicg\/script_256.tcl",
+          "sourceLine": "7",
+          "pragma": {
+            "name": "TOP",
+            "option": [{
+                "name": "name",
+                "value": "test_bicg_256"
+              }]
+          }
+        }]
+    }]}
